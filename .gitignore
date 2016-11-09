@@ -35,3 +35,27 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+#####
+#####
+# OS or Editor folders
+.DS_Store
+Thumbs.db
+.cache
+.idea
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# npm stuff
+node_modules
+npm-debug.log
+
+# python modules
+python_modules
+
+# Built files
+public/
+
+# Private keys
