@@ -19,7 +19,7 @@ projects:
   type: tool
   slug: account-explorer
   tech: [embed_api, management_api]
-- title: Campaign URL Builder
+- title: Campañas
   type: tool
   slug: campaign-url-builder
   status: new
