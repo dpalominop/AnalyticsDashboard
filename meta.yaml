@@ -47,11 +47,11 @@ projects:
     slug: multiple-views
     tech: [embed_api]
     excerpt: 'Displaying two different views side-by-side is not currently possible through the Google Analytics website. This demo shows how easy it is to do this using the Embed API.'
-  - title: Interactive Charts
+  - title: Cuadros Interactivos
     slug: interactive-charts
     tech: [embed_api]
     excerpt: 'This demo shows how you can build a dashboard that allows you to interactively explore your data. In this example you have a list of filters in one chart that you can click on and then a second chart will render showing just that filtered dataset.'
-  - title: Working with Custom Components
+  - title: Componentes Personalizados
     slug: custom-components
     tech: [embed_api]
     excerpt: 'The built-in components that ship with the Embed API are very nice, but sometimes you need to do more. This example shows how you can extend the Embed API to use your own custom components.'
