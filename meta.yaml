@@ -43,7 +43,7 @@ projects:
     slug: basic-dashboard
     tech: [embed_api]
     excerpt: 'This demos shows how to create a basic dashboard with a single timeline chart showing site traffic over the past week. You can update the chart to see data for any Google Analytics view you have access to.'
-  - title: Multiple Views
+  - title: Múltiples Vistas
     slug: multiple-views
     tech: [embed_api]
     excerpt: 'Displaying two different views side-by-side is not currently possible through the Google Analytics website. This demo shows how easy it is to do this using the Embed API.'
