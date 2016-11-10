@@ -66,6 +66,10 @@ projects:
 #  external:
 #    action: View Demo
 #    url: https://enhancedecommerce.appspot.com
+- title: Explorador de Queries
+  type: tool
+  slug: query-explorer
+  tech: [core_reporting_api, embed_api, management_api, metadata_api]
 - title: Hit Builder
   type: tool
   slug: hit-builder
@@ -77,10 +81,6 @@ projects:
 #  external:
 #    action: View Demo
 #    url: https://elements.polymer-project.org/elements/google-analytics?view=demo:demo/index.html
-- title: Explorador de Queries
-  type: tool
-  slug: query-explorer
-  tech: [core_reporting_api, embed_api, management_api, metadata_api]
 - title: Request Composer
   type: tool
   status: new
