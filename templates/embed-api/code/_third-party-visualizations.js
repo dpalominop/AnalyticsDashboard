@@ -70,6 +70,7 @@ gapi.analytics.ready(function() {
 
     // Render all the of charts for this view.
     renderWeekOverWeekChart(data.ids);
+    renderWeekOverWeekOverWeekChart(data.ids);
     renderYearOverYearChart(data.ids);
     renderTopBrowsersChart(data.ids);
     renderTopCountriesChart(data.ids);
@@ -141,6 +142,92 @@ gapi.analytics.ready(function() {
     });
   }
 
+  /**
+   * 
+   */
+
+  function renderWeekOverWeekOverWeekChart(ids) {
+
+    // Adjust `now` to experiment with different days, for testing only...
+    var now = moment(); // .subtract(3, 'day');
+
+    var thisWeek = query({
+      'ids': ids,
+      'dimensions': 'ga:date,ga:nthDay',
+      'metrics': 'ga:sessions',
+      'start-date': moment(now).subtract(1, 'day').day(0).format('YYYY-MM-DD'),
+      'end-date': moment(now).format('YYYY-MM-DD')
+    });
+
+    var lastWeek = query({
+      'ids': ids,
+      'dimensions': 'ga:date,ga:nthDay',
+      'metrics': 'ga:sessions',
+      'start-date': moment(now).subtract(1, 'day').day(0).subtract(1, 'week')
+          .format('YYYY-MM-DD'),
+      'end-date': moment(now).subtract(1, 'day').day(6).subtract(1, 'week')
+          .format('YYYY-MM-DD')
+    });
+
+    var beforeLastWeek = query({
+      'ids': ids,
+      'dimensions': 'ga:date,ga:nthDay',
+      'metrics': 'ga:sessions',
+      'start-date': moment(now).subtract(1, 'day').day(0).subtract(2, 'week')
+          .format('YYYY-MM-DD'),
+      'end-date': moment(now).subtract(1, 'day').day(6).subtract(2, 'week')
+          .format('YYYY-MM-DD')
+    });
+
+    Promise.all([thisWeek, lastWeek, beforeLastWeek]).then(function(results) {
+      console.log(results)
+      var data1 = results[0].rows.map(function(row) { return +row[2]; });
+      console.log(data1);
+      var data2 = results[1].rows.map(function(row) { return +row[2]; });
+      console.log(data2);
+      var data3 = results[2].rows.map(function(row) { return +row[2]; });
+      console.log(data3);
+      var labels = results[2].rows.map(function(row) { return +row[0]; });
+      console.log(labels);
+
+      labels = labels.map(function(label) {
+        return moment(label, 'YYYYMMDD').format('ddd');
+      });
+
+      var data = {
+        labels : labels,
+        datasets : [
+          {
+            label: 'Before Last Week',
+            fillColor : 'rgba(120,120,120,0.5)',
+            strokeColor : 'rgba(120,120,120,1)',
+            pointColor : 'rgba(120,120,120,1)',
+            pointStrokeColor : '#fff',
+            data : data3
+          },
+          {
+            label: 'Last Week',
+            fillColor : 'rgba(220,220,220,0.5)',
+            strokeColor : 'rgba(220,220,220,1)',
+            pointColor : 'rgba(220,220,220,1)',
+            pointStrokeColor : '#fff',
+            data : data2
+          },
+          {
+            label: 'This Week',
+            fillColor : 'rgba(151,187,205,0.5)',
+            strokeColor : 'rgba(151,187,205,1)',
+            pointColor : 'rgba(151,187,205,1)',
+            pointStrokeColor : '#fff',
+            data : data1
+          }
+        ]
+      };
+
+      new Chart(makeCanvas('chart-5-container')).Line(data);
+      generateLegend('legend-5-container', data.datasets);
+    });
+  }
 
   /**
    * Draw the a chart.js bar chart with data from the specified view that
