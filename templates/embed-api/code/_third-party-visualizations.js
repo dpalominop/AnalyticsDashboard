@@ -72,6 +72,7 @@ gapi.analytics.ready(function() {
     renderWeekOverWeekChart(data.ids);
     renderWeekOverWeekOverWeekChart(data.ids);
     renderYearOverYearChart(data.ids);
+    renderYearOverYearOverYearChart(data.ids);
     renderTopBrowsersChart(data.ids);
     renderTopCountriesChart(data.ids);
   });
@@ -291,6 +292,89 @@ gapi.analytics.ready(function() {
     });
   }
 
+/**
+ * 
+ */
+
+  function renderYearOverYearOverYearChart(ids) {
+
+    // Adjust `now` to experiment with different days, for testing only...
+    var now = moment(); // .subtract(3, 'day');
+
+    var thisYear = query({
+      'ids': ids,
+      'dimensions': 'ga:month,ga:nthMonth',
+      'metrics': 'ga:users',
+      'start-date': moment(now).date(1).month(0).format('YYYY-MM-DD'),
+      'end-date': moment(now).format('YYYY-MM-DD')
+    });
+
+    var lastYear = query({
+      'ids': ids,
+      'dimensions': 'ga:month,ga:nthMonth',
+      'metrics': 'ga:users',
+      'start-date': moment(now).subtract(1, 'year').date(1).month(0)
+          .format('YYYY-MM-DD'),
+      'end-date': moment(now).date(1).month(0).subtract(1, 'day')
+          .format('YYYY-MM-DD')
+    });
+
+    var beforeLastYear = query({
+      'ids': ids,
+      'dimensions': 'ga:month,ga:nthMonth',
+      'metrics': 'ga:users',
+      'start-date': moment(now).subtract(2, 'year').date(1).month(0)
+          .format('YYYY-MM-DD'),
+      'end-date': moment(now).subtract(1, 'year').date(1).month(0).subtract(1, 'day')
+          .format('YYYY-MM-DD')
+    });
+
+    Promise.all([thisYear, lastYear, beforeLastYear]).then(function(results) {
+      var data1 = results[0].rows.map(function(row) { return +row[2]; });
+      var data2 = results[1].rows.map(function(row) { return +row[2]; });
+      var data3 = results[2].rows.map(function(row) { return +row[2]; });
+      var labels = ['Jan','Feb','Mar','Apr','May','Jun',
+                    'Jul','Aug','Sep','Oct','Nov','Dec'];
+
+      // Ensure the data arrays are at least as long as the labels array.
+      // Chart.js bar charts don't (yet) accept sparse datasets.
+      for (var i = 0, len = labels.length; i < len; i++) {
+        if (data1[i] === undefined) data1[i] = null;
+        if (data2[i] === undefined) data2[i] = null;
+        if (data3[i] === undefined) data3[i] = null;
+      }
+
+      var data = {
+        labels : labels,
+        datasets : [
+          {
+            label: 'Last Year',
+            fillColor : 'rgba(120,120,120,0.5)',
+            strokeColor : 'rgba(120,120,120,1)',
+            data : data3
+          },
+          {
+            label: 'Last Year',
+            fillColor : 'rgba(220,220,220,0.5)',
+            strokeColor : 'rgba(220,220,220,1)',
+            data : data2
+          },
+          {
+            label: 'This Year',
+            fillColor : 'rgba(151,187,205,0.5)',
+            strokeColor : 'rgba(151,187,205,1)',
+            data : data1
+          }
+        ]
+      };
+
+      new Chart(makeCanvas('chart-6-container')).Bar(data);
+      generateLegend('legend-6-container', data.datasets);
+    })
+    .catch(function(err) {
+      console.error(err.stack);
+    });
+  }
 
   /**
    * Draw the a chart.js doughnut chart with data from the specified view that
