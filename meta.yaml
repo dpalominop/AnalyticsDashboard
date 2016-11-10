@@ -2,9 +2,12 @@ title: Google Analytics Demos & Tools
 host: ga-dev-tools.appspot.com
 slug: ''
 path: '/'
-tracking_id: UA-41425441-5
-tracking_id_testing: UA-41425441-7
-client_id: 793177639245-olst43lspv93vkoql0b9l26hmpf9kfmv.apps.googleusercontent.com
+tracking_id: UA-45955569-1
+#tracking_id_testing: UA-41425441-7
+client_id: 548963745466-i9urf9oa4uurgebcfgfsjc53pqrqe1vh.apps.googleusercontent.com
+#tracking_id: UA-41425441-5
+#tracking_id_testing: UA-41425441-7
+#client_id: 793177639245-olst43lspv93vkoql0b9l26hmpf9kfmv.apps.googleusercontent.com
 
 
 projects:
@@ -28,10 +31,14 @@ projects:
 #    action: Launch Tool
 #    url: https://developers.google.com/analytics/devguides/reporting/core/dimsmets
   tech: [metadata_api]
-- title: Embed API
+- title: Opciones
   type: demo
   slug: embed-api
   pages:
+  - title: Comparaciones en el tiempo
+    slug: third-party-visualizations
+    tech: [embed_api, real_time_reporting_api]
+    excerpt: 'The Embed API make it easy to query data and display it in a Google Chart. But it also allows you to access the raw data so you can display it however you want. This example uses the <a href="http://www.chartjs.org/">Chart.js</a> visualization library.'
   - title: Basic Dashboard
     slug: basic-dashboard
     tech: [embed_api]
@@ -48,10 +55,6 @@ projects:
     slug: custom-components
     tech: [embed_api]
     excerpt: 'The built-in components that ship with the Embed API are very nice, but sometimes you need to do more. This example shows how you can extend the Embed API to use your own custom components.'
-  - title: Third Party Visualizations
-    slug: third-party-visualizations
-    tech: [embed_api, real_time_reporting_api]
-    excerpt: 'The Embed API make it easy to query data and display it in a Google Chart. But it also allows you to access the raw data so you can display it however you want. This example uses the <a href="http://www.chartjs.org/">Chart.js</a> visualization library.'
   - title: Server-side Authorization
     slug: server-side-authorization
     tech: [embed_api, api_client_library_python]
