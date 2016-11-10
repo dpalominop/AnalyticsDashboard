@@ -180,15 +180,10 @@ gapi.analytics.ready(function() {
     });
 
     Promise.all([thisWeek, lastWeek, beforeLastWeek]).then(function(results) {
-      console.log(results)
       var data1 = results[0].rows.map(function(row) { return +row[2]; });
-      console.log(data1);
       var data2 = results[1].rows.map(function(row) { return +row[2]; });
-      console.log(data2);
       var data3 = results[2].rows.map(function(row) { return +row[2]; });
-      console.log(data3);
       var labels = results[2].rows.map(function(row) { return +row[0]; });
-      console.log(labels);
 
       labels = labels.map(function(label) {
         return moment(label, 'YYYYMMDD').format('ddd');

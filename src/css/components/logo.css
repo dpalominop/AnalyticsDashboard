@@ -33,7 +33,7 @@ limitations under the License.
 }
 
 .Logo-partial::after {
-  content: 'Demos & Tools';
+  /*content: 'Demos & Tools';*/
   color: #ddd;
   display: block;
   font-size: 1.4em;
@@ -51,7 +51,7 @@ limitations under the License.
     display: none;
   }
   .Logo-partial::after {
-    content: 'Google Analytics Demos & Tools';
+    /*content: 'Google Analytics Demos & Tools';*/
     line-height: normal;
   }
 }
