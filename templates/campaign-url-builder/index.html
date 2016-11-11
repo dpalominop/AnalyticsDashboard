@@ -84,10 +84,6 @@
 </section>
 {% endblock %}
 
-{% block tech_content %}
-  This tool uses the <a href="{{ site.tech.url_shortener_api.url }}">{{ site.tech.url_shortener_api.name }}</a> to create short links for long campaign URLs.
-{% endblock %}
-
 {% block foot_scripts %}
 {{ super() }}
 <script src="/public/javascript/campaign-url-builder.js"></script>

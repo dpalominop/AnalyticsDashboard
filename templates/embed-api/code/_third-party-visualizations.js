@@ -69,9 +69,9 @@ gapi.analytics.ready(function() {
     activeUsers.set(data).execute();
 
     // Render all the of charts for this view.
-    renderWeekOverWeekChart(data.ids);
+    //renderWeekOverWeekChart(data.ids);
     renderWeekOverWeekOverWeekChart(data.ids);
-    renderYearOverYearChart(data.ids);
+    //renderYearOverYearChart(data.ids);
     renderYearOverYearOverYearChart(data.ids);
     renderTopBrowsersChart(data.ids);
     renderTopCountriesChart(data.ids);

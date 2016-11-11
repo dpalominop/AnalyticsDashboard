@@ -2,12 +2,12 @@ title: Analytics Dashboard
 host: ga-dev-tools.appspot.com
 slug: ''
 path: '/'
-tracking_id: UA-45955569-1
+#tracking_id: UA-45955569-1
 #tracking_id_testing: UA-41425441-7
-client_id: 548963745466-i9urf9oa4uurgebcfgfsjc53pqrqe1vh.apps.googleusercontent.com
-#tracking_id: UA-41425441-5
-#tracking_id_testing: UA-41425441-7
-#client_id: 793177639245-olst43lspv93vkoql0b9l26hmpf9kfmv.apps.googleusercontent.com
+#client_id: 548963745466-i9urf9oa4uurgebcfgfsjc53pqrqe1vh.apps.googleusercontent.com
+tracking_id: UA-41425441-5
+tracking_id_testing: UA-41425441-7
+client_id: 793177639245-olst43lspv93vkoql0b9l26hmpf9kfmv.apps.googleusercontent.com
 
 
 projects:

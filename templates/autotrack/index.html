@@ -194,10 +194,6 @@
 
 {% endblock %}
 
-{% block tech_content %}
-  The {{ page.title }} demo uses the <a href="{{ site.tech.embed_api.url }}">{{ site.tech.embed_api.name }}</a> to report on display and the visualizations of the <a href="{{ site.tech.autotrack.url }}">{{ site.tech.autotrack.name }}</a> data.
-{% endblock %}
-
 {% block foot_scripts %}
 {{ super() }}
 <script src="/public/javascript/autotrack.js"></script>

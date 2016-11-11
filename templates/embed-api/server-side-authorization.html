@@ -30,9 +30,6 @@
 </section>
 {% endblock %}
 
-{% block tech_content %}
-  The {{ page.title }} demo uses the <code>DataChart</code> component of the <a href="{{ site.tech.embed_api.url }}">{{ site.tech.embed_api.name }}</a>, which queries the <a href="{{ site.tech.core_reporting_api.url }}">{{ site.tech.core_reporting_api.name }}</a> behind the scenes.
-{% endblock %}
 {% block foot_scripts %}
 {{ super() }}
 <script src="/public/javascript/embed-api.js"></script>
