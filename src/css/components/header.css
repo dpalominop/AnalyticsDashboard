@@ -35,7 +35,7 @@ limitations under the License.
 }
 
 .Header-block {
-  background: var(--bg-color-dark);
+  background: var(--bg-color-flat-red);
   box-shadow: 0 0 .5em rgba(0,0,0,.1);
   padding: 1em var(--gap);
   position: relative;
@@ -205,8 +205,8 @@ limitations under the License.
 @media (--break-lg) {
 
   .Header-block {
-    background: #fff;
-    padding: var(--gap-lg) calc(var(--gap-lg)*1.5) calc(var(--gap-lg)*1.5);
+    background: var(--bg-color-flat-red);
+    padding: var(--gap-lg) calc(var(--gap-lg)*1.5) calc(var(--gap-lg));
   }
 
   .Header-menu {

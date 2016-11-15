@@ -47,6 +47,9 @@ limitations under the License.
   --bg-color-dark: #333;
   --bg-color-dark-faded: #444;
   --bg-color-light: hsl(30, 10%, 95%);
+  --bg-color-flat-green: #1abc9c;
+  --bg-color-flat-red: #c0392b;
+  --bg-color-flat-dark-blue: #34495e;
 
   --border-color: #d4d2d0;
   --border-color-active: #3b99fc;
