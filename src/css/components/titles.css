@@ -63,7 +63,7 @@ limitations under the License.
  */
 
 .Titles--hero {
-  color: var(--ga-gray);
+  color: var(--bg-color-light);
 }
 
 .Titles--hero .Titles-main {
@@ -79,7 +79,7 @@ limitations under the License.
   }
   .Titles--hero .Titles-main {
     /*display: inline-block;*/
-    margin-right: .25em;
+    /*margin-right: .25em;*/
   }
   .Titles--hero .Titles-sub {
     /*display: inline-block;*/
@@ -92,7 +92,8 @@ limitations under the License.
   }
   .Titles--hero .Titles-main {
     font-size: 3em;
-    margin-right: .5em;
+    /*margin-right: .5em;*/
+    font-weight: 600;
   }
   .Titles--hero .Titles-sub {
     font-size: 1.75em;
