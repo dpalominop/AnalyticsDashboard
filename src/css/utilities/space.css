@@ -17,4 +17,5 @@ limitations under the License.
 
 .u-spaceDouble {
   margin: 0 0 calc(2*var(--gap));
+  text-align: center;
 }
