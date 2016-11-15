@@ -88,7 +88,7 @@ limitations under the License.
 
   .Site-sidebar {
     background: var(--bg-color-dark-faded);
-    border-top: .4em solid #222;
+    /*border-top: .4em solid #222;*/
     box-shadow: none;
     overflow: visible;
     position: static;
@@ -101,7 +101,7 @@ limitations under the License.
   }
 
   .Site-main {
-    border-top: .4em solid #f7991c;
+    /*border-top: .4em solid #f7991c;*/
     box-shadow: 0 0 1em rgba(0,0,0,.3);
     flex: 1;
     min-width: 0;
