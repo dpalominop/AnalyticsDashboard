@@ -31,13 +31,72 @@ gapi.analytics.ready(function() {
   var dataChart = new gapi.analytics.googleCharts.DataChart({
     query: {
       metrics: 'ga:sessions',
-      dimensions: 'ga:date',
-      'start-date': '30daysAgo',
+      dimensions: 'ga:country',
+      'start-date': '31daysAgo',
       'end-date': 'yesterday'
     },
     chart: {
       container: 'chart-container',
+      type: 'GEO',
+      options: {
+        width: '100%'
+      }
+    }
+  });
+
+  /**
+   * Create a new DataChart for New Users
+   */
+  var newUsersDataChart = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      metrics: 'ga:newUsers',
+      dimensions: 'ga:date',
+      'start-date': '31daysAgo',
+      'end-date': 'yesterday'
+    },
+    chart: {
+      container: 'new-users-chart-container',
       type: 'LINE',
+      options: {
+        width: '100%'
+      }
+    }
+  });
+
+  /**
+   * Create a new DataChart for Users
+   */
+  var usersDataChart = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      metrics: 'ga:users',
+      dimensions: 'ga:date',
+      'start-date': '31daysAgo',
+      'end-date': 'yesterday'
+    },
+    chart: {
+      container: 'users-chart-container',
+      type: 'LINE',
+      options: {
+        width: '100%'
+      }
+    }
+  });
+
+  /**
+   * Create a new DataChart for Sessions by Browsers
+   */
+  var sessionsByBrowsersDataChart = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      metrics: 'ga:sessions',
+      dimensions: 'ga:browser',
+      'start-date': '31daysAgo',
+      'end-date': 'yesterday',
+      'sort': '-ga:sessions',
+      'max-results': '6'
+    },
+    chart: {
+      container: 'sessions-browsers-chart-container',
+      type: 'TABLE',
       options: {
         width: '100%'
       }
@@ -50,6 +109,9 @@ gapi.analytics.ready(function() {
    */
   viewSelector.on('change', function(ids) {
     dataChart.set({query: {ids: ids}}).execute();
+    newUsersDataChart.set({query: {ids:ids}}).execute();
+    usersDataChart.set({query: {ids:ids}}).execute();
+    sessionsByBrowsersDataChart.set({query: {ids:ids}}).execute();
   });
 
 });
