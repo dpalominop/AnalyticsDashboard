@@ -29,13 +29,13 @@ gapi.analytics.ready(function() {
    */
   var mainChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      'dimensions': 'ga:browser',
+      'dimensions': 'ga:country',
       'metrics': 'ga:sessions',
       'sort': '-ga:sessions',
-      'max-results': '6'
+      'max-results': '41'
     },
     chart: {
-      type: 'TABLE',
+      type: 'GEO',
       container: 'main-chart-container',
       options: {
         width: '100%'
@@ -99,7 +99,6 @@ gapi.analytics.ready(function() {
    * the data from the browser in the clicked row.
    */
   mainChart.on('success', function(response) {
-
     var chart = response.chart;
     var dataTable = response.dataTable;
 
@@ -112,14 +111,14 @@ gapi.analytics.ready(function() {
       if (!chart.getSelection().length) return;
 
       var row =  chart.getSelection()[0].row;
-      var browser =  dataTable.getValue(row, 0);
+      var country =  dataTable.getValue(row, 0);
       var options = {
         query: {
-          filters: 'ga:browser==' + browser
+          filters: 'ga:country==' + country
         },
         chart: {
           options: {
-            title: browser
+            title: country
           }
         }
       };

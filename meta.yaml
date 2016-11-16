@@ -4,10 +4,10 @@ slug: ''
 path: '/'
 #tracking_id: UA-45955569-1
 #tracking_id_testing: UA-41425441-7
-#client_id: 548963745466-i9urf9oa4uurgebcfgfsjc53pqrqe1vh.apps.googleusercontent.com
-tracking_id: UA-41425441-5
-tracking_id_testing: UA-41425441-7
-client_id: 793177639245-olst43lspv93vkoql0b9l26hmpf9kfmv.apps.googleusercontent.com
+client_id: 548963745466-i9urf9oa4uurgebcfgfsjc53pqrqe1vh.apps.googleusercontent.com
+#tracking_id: UA-41425441-5
+#tracking_id_testing: UA-41425441-7
+#client_id: 793177639245-olst43lspv93vkoql0b9l26hmpf9kfmv.apps.googleusercontent.com
 
 
 projects:
@@ -32,14 +32,14 @@ projects:
     slug: third-party-visualizations
     tech: [embed_api, real_time_reporting_api]
     excerpt: 'The Embed API make it easy to query data and display it in a Google Chart. But it also allows you to access the raw data so you can display it however you want. This example uses the <a href="http://www.chartjs.org/">Chart.js</a> visualization library.'
-  - title: Múltiples Vistas
-    slug: multiple-views
-    tech: [embed_api]
-    excerpt: 'Displaying two different views side-by-side is not currently possible through the Google Analytics website. This demo shows how easy it is to do this using the Embed API.'
   - title: Cuadros Interactivos
     slug: interactive-charts
     tech: [embed_api]
     excerpt: 'This demo shows how you can build a dashboard that allows you to interactively explore your data. In this example you have a list of filters in one chart that you can click on and then a second chart will render showing just that filtered dataset.'
+  - title: Múltiples Vistas
+    slug: multiple-views
+    tech: [embed_api]
+    excerpt: 'Displaying two different views side-by-side is not currently possible through the Google Analytics website. This demo shows how easy it is to do this using the Embed API.'
   - title: Componentes Personalizados
     slug: custom-components
     tech: [embed_api]
