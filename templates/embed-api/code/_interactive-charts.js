@@ -31,6 +31,8 @@ gapi.analytics.ready(function() {
     query: {
       'dimensions': 'ga:country',
       'metrics': 'ga:sessions',
+      'start-date': '31daysAgo',
+      'end-date': 'yesterday',
       'sort': '-ga:sessions',
       'max-results': '41'
     },
@@ -45,19 +47,21 @@ gapi.analytics.ready(function() {
 
 
   /**
-   * Create a timeline chart showing sessions over time for the browser the
+   * Create a table chart showing Top Landing Page over time for the country the
    * user selected in the main chart.
    */
-  var breakdownChart = new gapi.analytics.googleCharts.DataChart({
+  var landingBreakdownChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      'dimensions': 'ga:date',
-      'metrics': 'ga:sessions',
-      'start-date': '7daysAgo',
-      'end-date': 'yesterday'
+      'dimensions': 'ga:landingPagePath',
+      'metrics': 'ga:users',
+      'start-date': '31daysAgo',
+      'end-date': 'yesterday',
+      'sort': '-ga:users',
+      'max-results': '10'
     },
     chart: {
-      type: 'LINE',
-      container: 'breakdown-chart-container',
+      type: 'TABLE',
+      container: 'landing-breakdown-chart-container',
       options: {
         width: '100%'
       }
@@ -72,7 +76,6 @@ gapi.analytics.ready(function() {
    */
   var mainChartRowClickListener;
 
-
   /**
    * Update both charts whenever the selected view changes.
    */
@@ -86,10 +89,10 @@ gapi.analytics.ready(function() {
     }
 
     mainChart.set(options).execute();
-    breakdownChart.set(options);
+    landingBreakdownChart.set(options);
 
     // Only render the breakdown chart if a browser filter has been set.
-    if (breakdownChart.get().query.filters) breakdownChart.execute();
+    if (landingBreakdownChart.get().query.filters) landingBreakdownChart.execute();
   });
 
 
@@ -123,7 +126,7 @@ gapi.analytics.ready(function() {
         }
       };
 
-      breakdownChart.set(options).execute();
+      landingBreakdownChart.set(options).execute();
     });
   });
 
