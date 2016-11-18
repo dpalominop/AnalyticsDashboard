@@ -1,30 +1,28 @@
-# Google Analytics Demos and Tools [![Build Status](https://travis-ci.org/googleanalytics/ga-dev-tools.svg?branch=master)](https://travis-ci.org/googleanalytics/ga-dev-tools)
+# Analytics Dashboard
 
-A showcase of demos and tools built with the various Google Analytics APIs and Libraries.
-**[View the Site (https://ga-dev-tools.appspot.com)](https://ga-dev-tools.appspot.com)**
+Dashboard personalizado de Google Analytics especializado en el sector de turismo.
 
-## Submitting Feedback / Reporting Bugs
+## Compartir Feedback / Reportar Bugs
 
-#### For the Demos & Tools site
+#### Para nuevas características y Bugs
 
-- You may report bugs by [submitting an issue](https://github.com/googleanalytics/ga-dev-tools/issues/new).
-- You may also submit an issue to [request a new demo or tool](https://github.com/googleanalytics/ga-dev-tools/issues/new).
+- Puedes reportar un bug a [reportar un bug](https://github.com/dpalominop/AnalyticsDashboard/issues/new).
+- Puedes reportar un requerimiento a [solicitar una nueva característica](https://github.com/dpalominop/AnalyticsDashboard/issues/new).
 
-#### For the Google Analytics platform
+#### Para conocer la plataforma de Google Analytics
 
-- Documentation for all Google Analytics API, libraries and SDKs can be found on [Google Analytics Developers](http://developers.google.com/analytics).
-- If you have questions, please refer to the getting [help section](http://developers.google.com/analytics/help/) of the developers site to find the best place to get your questions answered.
+- Documentación de toda la API de Google Analytics, librerías y SDKs puede ser encontrada en [Google Analytics Developers](http://developers.google.com/analytics).
 
-## Building and Running the Site Locally
+## Construir y Ejecutar localmente
 
-The Google Analytics demos and tools site runs on [Google App Engine](https://cloud.google.com/appengine/) and is built with [node.js](http://nodejs.org/). To run the site locally you'll need the following software installed on your system:
+Analytics Dashboard corre sobre [Google App Engine](https://cloud.google.com/appengine/) y es construído con [node.js](http://nodejs.org/). Para correr la plataforma localmente se necesita las siguientes dependencias instaladas en tu sistema:
 
 - [Node.js](https://nodejs.org/en/download/) (v6.0.0+)
 - [Google Cloud SDK](https://cloud.google.com/sdk/docs/) (v132.0.0+, with `dev_appserver.py` in your `PATH`)
 - [pip](https://pypi.python.org/pypi/pip)
 - [GraphicsMagick](http://www.graphicsmagick.org/) (with `gm` in your `PATH`)
 
-Once all dependencies are installed, follow these steps to build and run the site locally:
+Una vez instalados todas las dependencias, sigue estos pasos para construir y correr la plataforma localmente:
 
 ```sh
 # Clone the repository.
