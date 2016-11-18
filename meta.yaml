@@ -35,7 +35,7 @@ projects:
   - title: Rutas de los Usuarios
     slug: interactive-charts
     tech: [embed_api]
-    excerpt: 'This demo shows how you can build a dashboard that allows you to interactively explore your data. In this example you have a list of filters in one chart that you can click on and then a second chart will render showing just that filtered dataset.'
+    excerpt: ''
   - title: Datos Demográficos
     slug: demographics
     tech: [embed_api]
