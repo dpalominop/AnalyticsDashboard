@@ -83,7 +83,9 @@ gapi.analytics.ready(function() {
       metrics: 'ga:sessions',
       dimensions: 'ga:country',
       'start-date': '31daysAgo',
-      'end-date': 'yesterday'
+      'end-date': 'yesterday',
+      'sort': '-ga:sessions',
+      'max-results': '41'
     },
     chart: {
       container: 'chart-container',
