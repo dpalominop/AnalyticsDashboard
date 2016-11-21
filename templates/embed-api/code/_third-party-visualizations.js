@@ -348,7 +348,7 @@ gapi.analytics.ready(function() {
         labels : labels,
         datasets : [
           {
-            label: 'Last Year',
+            label: 'Before Last Year',
             fillColor : 'rgba(120,120,120,0.5)',
             strokeColor : 'rgba(120,120,120,1)',
             data : data3
