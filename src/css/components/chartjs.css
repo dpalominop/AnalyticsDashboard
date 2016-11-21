@@ -20,7 +20,7 @@ limitations under the License.
 }
 
 .Chartjs-figure {
-  height: 250px;
+  min-height: 250px;
 }
 
 .Chartjs-legend {

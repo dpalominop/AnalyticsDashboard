@@ -26,12 +26,12 @@ projects:
   pages:
   - title: Basico
     slug: basic-dashboard
-    tech: [embed_api]
-    excerpt: 'This demos shows how to create a basic dashboard with a single timeline chart showing site traffic over the past week. You can update the chart to see data for any Google Analytics view you have access to.'
+    tech: [embed_api, real_time_reporting_api]
+    excerpt: '.'
   - title: Comparaciones en el tiempo
     slug: third-party-visualizations
     tech: [embed_api, real_time_reporting_api]
-    excerpt: 'The Embed API make it easy to query data and display it in a Google Chart. But it also allows you to access the raw data so you can display it however you want. This example uses the <a href="http://www.chartjs.org/">Chart.js</a> visualization library.'
+    excerpt: '.'
   - title: Rutas de los Usuarios
     slug: interactive-charts
     tech: [embed_api]

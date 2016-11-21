@@ -11,11 +11,16 @@
       <li class="FlexGrid-item">
         <div class="Titles">
           <h1 class="Titles-main" id="view-name">Selecciona una Vista</h1>
+          <div class="Titles-sub">Varias visualizaciones</div>
         </div>
       </li>
+      <li class="FlexGrid-item FlexGrid-item--fixed">
+        <div id="active-users-container"></div>
+      </li>
     </ul>
-    <div class="ViewSelector" id="view-selector-container"></div>
+    <div id="view-selector-container"></div>
   </header>
+
 
   <ul class="FlexGrid FlexGrid--halves">
     <li class="FlexGrid-item">
@@ -36,6 +41,16 @@
         <figure class="Chartjs-figure" id="new-users-chart-container"></figure>
       </div>
     </li>
+    <li class="FlexGrid-item">
+      <div class="Chart">
+        <header class="Titles">
+          <h1 class="Titles-main">Nuevos Usuarios</h1>
+          <p class="Titles-sub">Last 30 days</p>
+        </header>
+        <figure class="Chartjs-figure" id="chart-6-container"></figure>
+        <ol class="Chartjs-legend" id="legend-6-container"></ol>
+      </div>
+    </li>
   </ul>
 
   <ul class="FlexGrid FlexGrid--halves">
@@ -46,6 +61,7 @@
           <p class="Titles-sub">Last 30 days</p>
         </header>
         <figure class="Chartjs-figure" id="users-chart-container"></figure>
+        <ol class="Chartjs-legend" id="users-chart-container"></ol>
       </div>
     </li>
     <li class="FlexGrid-item">
@@ -81,13 +97,13 @@
   </ul>
 
 </div>
-
 <section>
 
 </section>
 {% endblock %}
 
 {% block foot_scripts %}
+{% include 'embed-api/dependencies/_third-party-visualizations.html' %}
 {{ super() }}
 <script>
 {% include 'embed-api/code/_basic-dashboard.js' %}
