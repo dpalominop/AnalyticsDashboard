@@ -103,6 +103,48 @@ gapi.analytics.ready(function() {
     }
   });
 
+    /**
+   * Create a new DataChart for Top Landing Pages
+   */
+  var topLandingDataChart = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      metrics: 'ga:users',
+      dimensions: 'ga:landingPagePath',
+      'start-date': '31daysAgo',
+      'end-date': 'yesterday',
+      'sort': '-ga:users',
+      'max-results': '10'
+    },
+    chart: {
+      container: 'top-landing-chart-container',
+      type: 'TABLE',
+      options: {
+        width: '100%'
+      }
+    }
+  });
+
+    /**
+   * Create a new DataChart for All Pages (Top Content)
+   */
+  var allPagesDataChart = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      metrics: 'ga:users',
+      dimensions: 'ga:pagePath',
+      'start-date': '31daysAgo',
+      'end-date': 'yesterday',
+      'sort': '-ga:users',
+      'max-results': '10'
+    },
+    chart: {
+      container: 'all-pages-chart-container',
+      type: 'TABLE',
+      options: {
+        width: '100%'
+      }
+    }
+  });
+
 
   /**
    * Render the dataChart on the page whenever a new view is selected.
@@ -112,6 +154,8 @@ gapi.analytics.ready(function() {
     newUsersDataChart.set({query: {ids:ids}}).execute();
     usersDataChart.set({query: {ids:ids}}).execute();
     sessionsByBrowsersDataChart.set({query: {ids:ids}}).execute();
+    topLandingDataChart.set({query: {ids:ids}}).execute();
+    allPagesDataChart.set({query: {ids:ids}}).execute();
   });
 
 });
