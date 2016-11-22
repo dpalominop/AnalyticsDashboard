@@ -69,7 +69,6 @@ gapi.analytics.ready(function() {
 
     // Render all the of charts for this view.
     dataChart.set({query: {ids: data.ids}}).execute();
-    newUsersDataChart.set({query: {ids:data.ids}}).execute();
     usersDataChart.set({query: {ids:data.ids}}).execute();
     sessionsByBrowsersDataChart.set({query: {ids:data.ids}}).execute();
     topLandingDataChart.set({query: {ids:data.ids}}).execute();
@@ -96,38 +95,20 @@ gapi.analytics.ready(function() {
     }
   });
 
-  /**
-   * Create a new DataChart for New Users
-   */
-  var newUsersDataChart = new gapi.analytics.googleCharts.DataChart({
-    query: {
-      metrics: 'ga:newUsers',
-      dimensions: 'ga:date',
-      'start-date': '31daysAgo',
-      'end-date': 'yesterday'
-    },
-    chart: {
-      container: 'new-users-chart-container',
-      type: 'LINE',
-      options: {
-        width: '100%'
-      }
-    }
-  });
 
   /**
    * Create a new DataChart for Users
    */
   var usersDataChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      metrics: 'ga:users',
-      dimensions: 'ga:date',
+      metrics: 'ga:sessions,ga:bounceRate',
+      dimensions: 'ga:deviceCategory',
       'start-date': '31daysAgo',
       'end-date': 'yesterday'
     },
     chart: {
-      container: 'users-chart-container',
-      type: 'LINE',
+      container: 'mobile-chart-container',
+      type: 'TABLE',
       options: {
         width: '100%'
       }
@@ -243,13 +224,14 @@ gapi.analytics.ready(function() {
       var data = {
         labels : labels,
         datasets : [
+          
           {
-            label: 'New Userss',
-            fillColor : 'rgba(120,120,120,0.5)',
-            strokeColor : 'rgba(120,120,120,1)',
-            pointColor : 'rgba(120,120,120,1)',
+            label: 'Users',
+            fillColor : 'rgba(151,187,205,0.5)',
+            strokeColor : 'rgba(151,187,205,1)',
+            pointColor : 'rgba(151,187,205,1)',
             pointStrokeColor : '#fff',
-            data : data3
+            data : data1
           },
           {
             label: 'New Users',
@@ -260,12 +242,12 @@ gapi.analytics.ready(function() {
             data : data2
           },
           {
-            label: 'Users',
-            fillColor : 'rgba(151,187,205,0.5)',
-            strokeColor : 'rgba(151,187,205,1)',
-            pointColor : 'rgba(151,187,205,1)',
+            label: 'New Userss',
+            fillColor : 'rgba(120,120,120,0.5)',
+            strokeColor : 'rgba(120,120,120,1)',
+            pointColor : 'rgba(120,120,120,1)',
             pointStrokeColor : '#fff',
-            data : data1
+            data : data3
           }
         ]
       };
