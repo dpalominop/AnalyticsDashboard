@@ -35,9 +35,11 @@
     </li>
     <li class="FlexGrid-item">
       <header class="Titles">
-        <h1 class="Titles-main">Últimos 3 meses</h3>
+        <h1 class="Titles-main">Usuarios</h3>
+        <p class="Titles-sub">Últimos 30 días</p>
       </header>
-      <div id="temp-landingpath-chart-container" style="min-height:300px"></div>
+      <figure class="Chartjs-figure" id="temp-landingpath-chart-container" style="min-height:300px"></figure>
+      <ol class="Chartjs-legend" id="legend-6-container"></ol>
     </li>
   </ul>
 </div>
@@ -48,6 +50,7 @@
 {% endblock %}
 
 {% block foot_scripts %}
+{% include 'embed-api/dependencies/_third-party-visualizations.html' %}
 {{ super() }}
 <script>
 {% include 'embed-api/code/_interactive-charts.js' %}
