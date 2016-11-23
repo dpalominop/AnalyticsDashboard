@@ -51,7 +51,7 @@ gapi.analytics.ready(function() {
    */
   var demographicsBreakdownChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      'dimensions': 'ga:userGender, ga:userAgeBracket, ga:interestAffinityCategory',
+      'dimensions': 'ga:userGender, ga:userAgeBracket, ga:deviceCategory',
       'metrics': 'ga:users',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
