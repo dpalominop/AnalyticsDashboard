@@ -74,7 +74,7 @@ gapi.analytics.ready(function() {
    */
   var tempLandingPathChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      'metrics': 'ga:users',
+      'metrics': 'ga:sessions',
       'dimensions': 'ga:date',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
@@ -83,6 +83,27 @@ gapi.analytics.ready(function() {
     chart: {
       type: 'LINE',
       container: 'temp-landingpath-chart-container',
+      options: {
+        width: '100%'
+      }
+    }
+  });
+
+    /**
+   * Create a table chart showing Bounce Rate over time for the country the
+   * user selected in the main chart.
+   */
+  var bounceRateChart = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      'metrics': 'ga:bounceRate',
+      'dimensions': 'ga:date',
+      'start-date': '31daysAgo',
+      'end-date': 'yesterday',
+      'sort': 'ga:date'
+    },
+    chart: {
+      type: 'LINE',
+      container: 'bouncerate-chart-container',
       options: {
         width: '100%'
       }
@@ -125,12 +146,14 @@ gapi.analytics.ready(function() {
     mainChart.set(options).execute();
     landingPathChart.set(options);
     tempLandingPathChart.set(options);
+    bounceRateChart.set(options);
 
     // Only render the breakdown chart if a Country filter has been set.
     if (landingPathChart.get().query.filters) landingPathChart.execute();
 
     // Only render the breakdown chart if a LandingPath filter has been set.
     if (tempLandingPathChart.get().query.filters && landingPathChart.get().query.filters) tempLandingPathChart.execute();
+    if (bounceRateChart.get().query.filters && landingPathChart.get().query.filters) bounceRateChart.execute();
   });
 
 
@@ -166,6 +189,7 @@ gapi.analytics.ready(function() {
 
       landingPathChart.set(options).execute();
       tempLandingPathChart.set(options).execute();
+      bounceRateChart.set(options).execute();
     });
   });
 
@@ -199,6 +223,7 @@ gapi.analytics.ready(function() {
       };
 
       tempLandingPathChart.set(options).execute();
+      bounceRateChart.set(options).execute();
     });
   });
 
