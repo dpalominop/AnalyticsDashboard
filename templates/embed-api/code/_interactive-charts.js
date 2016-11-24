@@ -74,7 +74,7 @@ gapi.analytics.ready(function() {
    */
   var tempLandingPathChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      'metrics': 'ga:sessions',
+      'metrics': 'ga:sessions, ga:bounces',
       'dimensions': 'ga:date',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
