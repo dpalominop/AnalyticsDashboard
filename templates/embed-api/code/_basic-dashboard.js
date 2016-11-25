@@ -69,7 +69,7 @@ gapi.analytics.ready(function() {
 
     // Render all the of charts for this view.
     dataChart.set({query: {ids: data.ids}}).execute();
-    usersDataChart.set({query: {ids:data.ids}}).execute();
+    deviceDataChart.set({query: {ids:data.ids}}).execute();
     sessionsByBrowsersDataChart.set({query: {ids:data.ids}}).execute();
     topLandingDataChart.set({query: {ids:data.ids}}).execute();
     allPagesDataChart.set({query: {ids:data.ids}}).execute();
@@ -99,7 +99,7 @@ gapi.analytics.ready(function() {
   /**
    * Create a new DataChart for Users
    */
-  var usersDataChart = new gapi.analytics.googleCharts.DataChart({
+  var deviceDataChart = new gapi.analytics.googleCharts.DataChart({
     query: {
       metrics: 'ga:sessions,ga:bounceRate',
       dimensions: 'ga:deviceCategory',
@@ -107,7 +107,7 @@ gapi.analytics.ready(function() {
       'end-date': 'yesterday'
     },
     chart: {
-      container: 'mobile-chart-container',
+      container: 'device-chart-container',
       type: 'TABLE',
       options: {
         width: '100%'
