@@ -59,3 +59,4 @@ python_modules
 public/
 
 # Private keys
+service-account-key.json

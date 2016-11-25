@@ -68,7 +68,7 @@ gapi.analytics.ready(function() {
     activeUsers.set(data).execute();
 
     // Render all the of charts for this view.
-    dataChart.set({query: {ids: data.ids}}).execute();
+    countryChart.set({query: {ids: data.ids}}).execute();
     deviceDataChart.set({query: {ids:data.ids}}).execute();
     sessionsByBrowsersDataChart.set({query: {ids:data.ids}}).execute();
     topLandingDataChart.set({query: {ids:data.ids}}).execute();
@@ -77,7 +77,7 @@ gapi.analytics.ready(function() {
   });
 
 
-  var dataChart = new gapi.analytics.googleCharts.DataChart({
+  var countryChart = new gapi.analytics.googleCharts.DataChart({
     query: {
       metrics: 'ga:sessions',
       dimensions: 'ga:country',
@@ -87,7 +87,7 @@ gapi.analytics.ready(function() {
       'max-results': '41'
     },
     chart: {
-      container: 'chart-container',
+      container: 'country-container',
       type: 'GEO',
       options: {
         width: '100%'
