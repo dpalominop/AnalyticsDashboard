@@ -69,11 +69,11 @@ gapi.analytics.ready(function() {
 
     // Render all the of charts for this view.
     countryChart.set({query: {ids: data.ids}}).execute();
+    userNewUserDataChart.set({query: {ids: data.ids}}).execute();
     deviceDataChart.set({query: {ids:data.ids}}).execute();
     sessionsByBrowsersDataChart.set({query: {ids:data.ids}}).execute();
     topLandingDataChart.set({query: {ids:data.ids}}).execute();
     allPagesDataChart.set({query: {ids:data.ids}}).execute();
-    renderYearOverYearOverYearChart(data.ids);
   });
 
 
@@ -182,134 +182,22 @@ gapi.analytics.ready(function() {
  * 
  */
 
-  function renderYearOverYearOverYearChart(ids) {
-
-    // Adjust `now` to experiment with different days, for testing only...
-    var now = moment(); // .subtract(3, 'day');
-
-    var totalUsers = query({
-      'ids': ids,
-      'metrics': 'ga:users',
-      'dimensions': 'ga:date,ga:nthDay',
+  var userNewUserDataChart = new gapi.analytics.googleCharts.DataChart({
+    query:{
+      metrics: 'ga:users,ga:newUsers',
+      dimensions: 'ga:date',
       'start-date': '31daysAgo',
-      'end-date': 'yesterday'
-    });
-
-    var newUsers = query({
-      'ids': ids,
-      'metrics': 'ga:newUsers',
-      'dimensions': 'ga:date,ga:nthDay',
-      'start-date': '31daysAgo',
-      'end-date': 'yesterday'
-    });
-
-    var newUserss = query({
-      'ids': ids,
-      'metrics': 'ga:newUsers',
-      'dimensions': 'ga:date,ga:nthDay',
-      'start-date': '31daysAgo',
-      'end-date': 'yesterday'
-    });
-
-    Promise.all([totalUsers, newUsers, newUserss]).then(function(results) {
-      var data1 = results[0].rows.map(function(row) { return +row[2]; });
-      var data2 = results[1].rows.map(function(row) { return +row[2]; });
-      var data3 = results[2].rows.map(function(row) { return +row[2]; });
-      var labels = results[2].rows.map(function(row) { return +row[0]; });
-
-      labels = labels.map(function(label) {
-        return moment(label, 'YYYYMMDD').format('DD-MMM');
-      });
-
-      var data = {
-        labels : labels,
-        datasets : [
-          
-          {
-            label: 'Users',
-            fillColor : 'rgba(151,187,205,0.5)',
-            strokeColor : 'rgba(151,187,205,1)',
-            pointColor : 'rgba(151,187,205,1)',
-            pointStrokeColor : '#fff',
-            data : data1
-          },
-          {
-            label: 'New Users',
-            fillColor : 'rgba(220,220,220,0.5)',
-            strokeColor : 'rgba(220,220,220,1)',
-            pointColor : 'rgba(220,220,220,1)',
-            pointStrokeColor : '#fff',
-            data : data2
-          },
-          {
-            label: 'New Userss',
-            fillColor : 'rgba(120,120,120,0.5)',
-            strokeColor : 'rgba(120,120,120,1)',
-            pointColor : 'rgba(120,120,120,1)',
-            pointStrokeColor : '#fff',
-            data : data3
-          }
-        ]
-      };
-
-      new Chart(makeCanvas('chart-6-container')).Line(data);
-      generateLegend('legend-6-container', data.datasets);
-    })
-    .catch(function(err) {
-      console.error(err.stack);
-    });
-  }
-
-
-  /**
-   * Extend the Embed APIs `gapi.analytics.report.Data` component to
-   * return a promise the is fulfilled with the value returned by the API.
-   * @param {Object} params The request parameters.
-   * @return {Promise} A promise.
-   */
-  function query(params) {
-    return new Promise(function(resolve, reject) {
-      var data = new gapi.analytics.report.Data({query: params});
-      data.once('success', function(response) { resolve(response); })
-          .once('error', function(response) { reject(response); })
-          .execute();
-    });
-  }
-
-
-  /**
-   * Create a new canvas inside the specified element. Set it to be the width
-   * and height of its container.
-   * @param {string} id The id attribute of the element to host the canvas.
-   * @return {RenderingContext} The 2D canvas context.
-   */
-  function makeCanvas(id) {
-    var container = document.getElementById(id);
-    var canvas = document.createElement('canvas');
-    var ctx = canvas.getContext('2d');
-
-    container.innerHTML = '';
-    canvas.width = container.offsetWidth;
-    canvas.height = container.offsetHeight;
-    container.appendChild(canvas);
-
-    return ctx;
-  }
-
-  /**
-   * Create a visual legend inside the specified element based off of a
-   * Chart.js dataset.
-   * @param {string} id The id attribute of the element to host the legend.
-   * @param {Array.<Object>} items A list of labels and colors for the legend.
-   */
-  function generateLegend(id, items) {
-    var legend = document.getElementById(id);
-    legend.innerHTML = items.map(function(item) {
-      var color = item.color || item.fillColor;
-      var label = item.label;
-      return '<li><i style="background:' + color + '"></i>' + label + '</li>';
-    }).join('');
-  }
+      'end-date': 'yesterday',
+      'sort': 'ga:date'
+    },
+    chart:{
+      type: 'LINE',
+      container: 'userNewUser-container',
+      option: {
+        width: '100%'
+      }
+    }
+  });
 
   // Set some global Chart.js defaults.
   Chart.defaults.global.animationSteps = 60;
