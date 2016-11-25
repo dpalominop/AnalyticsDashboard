@@ -52,7 +52,7 @@ gapi.analytics.ready(function() {
    */
   var landingPathChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      'metrics': 'ga:users',
+      'metrics': 'ga:sessions,ga:users',
       'dimensions': 'ga:landingPagePath',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
