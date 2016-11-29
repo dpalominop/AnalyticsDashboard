@@ -90,20 +90,21 @@ gapi.analytics.ready(function() {
   });
 
     /**
-   * Create a table chart showing Bounce Rate over time for the country the
+   * Create a table chart showing Inicial Pade next to Landing Page for the country the
    * user selected in the main chart.
    */
-  var bounceRateChart = new gapi.analytics.googleCharts.DataChart({
+  var inicialPageChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      'metrics': 'ga:bounceRate',
-      'dimensions': 'ga:date',
+      'metrics': 'ga:sessions',
+      'dimensions': 'ga:pagePath',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
-      'sort': 'ga:date'
+      'sort': '-ga:sessions',
+      'max-results': '10'
     },
     chart: {
-      type: 'LINE',
-      container: 'bouncerate-chart-container',
+      type: 'TABLE',
+      container: 'inicialpage-chart-container',
       options: {
         width: '100%'
       }
@@ -146,14 +147,14 @@ gapi.analytics.ready(function() {
     mainChart.set(options).execute();
     landingPathChart.set(options);
     tempLandingPathChart.set(options);
-    bounceRateChart.set(options);
+    inicialPageChart.set(options);
 
     // Only render the breakdown chart if a Country filter has been set.
     if (landingPathChart.get().query.filters) landingPathChart.execute();
 
     // Only render the breakdown chart if a LandingPath filter has been set.
     if (tempLandingPathChart.get().query.filters && landingPathChart.get().query.filters) tempLandingPathChart.execute();
-    if (bounceRateChart.get().query.filters && landingPathChart.get().query.filters) bounceRateChart.execute();
+    if (inicialPageChart.get().query.filters && landingPathChart.get().query.filters) inicialPageChart.execute();
   });
 
 
@@ -189,7 +190,7 @@ gapi.analytics.ready(function() {
 
       landingPathChart.set(options).execute();
       tempLandingPathChart.set(options).execute();
-      bounceRateChart.set(options).execute();
+      inicialPageChart.set(options).execute();
     });
   });
 
@@ -221,9 +222,10 @@ gapi.analytics.ready(function() {
           }
         }
       };
+      console.log(options);
 
       tempLandingPathChart.set(options).execute();
-      bounceRateChart.set(options).execute();
+      inicialPageChart.set(options).execute();
     });
   });
 
