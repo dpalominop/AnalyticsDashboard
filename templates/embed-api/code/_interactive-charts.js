@@ -265,4 +265,10 @@ gapi.analytics.ready(function() {
     });
   });
 
+  // Set some global Chart.js defaults.
+  Chart.defaults.global.animationSteps = 60;
+  Chart.defaults.global.animationEasing = 'easeInOutQuart';
+  Chart.defaults.global.responsive = true;
+  Chart.defaults.global.maintainAspectRatio = false;
+
 });
