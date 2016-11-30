@@ -33,7 +33,7 @@ projects:
     tech: [embed_api, real_time_reporting_api]
     excerpt: '.'
   - title: Rutas de los Usuarios
-    slug: interactive-charts
+    slug: users-routes
     tech: [embed_api]
     excerpt: ''
   - title: Datos Demográficos
