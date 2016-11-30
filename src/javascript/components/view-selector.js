@@ -19,7 +19,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AlertDispatcher from './alert-dispatcher';
-import '../embed-api/components/view-selector2';
+import '../options/components/view-selector2';
 
 
 /**

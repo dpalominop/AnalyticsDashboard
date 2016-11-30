@@ -23,8 +23,8 @@ from lib.handlers.base import BaseHandler
 
 class ServerSideAuthHandler(BaseHandler):
   def get(self):
-    data = template.get_data('embed-api', 'server-side-authorization')
+    data = template.get_data('options', 'server-side-authorization')
     data['site']['access_token'] = service_account.get_access_token()
-    html = template.render('embed-api', 'server-side-authorization', data)
+    html = template.render('options', 'server-side-authorization', data)
 
     self.response.write(html)

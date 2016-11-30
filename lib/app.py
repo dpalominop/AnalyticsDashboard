@@ -27,7 +27,7 @@ from lib.handlers.server_side_auth import ServerSideAuthHandler
 router = webapp2.WSGIApplication([
 
   # Redirects
-  (r'/demos/embed-api.*', redirects.EmbedApiRedirect),
+  (r'/demos/options.*', redirects.EmbedApiRedirect),
   (r'/explorer/csvhandler.*', redirects.QueryExplorerCsvRedirect),
   (r'/explorer.*', redirects.QueryExplorerRedirect),
 

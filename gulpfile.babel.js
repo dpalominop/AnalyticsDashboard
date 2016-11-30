@@ -189,11 +189,11 @@ gulp.task('javascript:webpack', (function() {
 }()));
 
 
-gulp.task('javascript:embed-api-components', (function() {
+gulp.task('javascript:options-components', (function() {
   let compiler;
 
   const createCompiler = () => {
-    const COMPONENT_PATH = './javascript/embed-api/components';
+    const COMPONENT_PATH = './javascript/options/components';
     let components = ['active-users', 'date-range-selector', 'view-selector2'];
     let entry = {};
 
@@ -236,7 +236,7 @@ gulp.task('javascript:embed-api-components', (function() {
 
 gulp.task('javascript', [
   'javascript:bundle',
-  'javascript:embed-api-components',
+  'javascript:options-components',
 ]);
 
 
@@ -284,9 +284,9 @@ gulp.task('watch', ['build:core', 'serve'], function() {
 });
 
 
-gulp.task('build:embed-api-components', ['javascript'], function() {
-  gulp.src('public/javascript/embed-api/components/*')
-      .pipe(gulp.dest('build/javascript/embed-api/components'));
+gulp.task('build:options-components', ['javascript'], function() {
+  gulp.src('public/javascript/options/components/*')
+      .pipe(gulp.dest('build/javascript/options/components'));
 });
 
 
@@ -295,7 +295,7 @@ gulp.task('build:core', [
   'css',
   'images',
   'json',
-  'build:embed-api-components',
+  'build:options-components',
 ]);
 
 

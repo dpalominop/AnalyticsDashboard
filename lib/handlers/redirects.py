@@ -21,7 +21,7 @@ import webapp2
 
 class EmbedApiRedirect(webapp2.RequestHandler):
   def get(self):
-    return webapp2.redirect('/embed-api/', True)
+    return webapp2.redirect('/options/', True)
 
 
 class QueryExplorerCsvRedirect(webapp2.RequestHandler):

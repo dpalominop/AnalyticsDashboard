@@ -1,4 +1,4 @@
-{% extends 'embed-api/demo.html' %}
+{% extends 'options/demo.html' %}
 
 {% block content %}
 <section>
@@ -93,9 +93,9 @@
 {% endblock %}
 
 {% block foot_scripts %}
-{% include 'embed-api/dependencies/_third-party-visualizations.html' %}
+{% include 'options/dependencies/_third-party-visualizations.html' %}
 {{ super() }}
 <script>
-{% include 'embed-api/code/_basic-dashboard.js' %}
+{% include 'options/code/_basic-dashboard.js' %}
 </script>
 {% endblock %}

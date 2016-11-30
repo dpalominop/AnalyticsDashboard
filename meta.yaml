@@ -22,7 +22,7 @@ projects:
 
 - title: Opciones
   type: demo
-  slug: embed-api
+  slug: options
   pages:
   - title: Basico
     slug: basic-dashboard
