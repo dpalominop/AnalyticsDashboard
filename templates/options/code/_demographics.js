@@ -67,6 +67,29 @@ gapi.analytics.ready(function() {
     }
   });
 
+  /**
+   * Create a table chart showing users by device for the country the
+   * user selected in the main chart.
+   */
+  var devicesChart = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      metrics: 'ga:sessions',
+      dimensions: 'ga:deviceCategory',
+      'start-date': '30daysAgo',
+      'end-date': 'yesterday',
+      'max-results': 6,
+      sort: '-ga:sessions'
+    },
+    chart: {
+      container: 'devices-chart-container',
+      type: 'PIE',
+      options: {
+        width: '100%',
+        pieHole: 4/9
+      }
+    }
+  });
+
 
   /**
    * Store a refernce to the row click listener variable so it can be
@@ -89,9 +112,14 @@ gapi.analytics.ready(function() {
 
     mainChart.set(options).execute();
     demographicsChart.set(options);
+    devicesChart.set(options);
 
     // Only render the breakdown chart if a browser filter has been set.
     if (demographicsChart.get().query.filters) demographicsChart.execute();
+
+    // Only render the breakdown chart if a browser filter has been set.
+    if (devicesChart.get().query.filters) devicesChart.execute();
+    
   });
 
 
@@ -126,6 +154,7 @@ gapi.analytics.ready(function() {
       };
       
       demographicsChart.set(options).execute();
+      devicesChart.set(options).execute();
     });
   });
 
