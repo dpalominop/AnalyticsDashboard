@@ -25,7 +25,7 @@ projects:
   slug: options
   pages:
   - title: Basico
-    slug: basic-dashboard
+    slug: basic
     tech: [embed_api, real_time_reporting_api]
     excerpt: '.'
   - title: Comparaciones en el tiempo
