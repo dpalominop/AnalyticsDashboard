@@ -49,7 +49,7 @@ gapi.analytics.ready(function() {
    * Create a table chart showing demographics over time for the country the
    * user selected in the main chart.
    */
-  var demographicsBreakdownChart = new gapi.analytics.googleCharts.DataChart({
+  var demographicsChart = new gapi.analytics.googleCharts.DataChart({
     query: {
       'dimensions': 'ga:userGender, ga:userAgeBracket, ga:deviceCategory',
       'metrics': 'ga:users',
@@ -60,7 +60,7 @@ gapi.analytics.ready(function() {
     },
     chart: {
       type: 'TABLE',
-      container: 'demographics-breakdown-chart-container',
+      container: 'demographics-chart-container',
       options: {
         width: '100%'
       }
@@ -88,10 +88,10 @@ gapi.analytics.ready(function() {
     }
 
     mainChart.set(options).execute();
-    demographicsBreakdownChart.set(options);
+    demographicsChart.set(options);
 
     // Only render the breakdown chart if a browser filter has been set.
-    if (demographicsBreakdownChart.get().query.filters) demographicsBreakdownChart.execute();
+    if (demographicsChart.get().query.filters) demographicsChart.execute();
   });
 
 
@@ -125,7 +125,7 @@ gapi.analytics.ready(function() {
         }
       };
       
-      demographicsBreakdownChart.set(options).execute();
+      demographicsChart.set(options).execute();
     });
   });
 
