@@ -55,7 +55,8 @@ gapi.analytics.ready(function() {
       'metrics': 'ga:users',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
-      'sort': '-ga:users'
+      'sort': '-ga:users',
+      'max-results': '6'
     },
     chart: {
       type: 'TABLE',
