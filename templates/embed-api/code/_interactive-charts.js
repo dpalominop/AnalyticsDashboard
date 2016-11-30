@@ -10,12 +10,43 @@ gapi.analytics.ready(function() {
     clientid: 'REPLACE WITH YOUR CLIENT ID'
   });
 
+  /**
+   * Create a new ActiveUsers instance to be rendered inside of an
+   * element with the id "active-users-container" and poll for changes every
+   * five seconds.
+   */
+  var activeUsers = new gapi.analytics.ext.ActiveUsers({
+    container: 'active-users-container',
+    pollingInterval: 5
+  });
+
+
+  /**
+   * Add CSS animation to visually show the when users come and go.
+   */
+  activeUsers.once('success', function() {
+    var element = this.container.firstChild;
+    var timeout;
+
+    this.on('change', function(data) {
+      var element = this.container.firstChild;
+      var animationClass = data.delta > 0 ? 'is-increasing' : 'is-decreasing';
+      element.className += (' ' + animationClass);
+
+      clearTimeout(timeout);
+      timeout = setTimeout(function() {
+        element.className =
+            element.className.replace(/ is-(increasing|decreasing)/g, '');
+      }, 3000);
+    });
+  });
+
 
   /**
    * Create a new ViewSelector instance to be rendered inside of an
    * element with the id "view-selector-container".
    */
-  var viewSelector = new gapi.analytics.ViewSelector({
+  var viewSelector = new gapi.analytics.ext.ViewSelector2({
     container: 'view-selector-container'
   });
 
@@ -129,8 +160,13 @@ gapi.analytics.ready(function() {
   /**
    * Update both charts whenever the selected view changes.
    */
-  viewSelector.on('change', function(ids) {
-    var options = {query: {ids: ids}};
+  viewSelector.on('viewChange', function(data) {
+    var title = document.getElementById('view-name');
+    title.innerHTML = data.property.name + ' (' + data.view.name + ')';
+    // Start tracking active users for this view.
+    activeUsers.set(data).execute();
+
+    var options = {query: {ids: data.ids}};
 
     // Clean up any event listeners registered on the main chart before
     // rendering a new one.
