@@ -29,7 +29,7 @@ projects:
     tech: [embed_api, real_time_reporting_api]
     excerpt: '.'
   - title: Comparaciones en el tiempo
-    slug: third-party-visualizations
+    slug: comparisons-over-time
     tech: [embed_api, real_time_reporting_api]
     excerpt: '.'
   - title: Rutas de los Usuarios
