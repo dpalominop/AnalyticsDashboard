@@ -229,9 +229,11 @@ gapi.analytics.ready(function() {
     // Only render the breakdown chart if a browser filter has been set.
     if (ageChart.get().query.filters) ageChart.execute();
 
-    // Update the "from" dates text.
+    // Update the "period" dates text.
     var datefield = document.getElementById('period');
     datefield.innerHTML = data['start-date'] + '&mdash;' + data['end-date'];
+    var datefield2 = document.getElementById('period2');
+    datefield2.innerHTML = data['start-date'] + '&mdash;' + data['end-date'];
   });
 
 
