@@ -12,10 +12,14 @@
       <li class="FlexGrid-item">
         <div class="Titles">
           <h1 class="Titles-main" id="view-name">Selecciona una Vista</h1>
+          <div class="Titles-sub">Periodo de comparación:
+            <b id="period">31 day ago - Yesterday</b>
+          </div>
         </div>
       </li>
     </ul>
     <div class="ViewSelector" id="view-selector-container"></div>
+    <div id="date-range-selector-container"></div>
   </header>
 
   <ul class="FlexGrid">
@@ -62,6 +66,7 @@
 {% endblock %}
 
 {% block foot_scripts %}
+{% include'options/dependencies/_custom-components.html' %}
 {{ super() }}
 <script>
 {% include 'options/code/_demographics.js' %}

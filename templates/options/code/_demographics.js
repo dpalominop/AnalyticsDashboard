@@ -10,17 +10,35 @@ gapi.analytics.ready(function() {
     clientid: 'REPLACE WITH YOUR CLIENT ID'
   });
 
+  /**
+   * Query params representing the first chart's date range.
+   */
+  var dateRange = {
+    'start-date': '31daysAgo',
+    'end-date': '1daysAgo'
+  };
 
   /**
    * Create a new ViewSelector instance to be rendered inside of an
    * element with the id "view-selector-container".
    */
-  var viewSelector = new gapi.analytics.ViewSelector({
+  var viewSelector = new gapi.analytics.ext.ViewSelector2({
     container: 'view-selector-container'
   });
 
   // Render the view selector to the page.
   viewSelector.execute();
+
+  /**
+   * Create a new DateRangeSelector instance to be rendered inside of an
+   * element with the id "date-range-selector-1-container", set its date range
+   * and then render it to the page.
+   */
+  var dateRangeSelector = new gapi.analytics.ext.DateRangeSelector({
+    container: 'date-range-selector-container'
+  })
+  .set(dateRange)
+  .execute();
 
   /**
    * Create a table chart showing top browsers for users to interact with.
@@ -146,8 +164,8 @@ gapi.analytics.ready(function() {
   /**
    * Update both charts whenever the selected view changes.
    */
-  viewSelector.on('change', function(ids) {
-    var options = {query: {ids: ids}};
+  viewSelector.on('viewChange', function(data) {
+    var options = {query: {ids: data.ids}};
 
     // Clean up any event listeners registered on the main chart before
     // rendering a new one.
@@ -174,6 +192,46 @@ gapi.analytics.ready(function() {
     // Only render the breakdown chart if a browser filter has been set.
     if (ageChart.get().query.filters) ageChart.execute();
     
+    var title = document.getElementById('view-name');
+    title.innerHTML = data.property.name + ' (' + data.view.name + ')';
+  });
+
+    /**
+   * Register a handler to run whenever the user changes the date range from
+   * the first datepicker. The handler will update the first dataChart
+   * instance as well as change the dashboard subtitle to reflect the range.
+   */
+  dateRangeSelector.on('change', function(data) {
+    var options = {query: data};
+
+    // Clean up any event listeners registered on the main chart before
+    // rendering a new one.
+    if (mainChartRowClickListener) {
+      google.visualization.events.removeListener(mainChartRowClickListener);
+    }
+
+    mainChart.set(options).execute();
+    demographicsChart.set(options).execute();
+    
+    devicesChart.set(options).execute();
+    genderChart.set(options).execute();
+    ageChart.set(options).execute();
+
+    // Only render the breakdown chart if a browser filter has been set.
+    if (demographicsChart.get().query.filters) demographicsChart.execute();
+
+    // Only render the breakdown chart if a browser filter has been set.
+    if (devicesChart.get().query.filters) devicesChart.execute();
+
+    // Only render the breakdown chart if a browser filter has been set.
+    if (genderChart.get().query.filters) genderChart.execute();
+
+    // Only render the breakdown chart if a browser filter has been set.
+    if (ageChart.get().query.filters) ageChart.execute();
+
+    // Update the "from" dates text.
+    var datefield = document.getElementById('period');
+    datefield.innerHTML = data['start-date'] + '&mdash;' + data['end-date'];
   });
 
 
