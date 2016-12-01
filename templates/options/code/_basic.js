@@ -124,7 +124,7 @@ gapi.analytics.ready(function() {
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
       'sort': '-ga:sessions',
-      'max-results': '41'
+      'max-results': '31'
     },
     chart: {
       container: 'country-container',
