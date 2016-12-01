@@ -20,6 +20,7 @@
     <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;</script>
     <script async src="https://www.google-analytics.com/analytics.js"></script>
   {% endblock %}
+
 </head>
 <body class="Site {{ initial_state }}">
 
@@ -49,9 +50,13 @@
   </main>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+   
   {% block foot_scripts %}
     <script src="/public/javascript/app.js"></script>
+    
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   {% endblock %}
 
 </body>
