@@ -28,10 +28,6 @@ projects:
     slug: basic
     tech: [embed_api, real_time_reporting_api]
     excerpt: '.'
-  - title: Comparaciones en el tiempo
-    slug: comparisons-over-time
-    tech: [embed_api, real_time_reporting_api]
-    excerpt: '.'
   - title: Rutas de los Usuarios
     slug: users-routes
     tech: [embed_api]
@@ -40,6 +36,10 @@ projects:
     slug: demographics
     tech: [embed_api]
     excerpt: ''
+  - title: Comparaciones en el tiempo
+    slug: comparisons-over-time
+    tech: [embed_api, real_time_reporting_api]
+    excerpt: '.'
   - title: Múltiples Vistas
     slug: multiple-views
     tech: [embed_api]
