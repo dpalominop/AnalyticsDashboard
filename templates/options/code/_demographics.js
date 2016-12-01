@@ -31,7 +31,7 @@ gapi.analytics.ready(function() {
 
   /**
    * Create a new DateRangeSelector instance to be rendered inside of an
-   * element with the id "date-range-selector-1-container", set its date range
+   * element with the id "date-range-selector-container", set its date range
    * and then render it to the page.
    */
   var dateRangeSelector = new gapi.analytics.ext.DateRangeSelector({
@@ -63,7 +63,7 @@ gapi.analytics.ready(function() {
     }
   });
 
-    /**
+  /**
    * Create a table chart showing demographics over time for the country the
    * user selected in the main chart.
    */
