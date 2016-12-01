@@ -155,6 +155,29 @@ gapi.analytics.ready(function() {
   });
 
   /**
+   * Create a table chart showing users by device for the country the
+   * user selected in the main chart.
+   */
+  var interestChart = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      metrics: 'ga:users',
+      dimensions: 'ga:interestInMarketCategory',
+      'start-date': '30daysAgo',
+      'end-date': 'yesterday',
+      'max-results': 6,
+      sort: '-ga:users'
+    },
+    chart: {
+      container: 'interest-chart-container',
+      type: 'PIE',
+      options: {
+        width: '100%',
+        pieHole: 4/9
+      }
+    }
+  });
+
+  /**
    * Store a refernce to the row click listener variable so it can be
    * removed later to prevent leaking memory when the chart instance is
    * replaced.
@@ -179,6 +202,7 @@ gapi.analytics.ready(function() {
     devicesChart.set(options).execute();
     genderChart.set(options).execute();
     ageChart.set(options).execute();
+    interestChart.set(options).execute();
 
     // Only render the breakdown chart if a browser filter has been set.
     if (demographicsChart.get().query.filters) demographicsChart.execute();
@@ -191,12 +215,15 @@ gapi.analytics.ready(function() {
 
     // Only render the breakdown chart if a browser filter has been set.
     if (ageChart.get().query.filters) ageChart.execute();
+
+    // Only render the breakdown chart if a browser filter has been set.
+    if (interestChart.get().query.filters) ageChart.execute();
     
     var title = document.getElementById('view-name');
     title.innerHTML = data.property.name + ' (' + data.view.name + ')';
   });
 
-    /**
+  /**
    * Register a handler to run whenever the user changes the date range from
    * the first datepicker. The handler will update the first dataChart
    * instance as well as change the dashboard subtitle to reflect the range.
@@ -216,6 +243,7 @@ gapi.analytics.ready(function() {
     devicesChart.set(options).execute();
     genderChart.set(options).execute();
     ageChart.set(options).execute();
+    interestChart.set(options).execute();
 
     // Only render the breakdown chart if a browser filter has been set.
     if (demographicsChart.get().query.filters) demographicsChart.execute();
@@ -228,6 +256,9 @@ gapi.analytics.ready(function() {
 
     // Only render the breakdown chart if a browser filter has been set.
     if (ageChart.get().query.filters) ageChart.execute();
+
+    // Only render the breakdown chart if a browser filter has been set.
+    if (interestChart.get().query.filters) ageChart.execute();
 
     // Update the "period" dates text.
     var datefield = document.getElementById('period');
@@ -273,6 +304,7 @@ gapi.analytics.ready(function() {
       devicesChart.set(options).execute();
       genderChart.set(options).execute();
       ageChart.set(options).execute();
+      interestChart.set(options).execute();
     });
   });
 
