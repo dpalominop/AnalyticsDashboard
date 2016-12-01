@@ -268,6 +268,8 @@ gapi.analytics.ready(function() {
       };
       
       demographicsChart.set(options).execute();
+      document.getElementById('country').innerHTML = ": "+country;
+      
       devicesChart.set(options).execute();
       genderChart.set(options).execute();
       ageChart.set(options).execute();
