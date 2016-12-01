@@ -93,6 +93,29 @@ gapi.analytics.ready(function() {
     allPagesDataChart.set({query: {ids:data.ids}}).execute();
   });
 
+  /**
+   * Register a handler to run whenever the user changes the date range from
+   * the first datepicker. The handler will update the first dataChart
+   * instance as well as change the dashboard subtitle to reflect the range.
+   */
+  dateRangeSelector.on('change', function(data) {
+    var options = {query: data};
+
+    // Start tracking active users for this view.
+    activeUsers.set(data).execute();
+
+    // Render all the of charts for this view.
+    countryChart.set(options).execute();
+    userNewUserDataChart.set(options).execute();
+    deviceDataChart.set(options).execute();
+    sessionsByBrowsersDataChart.set(options).execute();
+    topLandingDataChart.set(options).execute();
+    allPagesDataChart.set(options).execute();
+
+    // Update the "period" dates text.
+    var datefield = document.getElementById('period');
+    datefield.innerHTML = data['start-date'] + '&mdash;' + data['end-date'];
+  });
 
   var countryChart = new gapi.analytics.googleCharts.DataChart({
     query: {
