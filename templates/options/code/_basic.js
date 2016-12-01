@@ -14,6 +14,13 @@ gapi.analytics.ready(function() {
     clientid: 'REPLACE WITH YOUR CLIENT ID'
   });
 
+  /**
+   * Query params representing the first chart's date range.
+   */
+  var dateRange = {
+    'start-date': '31daysAgo',
+    'end-date': '1daysAgo'
+  };
 
   /**
    * Create a new ActiveUsers instance to be rendered inside of an
@@ -55,6 +62,16 @@ gapi.analytics.ready(function() {
   })
   .execute();
 
+  /**
+   * Create a new DateRangeSelector instance to be rendered inside of an
+   * element with the id "date-range-selector-container", set its date range
+   * and then render it to the page.
+   */
+  var dateRangeSelector = new gapi.analytics.ext.DateRangeSelector({
+    container: 'date-range-selector-container'
+  })
+  .set(dateRange)
+  .execute();
 
   /**
    * Update the activeUsers component, the Chartjs charts, and the dashboard
