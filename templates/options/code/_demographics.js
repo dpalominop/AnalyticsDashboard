@@ -29,11 +29,11 @@ gapi.analytics.ready(function() {
    */
   var mainChart = new gapi.analytics.googleCharts.DataChart({
     query: {
+      'metrics': 'ga:users',
       'dimensions': 'ga:country',
-      'metrics': 'ga:sessions',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
-      'sort': '-ga:sessions',
+      'sort': '-ga:users',
       'max-results': '41'
     },
     chart: {
@@ -51,8 +51,8 @@ gapi.analytics.ready(function() {
    */
   var demographicsChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      'dimensions': 'ga:userGender, ga:userAgeBracket, ga:deviceCategory',
       'metrics': 'ga:users',
+      'dimensions': 'ga:userGender, ga:userAgeBracket, ga:deviceCategory',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
       'sort': '-ga:users',
@@ -73,12 +73,12 @@ gapi.analytics.ready(function() {
    */
   var devicesChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      metrics: 'ga:sessions',
+      metrics: 'ga:users',
       dimensions: 'ga:deviceCategory',
       'start-date': '30daysAgo',
       'end-date': 'yesterday',
       'max-results': 6,
-      sort: '-ga:sessions'
+      sort: '-ga:users'
     },
     chart: {
       container: 'devices-chart-container',
@@ -96,12 +96,12 @@ gapi.analytics.ready(function() {
    */
   var genderChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      metrics: 'ga:sessions',
+      metrics: 'ga:users',
       dimensions: 'ga:userGender',
       'start-date': '30daysAgo',
       'end-date': 'yesterday',
       'max-results': 6,
-      sort: '-ga:sessions'
+      sort: '-ga:users'
     },
     chart: {
       container: 'gender-chart-container',
@@ -119,12 +119,12 @@ gapi.analytics.ready(function() {
    */
   var ageChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      metrics: 'ga:sessions',
+      metrics: 'ga:users',
       dimensions: 'ga:userAgeBracket',
       'start-date': '30daysAgo',
       'end-date': 'yesterday',
       'max-results': 6,
-      sort: '-ga:sessions'
+      sort: '-ga:users'
     },
     chart: {
       container: 'age-chart-container',
