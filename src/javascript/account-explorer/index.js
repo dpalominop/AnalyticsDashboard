@@ -135,7 +135,7 @@ function updateResults(results, query = undefined) {
   }
 
   if (typeof query == 'string') {
-    $('#results-title').text('Showing results for "' + query + '"');
+    $('#results-title').text('Mostrando resultados para "' + query + '"');
   }
 }
 
@@ -160,7 +160,7 @@ function setViewSelector(viewId) {
       };
       updateResults([allObjects]);
       $('#search-box').val('');
-      $('#results-title').text('Showing view selected above');
+      $('#results-title').text('Mostrando vista seleccionada arriba');
     } catch (e) {
       // No action.
     }
