@@ -52,7 +52,7 @@ gapi.analytics.ready(function() {
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
       'sort': '-ga:users',
-      'max-results': '41'
+      'max-results': '30'
     },
     chart: {
       type: 'GEO',
