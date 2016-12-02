@@ -1,8 +1,8 @@
 {
-  "name": "ga-dev-tools",
+  "name": "Analytics Dashboard",
   "repository": {
     "type": "git",
-    "url": "git://github.com/googleanalytics/ga-dev-tools.git"
+    "url": "git://github.com/dpalominop/AnalyticsDashboard.git"
   },
   "scripts": {
     "start": "gulp watch",
