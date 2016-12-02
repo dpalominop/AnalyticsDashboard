@@ -1,0 +1,19 @@
+{% extends 'options/demo.html' %}
+
+{% block content %}
+
+<section>
+</section>
+
+<section>
+</section>
+
+{% endblock %}
+
+{% block foot_scripts %}
+{% include 'options/dependencies/_comparisons-over-time.html' %}
+{{ super() }}
+<script>
+{% include 'options/code/_channels.js' %}
+</script>
+{% endblock %}
