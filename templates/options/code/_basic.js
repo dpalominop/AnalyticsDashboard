@@ -169,7 +169,7 @@ gapi.analytics.ready(function() {
     },
     chart: {
       container: 'sessions-browsers-chart-container',
-      type: 'TABLE',
+      type: 'PIE',
       options: {
         width: '100%'
       }
