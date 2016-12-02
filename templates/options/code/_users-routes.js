@@ -11,6 +11,15 @@ gapi.analytics.ready(function() {
   });
 
   /**
+   * Query params representing the first chart's date range.
+   */
+  var dateRange = {
+    'start-date': '31daysAgo',
+    'end-date': '1daysAgo'
+  };
+
+
+  /**
    * Create a new ActiveUsers instance to be rendered inside of an
    * element with the id "active-users-container" and poll for changes every
    * five seconds.
@@ -52,6 +61,17 @@ gapi.analytics.ready(function() {
 
   // Render the view selector to the page.
   viewSelector.execute();
+
+  /**
+   * Create a new DateRangeSelector instance to be rendered inside of an
+   * element with the id "date-range-selector-container", set its date range
+   * and then render it to the page.
+   */
+  var dateRangeSelector = new gapi.analytics.ext.DateRangeSelector({
+    container: 'date-range-selector-container'
+  })
+  .set(dateRange)
+  .execute();
 
   /**
    * Create a table chart showing top browsers for users to interact with.
@@ -193,6 +213,45 @@ gapi.analytics.ready(function() {
     if (inicialPageChart.get().query.filters && landingPathChart.get().query.filters) inicialPageChart.execute();
   });
 
+  /**
+   * Register a handler to run whenever the user changes the date range from
+   * the first datepicker. The handler will update the first dataChart
+   * instance as well as change the dashboard subtitle to reflect the range.
+   */
+  dateRangeSelector.on('change', function(data) {
+    var options = {query: data};
+
+    // Start tracking active users for this view.
+    activeUsers.set(data).execute();
+
+    // Clean up any event listeners registered on the main chart before
+    // rendering a new one.
+    if (mainChartRowClickListener) {
+      google.visualization.events.removeListener(mainChartRowClickListener);
+    }
+
+    // Clean up any event listeners registered on the landing chart before
+    // rendering a new one.
+    if (landingPathChartRowClickListener) {
+      google.visualization.events.removeListener(landingPathChartRowClickListener);
+    }
+
+    mainChart.set(options).execute();
+    landingPathChart.set(options);
+    tempLandingPathChart.set(options);
+    inicialPageChart.set(options);
+
+    // Only render the breakdown chart if a Country filter has been set.
+    if (landingPathChart.get().query.filters) landingPathChart.execute();
+
+    // Only render the breakdown chart if a LandingPath filter has been set.
+    if (tempLandingPathChart.get().query.filters && landingPathChart.get().query.filters) tempLandingPathChart.execute();
+    if (inicialPageChart.get().query.filters && landingPathChart.get().query.filters) inicialPageChart.execute();
+
+    // Update the "period" dates text.
+    var datefield = document.getElementById('period');
+    datefield.innerHTML = data['start-date'] + '&mdash;' + data['end-date'];
+  });
 
   /**
    * Each time the main chart is rendered, add an event listener to it so
