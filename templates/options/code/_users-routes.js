@@ -65,7 +65,7 @@ gapi.analytics.ready(function() {
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
       'sort': '-ga:sessions',
-      'max-results': '41'
+      'max-results': '31'
     },
     chart: {
       type: 'GEO',
@@ -131,7 +131,7 @@ gapi.analytics.ready(function() {
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
       'sort': '-ga:sessions',
-      'max-results': '10'
+      'max-results': '5'
     },
     chart: {
       type: 'TABLE',
