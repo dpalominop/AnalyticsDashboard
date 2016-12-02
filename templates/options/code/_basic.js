@@ -141,14 +141,14 @@ gapi.analytics.ready(function() {
    */
   var deviceDataChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      metrics: 'ga:sessions,ga:bounceRate',
+      metrics: 'ga:sessions,ga:bounces',
       dimensions: 'ga:deviceCategory',
       'start-date': '31daysAgo',
       'end-date': 'yesterday'
     },
     chart: {
       container: 'device-chart-container',
-      type: 'TABLE',
+      type: 'COLUMN',
       options: {
         width: '100%'
       }
