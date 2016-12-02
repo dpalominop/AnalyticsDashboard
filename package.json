@@ -1,5 +1,5 @@
 {
-  "name": "Analytics Dashboard",
+  "name": "ga-dev-tools",
   "repository": {
     "type": "git",
     "url": "git://github.com/dpalominop/AnalyticsDashboard.git"

@@ -167,4 +167,4 @@ tech:
 # Setting them here makes it easier to update globally.
 links:
   devsite: http://developers.google.com/analytics
-  github: https://github.com/googleanalytics/ga-dev-tools
+  github: https://github.com/dpalominop/AnalyticsDashboard
