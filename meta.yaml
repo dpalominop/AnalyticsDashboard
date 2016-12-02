@@ -36,6 +36,10 @@ projects:
     slug: demographics
     tech: [embed_api]
     excerpt: ''
+  - title: Canales y Palabras Claves
+    slug: channels-keywords
+    tech: [embed_api]
+    excerpt: ''
   - title: Comparaciones en el tiempo
     slug: comparisons-over-time
     tech: [embed_api, real_time_reporting_api]
