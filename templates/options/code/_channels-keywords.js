@@ -70,7 +70,7 @@ gapi.analytics.ready(function() {
       'max-results': '5'
     },
     chart: {
-      type: 'TABLE',
+      type: 'COLUMN',
       container: 'landingpath-chart-container',
       options: {
         width: '100%'
