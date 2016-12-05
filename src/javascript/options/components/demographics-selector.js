@@ -55,8 +55,10 @@ gapi.analytics.ready(function() {
      */
     execute: function() {
       let options = this.get();
+      console.log(options);
       options['start-date'] = options['start-date'] || '7daysAgo';
       options['end-date'] = options['end-date'] || 'yesterday';
+
 
       // Allow container to be a string ID or an HTMLElement.
       this.container = typeof options.container == 'string' ?
@@ -124,6 +126,22 @@ gapi.analytics.ready(function() {
       '  <div class="DateRangeSelector-item">' +
       '    <label>Genero</label> ' +
       '    <input type="date">' +
+      '  </div>' +
+      '  <div class="DateRangeSelector-item">' +
+      '    <label>Género</label> ' +
+      '    <select name="select-gender">' +
+      '      <option value="value1" selected>All</option>' +
+      '      <option value="value2">Hombre</option>' +
+      '      <option value="value3">Mujer</option>' +
+      '    </select>'+
+      '  </div>' +
+      '  <div class="DateRangeSelector-item">' +
+      '    <label>Edad</label> ' +
+      '    <select name="select-age">' +
+      '      <option value="value1" selected>All</option>' +
+      '      <option value="value2">0-18</option>' +
+      '      <option value="value3">18-24</option>' +
+      '    </select>'+
       '  </div>' +
       '</div>',
   });

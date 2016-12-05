@@ -19,6 +19,16 @@ gapi.analytics.ready(function() {
   };
 
   /**
+   * Query params representing the first chart's date demographics.
+   */
+  var dateDemographic = {
+    'start-date': '31daysAgo',
+    'end-date': '1daysAgo',
+    'gender': 'All',
+    'age':  'All'
+  };
+
+  /**
    * Create a new ViewSelector2 instance to be rendered inside of an
    * element with the id "view-selector-container".
    */
@@ -42,10 +52,10 @@ gapi.analytics.ready(function() {
    * "demographics-selector" selecciona opciones de género y edad 
    * para usarlos como filtros en los queries realizados a Google Analytics
    */
-  var demographicsSelector = new gapi.analytics.ext.DemographicsSelector({
+  var demographicSelector = new gapi.analytics.ext.DemographicsSelector({
     container: 'demographics-selector-container'
   })
-  .set(dateRange)
+  .set(dateDemographic)
   .execute();
 
   var countryChart = new gapi.analytics.googleCharts.DataChart({
