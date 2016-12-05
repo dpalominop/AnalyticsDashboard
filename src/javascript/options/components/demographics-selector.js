@@ -47,6 +47,13 @@ gapi.analytics.ready(function() {
     return date.getFullYear() + '-' + month + '-' + day;
   }
 
+  /**
+   * 
+   */
+  function getValueSelected(itemSelect){
+      return 'all';
+  }
+
   gapi.analytics.createComponent('DemographicsSelector', {
 
     /**
@@ -55,10 +62,11 @@ gapi.analytics.ready(function() {
      */
     execute: function() {
       let options = this.get();
-      console.log(options);
+
       options['start-date'] = options['start-date'] || '7daysAgo';
       options['end-date'] = options['end-date'] || 'yesterday';
-
+      options['gender'] = options['gender'] || 'All';
+      options['age'] = options['age'] || 'All';
 
       // Allow container to be a string ID or an HTMLElement.
       this.container = typeof options.container == 'string' ?
@@ -69,11 +77,19 @@ gapi.analytics.ready(function() {
 
       this.container.innerHTML = this.template;
       let dateInputs = this.container.querySelectorAll('input');
+      let demographicsInputs = this.container.querySelectorAll('select');
 
       this.startDateInput = dateInputs[0];
       this.startDateInput.value = convertDate(options['start-date']);
       this.endDateInput = dateInputs[1];
       this.endDateInput.value = convertDate(options['end-date']);
+
+      this.genderInput = demographicsInputs[0];
+      this.genderInput.value = getValueSelected(options['gender'])
+      this.ageInput = demographicsInputs[1];
+      this.ageInput.value = getValueSelected(options['age'])
+      console.log(this.startDateInput.value);
+      console.log(this.ageInput.value);
 
       this.setValues();
       this.setMinMax();
@@ -92,6 +108,8 @@ gapi.analytics.ready(function() {
       this.emit('change', {
         'start-date': this['start-date'],
         'end-date': this['end-date'],
+        'gender': this['gender'],
+        'age': this['age'],
       });
     },
 
@@ -101,6 +119,8 @@ gapi.analytics.ready(function() {
     setValues: function() {
       this['start-date'] = this.startDateInput.value;
       this['end-date'] = this.endDateInput.value;
+      this['gender'] = this.genderInput.value;
+      this['age'] = this.ageInput.value;
     },
 
     /**
@@ -120,27 +140,32 @@ gapi.analytics.ready(function() {
     template:
       '<div class="DateRangeSelector">' +
       '  <div class="DateRangeSelector-item">' +
-      '    <label>Edad</label> ' +
+      '    <label>Start Date</label> ' +
       '    <input type="date">' +
       '  </div>' +
       '  <div class="DateRangeSelector-item">' +
-      '    <label>Genero</label> ' +
+      '    <label>End Date</label> ' +
       '    <input type="date">' +
       '  </div>' +
       '  <div class="DateRangeSelector-item">' +
       '    <label>Género</label> ' +
       '    <select name="select-gender">' +
-      '      <option value="value1" selected>All</option>' +
-      '      <option value="value2">Hombre</option>' +
-      '      <option value="value3">Mujer</option>' +
+      '      <option value="all" selected>Todos</option>' +
+      '      <option value="man">Hombre</option>' +
+      '      <option value="woman">Mujer</option>' +
       '    </select>'+
       '  </div>' +
       '  <div class="DateRangeSelector-item">' +
       '    <label>Edad</label> ' +
       '    <select name="select-age">' +
-      '      <option value="value1" selected>All</option>' +
-      '      <option value="value2">0-18</option>' +
-      '      <option value="value3">18-24</option>' +
+      '      <option value="all" selected>Todos</option>' +
+      '      <option value="val_0">0-18</option>' +
+      '      <option value="val_1">18-24</option>' +
+      '      <option value="val_2">25-34</option>' +
+      '      <option value="val_3">35-44</option>' +
+      '      <option value="val_4">45-54</option>' +
+      '      <option value="val_5">55-64</option>' +
+      '      <option value="val_6">65+</option>' +
       '    </select>'+
       '  </div>' +
       '</div>',
