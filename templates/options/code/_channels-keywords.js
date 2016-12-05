@@ -245,6 +245,9 @@ gapi.analytics.ready(function() {
       };
 
       channelChart.set(options).execute();
+
+      var title = document.getElementById('channel-subtitle');
+      title.innerHTML = country + ': ' + landingPagePath;
     });
   });
 
