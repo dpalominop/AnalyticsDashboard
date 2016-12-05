@@ -166,6 +166,8 @@ gapi.analytics.ready(function() {
       };
 
       landingPathChart.set(options).execute();
+      var title = document.getElementById('landing-subtitle');
+      title.innerHTML = country;
     });
   });
 
