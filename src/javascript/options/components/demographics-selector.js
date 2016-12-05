@@ -47,13 +47,6 @@ gapi.analytics.ready(function() {
     return date.getFullYear() + '-' + month + '-' + day;
   }
 
-  /**
-   * 
-   */
-  function getValueSelected(itemSelect){
-      return 'all';
-  }
-
   gapi.analytics.createComponent('DemographicsSelector', {
 
     /**
@@ -85,11 +78,9 @@ gapi.analytics.ready(function() {
       this.endDateInput.value = convertDate(options['end-date']);
 
       this.genderInput = demographicsInputs[0];
-      this.genderInput.value = getValueSelected(options['gender'])
+      this.genderInput.value = options['gender'];
       this.ageInput = demographicsInputs[1];
-      this.ageInput.value = getValueSelected(options['age'])
-      console.log(this.startDateInput.value);
-      console.log(this.ageInput.value);
+      this.ageInput.value = options['age'];
 
       this.setValues();
       this.setMinMax();
@@ -159,13 +150,13 @@ gapi.analytics.ready(function() {
       '    <label>Edad</label> ' +
       '    <select name="select-age">' +
       '      <option value="all" selected>Todos</option>' +
-      '      <option value="val_0">0-18</option>' +
-      '      <option value="val_1">18-24</option>' +
-      '      <option value="val_2">25-34</option>' +
-      '      <option value="val_3">35-44</option>' +
-      '      <option value="val_4">45-54</option>' +
-      '      <option value="val_5">55-64</option>' +
-      '      <option value="val_6">65+</option>' +
+      '      <option value="0">0-18</option>' +
+      '      <option value="18">18-24</option>' +
+      '      <option value="25">25-34</option>' +
+      '      <option value="35">35-44</option>' +
+      '      <option value="45">45-54</option>' +
+      '      <option value="55">55-64</option>' +
+      '      <option value="65">65+</option>' +
       '    </select>'+
       '  </div>' +
       '</div>',

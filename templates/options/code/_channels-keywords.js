@@ -24,8 +24,8 @@ gapi.analytics.ready(function() {
   var dateDemographic = {
     'start-date': '31daysAgo',
     'end-date': '1daysAgo',
-    'gender': 'All',
-    'age':  'All'
+    'gender': 'man',
+    'age':  '18'
   };
 
   /**
@@ -160,7 +160,10 @@ gapi.analytics.ready(function() {
     var title = document.getElementById('view-name');
     title.innerHTML = data.property.name + ' (' + data.view.name + ')';
 
-    var options = {query: {ids: data.ids}};
+    var options = {query: {ids: data.ids,
+                          filters: null,
+                          }
+                };
 
     // Clean up any event listeners registered on the main chart before
     // rendering a new one.
