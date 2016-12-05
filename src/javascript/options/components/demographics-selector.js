@@ -47,6 +47,36 @@ gapi.analytics.ready(function() {
     return date.getFullYear() + '-' + month + '-' + day;
   }
 
+  /**
+   * 
+   */
+  function setQuery(start, end, gender, age){
+    if(gender === 'all' & age==='all'){
+      return {
+        'start-date': start,
+        'end-date': end
+      };
+    }else if(gender === 'all'){
+      return {
+        'start-date': start,
+        'end-date': end,
+        'filter': 'ga:userAgeBracket=='+age,
+      };
+    }else if(age === 'all'){
+      return {
+        'start-date': start,
+        'end-date': end,
+        'filter': 'ga:userGender=='+gender,
+      };
+    }else{
+      return {
+        'start-date': start,
+        'end-date': end,
+        'filter': 'ga:userGender=='+gender+';ga:userGender=='+gender,
+      };
+    }
+  }
+
   gapi.analytics.createComponent('DemographicsSelector', {
 
     /**
@@ -55,11 +85,13 @@ gapi.analytics.ready(function() {
      */
     execute: function() {
       let options = this.get();
+      //console.log('options')
+      //console.log(options)
 
       options['start-date'] = options['start-date'] || '7daysAgo';
       options['end-date'] = options['end-date'] || 'yesterday';
-      options['gender'] = options['gender'] || 'All';
-      options['age'] = options['age'] || 'All';
+      options['gender'] = options['gender'] || 'all';
+      options['age'] = options['age'] || 'all';
 
       // Allow container to be a string ID or an HTMLElement.
       this.container = typeof options.container == 'string' ?
@@ -96,12 +128,11 @@ gapi.analytics.ready(function() {
     onChange: function() {
       this.setValues();
       this.setMinMax();
-      this.emit('change', {
-        'start-date': this['start-date'],
-        'end-date': this['end-date'],
-        'gender': this['gender'],
-        'age': this['age'],
-      });
+      this.emit('change', setQuery(this['start-date'],
+                                    this['end-date'],
+                                    this['gender'],
+                                    this['age'])
+                );
     },
 
     /**
@@ -142,21 +173,21 @@ gapi.analytics.ready(function() {
       '    <label>Género</label> ' +
       '    <select name="select-gender">' +
       '      <option value="all" selected>Todos</option>' +
-      '      <option value="man">Hombre</option>' +
-      '      <option value="woman">Mujer</option>' +
+      '      <option value="male">Hombre</option>' +
+      '      <option value="female">Mujer</option>' +
       '    </select>'+
       '  </div>' +
       '  <div class="DateRangeSelector-item">' +
       '    <label>Edad</label> ' +
       '    <select name="select-age">' +
       '      <option value="all" selected>Todos</option>' +
-      '      <option value="0">0-18</option>' +
-      '      <option value="18">18-24</option>' +
-      '      <option value="25">25-34</option>' +
-      '      <option value="35">35-44</option>' +
-      '      <option value="45">45-54</option>' +
-      '      <option value="55">55-64</option>' +
-      '      <option value="65">65+</option>' +
+      '      <option value="0-18">0-18</option>' +
+      '      <option value="18-24">18-24</option>' +
+      '      <option value="25-34">25-34</option>' +
+      '      <option value="35-44">35-44</option>' +
+      '      <option value="45-54">45-54</option>' +
+      '      <option value="55-64">55-64</option>' +
+      '      <option value="65+">65+</option>' +
       '    </select>'+
       '  </div>' +
       '</div>',

@@ -11,21 +11,13 @@ gapi.analytics.ready(function() {
   });
 
   /**
-   * Query params representing the first chart's date range.
-   */
-  var dateRange = {
-    'start-date': '31daysAgo',
-    'end-date': '1daysAgo'
-  };
-
-  /**
    * Query params representing the first chart's date demographics.
    */
   var dateDemographic = {
     'start-date': '31daysAgo',
     'end-date': '1daysAgo',
-    'gender': 'man',
-    'age':  '18'
+    'gender': 'male',
+    'age':  '18-24'
   };
 
   /**
@@ -35,17 +27,6 @@ gapi.analytics.ready(function() {
   var viewSelector = new gapi.analytics.ext.ViewSelector2({
     container: 'view-selector-container',
   })
-  .execute();
-
-  /**
-   * Create a new DateRangeSelector instance to be rendered inside of an
-   * element with the id "date-range-selector-container", set its date range
-   * and then render it to the page.
-   */
-  var dateRangeSelector = new gapi.analytics.ext.DateRangeSelector({
-    container: 'date-range-selector-container'
-  })
-  .set(dateRange)
   .execute();
 
   /**
@@ -193,11 +174,12 @@ gapi.analytics.ready(function() {
   });
 
   /**
-   * Register a handler to run whenever the user changes the date range from
-   * the first datepicker. The handler will update the first dataChart
-   * instance as well as change the dashboard subtitle to reflect the range.
+   * 
    */
-  dateRangeSelector.on('change', function(data) {
+  demographicSelector.on('change', function(data) {
+    //console.log("demographicSelector");
+    //console.log(data);
+
     var options = {query: data};
 
     // Clean up any event listeners registered on the main chart before
