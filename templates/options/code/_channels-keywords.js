@@ -16,8 +16,8 @@ gapi.analytics.ready(function() {
   var dateDemographic = {
     'start-date': '31daysAgo',
     'end-date': '1daysAgo',
-    'gender': 'male',
-    'age':  '18-24'
+    'gender': 'all',
+    'age':  'all'
   };
 
   /**

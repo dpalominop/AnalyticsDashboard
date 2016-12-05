@@ -54,25 +54,26 @@ gapi.analytics.ready(function() {
     if(gender === 'all' & age==='all'){
       return {
         'start-date': start,
-        'end-date': end
+        'end-date': end,
+        filters: null,
       };
     }else if(gender === 'all'){
       return {
         'start-date': start,
         'end-date': end,
-        'filter': 'ga:userAgeBracket=='+age,
+        'filters': 'ga:userAgeBracket=='+age,
       };
     }else if(age === 'all'){
       return {
         'start-date': start,
         'end-date': end,
-        'filter': 'ga:userGender=='+gender,
+        'filters': 'ga:userGender=='+gender,
       };
     }else{
       return {
         'start-date': start,
         'end-date': end,
-        'filter': 'ga:userGender=='+gender+';ga:userGender=='+gender,
+        'filters': 'ga:userGender=='+gender+';ga:userAgeBracket=='+age,
       };
     }
   }
