@@ -85,7 +85,7 @@ gapi.analytics.ready(function() {
   var channelChart = new gapi.analytics.googleCharts.DataChart({
     query: {
       'metrics': 'ga:sessions',
-      'dimensions': 'ga:pagePath',
+      'dimensions': 'ga:channelGrouping',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
       'sort': '-ga:sessions',
