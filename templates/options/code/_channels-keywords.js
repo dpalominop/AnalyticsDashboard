@@ -67,7 +67,7 @@ gapi.analytics.ready(function() {
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
       'sort': '-ga:users',
-      'max-results': '5'
+      'max-results': '8'
     },
     chart: {
       type: 'COLUMN',
