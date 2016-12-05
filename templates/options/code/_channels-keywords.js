@@ -38,6 +38,16 @@ gapi.analytics.ready(function() {
   .set(dateRange)
   .execute();
 
+  /**
+   * "demographics-selector" selecciona opciones de género y edad 
+   * para usarlos como filtros en los queries realizados a Google Analytics
+   */
+  var demographicsSelector = new gapi.analytics.ext.DemographicsSelector({
+    container: 'demographics-selector-container'
+  })
+  .set(dateRange)
+  .execute();
+
   var countryChart = new gapi.analytics.googleCharts.DataChart({
     query: {
       metrics: 'ga:sessions',

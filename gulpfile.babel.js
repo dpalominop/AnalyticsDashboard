@@ -194,7 +194,7 @@ gulp.task('javascript:options-components', (function() {
 
   const createCompiler = () => {
     const COMPONENT_PATH = './javascript/options/components';
-    let components = ['active-users', 'date-range-selector', 'view-selector2'];
+    let components = ['active-users', 'date-range-selector', 'view-selector2', 'demographics-selector'];
     let entry = {};
 
     for (let component of components) {
