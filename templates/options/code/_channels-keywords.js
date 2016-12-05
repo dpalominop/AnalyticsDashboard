@@ -114,7 +114,7 @@ gapi.analytics.ready(function() {
       'max-results': '5'
     },
     chart: {
-      type: 'TABLE',
+      type: 'PIE',
       container: 'keyword-chart-container',
       options: {
         width: '100%'
