@@ -101,13 +101,37 @@ gapi.analytics.ready(function() {
   });
 
   /**
+   * Create a table chart showing Inicial Pade next to Landing Page for the country the
+   * user selected in the main chart.
+   */
+  var keywordChart = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      'metrics': 'ga:sessions',
+      'dimensions': 'ga:keyword',
+      'start-date': '31daysAgo',
+      'end-date': 'yesterday',
+      'sort': '-ga:sessions',
+      'max-results': '5'
+    },
+    chart: {
+      type: 'TABLE',
+      container: 'keyword-chart-container',
+      options: {
+        width: '100%'
+      }
+    }
+  });
+
+  /**
    * Store a refernce to the row click listener variable so it can be
    * removed later to prevent leaking memory when the chart instance is
    * replaced.
    */
   var countryChartClickListener;
   var landingPathChartRowClickListener;
+  var channelChartRowClickListener;
   var country;
+  var landingPagePath;
   /**
    * Update the activeUsers component, the Chartjs charts, and the dashboard
    * title whenever the user changes the view.
@@ -124,20 +148,25 @@ gapi.analytics.ready(function() {
       google.visualization.events.removeListener(countryChartClickListener);
     }
 
-    // Clean up any event listeners registered on the landing chart before
-    // rendering a new one.
     if (landingPathChartRowClickListener) {
       google.visualization.events.removeListener(landingPathChartRowClickListener);
+    }
+
+    if (channelChartRowClickListener) {
+      google.visualization.events.removeListener(channelChartRowClickListener);
     }
 
     // Render all the of charts for this view.
     countryChart.set(options).execute();
     landingPathChart.set(options);
     channelChart.set(options);
+    keywordChart.set(options);
 
     // Only render the breakdown chart if a Country filter has been set.
     if (landingPathChart.get().query.filters) landingPathChart.execute();
     if (channelChart.get().query.filters && landingPathChart.get().query.filters) channelChart.execute();
+    if (keywordChart.get().query.filters && channelChart.get().query.filters && landingPathChart.get().query.filters) keywordChart.execute();
+
   });
 
   /**
@@ -154,20 +183,24 @@ gapi.analytics.ready(function() {
       google.visualization.events.removeListener(countryChartClickListener);
     }
 
-    // Clean up any event listeners registered on the landing chart before
-    // rendering a new one.
     if (landingPathChartRowClickListener) {
       google.visualization.events.removeListener(landingPathChartRowClickListener);
+    }
+
+    if (channelChartRowClickListener) {
+      google.visualization.events.removeListener(channelChartRowClickListener);
     }
 
     // Render all the of charts for this view.
     countryChart.set(options).execute();
     landingPathChart.set(options);
     channelChart.set(options);
+    keywordChart.set(options);
 
     // Only render the breakdown chart if a Country filter has been set.
     if (landingPathChart.get().query.filters) landingPathChart.execute();
     if (channelChart.get().query.filters && landingPathChart.get().query.filters) channelChart.execute();
+    if (keywordChart.get().query.filters && channelChart.get().query.filters && landingPathChart.get().query.filters) keywordChart.execute();
 
     // Update the "period" dates text.
     var datefield = document.getElementById('period');
@@ -206,11 +239,14 @@ gapi.analytics.ready(function() {
 
       landingPathChart.set(options).execute();
       channelChart.set(options).execute();
+      keywordChart.set(options).execute();
 
       var title = document.getElementById('landing-subtitle');
       title.innerHTML = country;
       var title2 = document.getElementById('channel-subtitle');
       title2.innerHTML = country;
+      var title3 = document.getElementById('keyword-subtitle');
+      title3.innerHTML = country;
     });
   });
 
@@ -232,7 +268,7 @@ gapi.analytics.ready(function() {
       if (!chart.getSelection().length) return;
 
       var row =  chart.getSelection()[0].row;
-      var landingPagePath = dataTable.getValue(row, 0);
+      landingPagePath = dataTable.getValue(row, 0);
       var options = {
         query: {
           filters: 'ga:country==' + country + ';' + 'ga:landingPagePath==' + landingPagePath
@@ -245,9 +281,49 @@ gapi.analytics.ready(function() {
       };
 
       channelChart.set(options).execute();
+      keywordChart.set(options).execute();
 
       var title = document.getElementById('channel-subtitle');
       title.innerHTML = country + ': ' + landingPagePath;
+      var title2 = document.getElementById('keyword-subtitle');
+      title2.innerHTML = country + ': ' + landingPagePath;
+    });
+  });
+
+  /**
+   * Each time the landing chart is rendered, add an event listener to it so
+   * that when the user clicks on a row, the line chart is updated with
+   * the data from the country in the clicked row.
+   */
+  channelChart.on('success', function(response) {
+    var chart = response.chart;
+    var dataTable = response.dataTable;
+
+    // Store a reference to this listener so it can be cleaned up later.
+    channelChartRowClickListener = google.visualization.events
+        .addListener(chart, 'select', function(event) {
+
+      // When you unselect a row, the "select" event still fires
+      // but the selection is empty. Ignore that case.
+      if (!chart.getSelection().length) return;
+
+      var row =  chart.getSelection()[0].row;
+      var channel = dataTable.getValue(row, 0);
+      var options = {
+        query: {
+          filters: 'ga:country==' + country + ';ga:landingPagePath==' + landingPagePath + ';ga:channelGrouping==' + channel
+        },
+        chart: {
+          options: {
+            title: country + ': ' + landingPagePath + ': ' + channel
+          }
+        }
+      };
+
+      keywordChart.set(options).execute();
+
+      var title = document.getElementById('keyword-subtitle');
+      title.innerHTML = country + ': ' + landingPagePath + ': ' + channel;
     });
   });
 
