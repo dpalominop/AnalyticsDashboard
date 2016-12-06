@@ -140,28 +140,6 @@ gapi.analytics.ready(function() {
     }
   });
 
-    /**
-   * Create a table chart showing Inicial Pade next to Landing Page for the country the
-   * user selected in the main chart.
-   */
-  var inicialPageChart = new gapi.analytics.googleCharts.DataChart({
-    query: {
-      'metrics': 'ga:sessions',
-      'dimensions': 'ga:pagePath',
-      'start-date': '31daysAgo',
-      'end-date': 'yesterday',
-      'sort': '-ga:sessions',
-      'max-results': '5'
-    },
-    chart: {
-      type: 'TABLE',
-      container: 'inicialpage-chart-container',
-      options: {
-        width: '100%'
-      }
-    }
-  });
-
   /**
    * Store a refernce to the row click listener variable so it can be
    * removed later to prevent leaking memory when the chart instance is
@@ -203,14 +181,12 @@ gapi.analytics.ready(function() {
     countryChart.set(options).execute();
     landingPathChart.set(options);
     tempLandingPathChart.set(options);
-    inicialPageChart.set(options);
 
     // Only render the breakdown chart if a Country filter has been set.
     if (landingPathChart.get().query.filters) landingPathChart.execute();
 
     // Only render the breakdown chart if a LandingPath filter has been set.
     if (tempLandingPathChart.get().query.filters && landingPathChart.get().query.filters) tempLandingPathChart.execute();
-    if (inicialPageChart.get().query.filters && landingPathChart.get().query.filters) inicialPageChart.execute();
   });
 
   /**
@@ -239,14 +215,12 @@ gapi.analytics.ready(function() {
     countryChart.set(options).execute();
     landingPathChart.set(options);
     tempLandingPathChart.set(options);
-    inicialPageChart.set(options);
 
     // Only render the breakdown chart if a Country filter has been set.
     if (landingPathChart.get().query.filters) landingPathChart.execute();
 
     // Only render the breakdown chart if a LandingPath filter has been set.
     if (tempLandingPathChart.get().query.filters && landingPathChart.get().query.filters) tempLandingPathChart.execute();
-    if (inicialPageChart.get().query.filters && landingPathChart.get().query.filters) inicialPageChart.execute();
 
     // Update the "period" dates text.
     var datefield = document.getElementById('period');
@@ -285,7 +259,6 @@ gapi.analytics.ready(function() {
 
       landingPathChart.set(options).execute();
       tempLandingPathChart.set(options).execute();
-      inicialPageChart.set(options).execute();
     });
   });
 
@@ -320,7 +293,6 @@ gapi.analytics.ready(function() {
       //console.log(options);
 
       tempLandingPathChart.set(options).execute();
-      inicialPageChart.set(options).execute();
     });
   });
 
