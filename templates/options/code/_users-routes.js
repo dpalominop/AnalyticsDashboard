@@ -78,7 +78,7 @@ gapi.analytics.ready(function() {
    * Clicking on a row in the table will update a second timeline chart with
    * data from the selected browser.
    */
-  var mainChart = new gapi.analytics.googleCharts.DataChart({
+  var countryChart = new gapi.analytics.googleCharts.DataChart({
     query: {
       'metrics': 'ga:sessions',
       'dimensions': 'ga:country',
@@ -89,7 +89,7 @@ gapi.analytics.ready(function() {
     },
     chart: {
       type: 'GEO',
-      container: 'main-chart-container',
+      container: 'country-chart-container',
       options: {
         width: '100%'
       }
@@ -99,7 +99,7 @@ gapi.analytics.ready(function() {
 
   /**
    * Create a table chart showing Top Landing Page over time for the country the
-   * user selected in the main chart.
+   * user selected in the country chart.
    */
   var landingPathChart = new gapi.analytics.googleCharts.DataChart({
     query: {
@@ -167,7 +167,7 @@ gapi.analytics.ready(function() {
    * removed later to prevent leaking memory when the chart instance is
    * replaced.
    */
-  var mainChartRowClickListener;
+  var countryChartRowClickListener;
 
   /**
    * Store a refernce to the row click listener variable so it can be
@@ -190,8 +190,8 @@ gapi.analytics.ready(function() {
 
     // Clean up any event listeners registered on the main chart before
     // rendering a new one.
-    if (mainChartRowClickListener) {
-      google.visualization.events.removeListener(mainChartRowClickListener);
+    if (countryChartRowClickListener) {
+      google.visualization.events.removeListener(countryChartRowClickListener);
     }
 
     // Clean up any event listeners registered on the landing chart before
@@ -200,7 +200,7 @@ gapi.analytics.ready(function() {
       google.visualization.events.removeListener(landingPathChartRowClickListener);
     }
 
-    mainChart.set(options).execute();
+    countryChart.set(options).execute();
     landingPathChart.set(options);
     tempLandingPathChart.set(options);
     inicialPageChart.set(options);
@@ -226,8 +226,8 @@ gapi.analytics.ready(function() {
 
     // Clean up any event listeners registered on the main chart before
     // rendering a new one.
-    if (mainChartRowClickListener) {
-      google.visualization.events.removeListener(mainChartRowClickListener);
+    if (countryChartRowClickListener) {
+      google.visualization.events.removeListener(countryChartRowClickListener);
     }
 
     // Clean up any event listeners registered on the landing chart before
@@ -236,7 +236,7 @@ gapi.analytics.ready(function() {
       google.visualization.events.removeListener(landingPathChartRowClickListener);
     }
 
-    mainChart.set(options).execute();
+    countryChart.set(options).execute();
     landingPathChart.set(options);
     tempLandingPathChart.set(options);
     inicialPageChart.set(options);
@@ -258,12 +258,12 @@ gapi.analytics.ready(function() {
    * that when the user clicks on a row, the line chart is updated with
    * the data from the browser in the clicked row.
    */
-  mainChart.on('success', function(response) {
+  countryChart.on('success', function(response) {
     var chart = response.chart;
     var dataTable = response.dataTable;
 
     // Store a reference to this listener so it can be cleaned up later.
-    mainChartRowClickListener = google.visualization.events
+    countryChartRowClickListener = google.visualization.events
         .addListener(chart, 'select', function(event) {
 
       // When you unselect a row, the "select" event still fires
@@ -317,7 +317,7 @@ gapi.analytics.ready(function() {
           }
         }
       };
-      console.log(options);
+      //console.log(options);
 
       tempLandingPathChart.set(options).execute();
       inicialPageChart.set(options).execute();
