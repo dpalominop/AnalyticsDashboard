@@ -162,7 +162,7 @@ gapi.analytics.ready(function() {
      */
     template:
       '<div class="row">' +
-      '<div class="col-md-6 DateRangeSelector">' +
+      '<div class="col-md-8 DateRangeSelector">' +
       '  <div class="DateRangeSelector-item">' +
       '    <label>Start Date</label> ' +
       '    <input type="date">' +
@@ -172,7 +172,7 @@ gapi.analytics.ready(function() {
       '    <input type="date">' +
       '  </div>' +
       '</div>' +
-      '<div class="col-md-6 ViewSelector2">' +
+      '<div class="col-md-4 ViewSelector2">' +
       '  <div class="col-md-6 ViewSelector2-item">' +
       '    <label>Género</label> ' +
       '    <select class="FormField">' +
