@@ -185,7 +185,6 @@ gapi.analytics.ready(function() {
       '    <label>Edad</label> ' +
       '    <select class="FormField">' +
       '      <option value="all" selected>Todos</option>' +
-      '      <option value="0-18">0-18</option>' +
       '      <option value="18-24">18-24</option>' +
       '      <option value="25-34">25-34</option>' +
       '      <option value="35-44">35-44</option>' +
