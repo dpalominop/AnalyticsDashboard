@@ -181,7 +181,7 @@ gapi.analytics.ready(function() {
    */
   var topLandingDataChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      metrics: 'ga:users',
+      metrics: 'ga:users,ga:sessions',
       dimensions: 'ga:landingPagePath',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
@@ -202,7 +202,7 @@ gapi.analytics.ready(function() {
    */
   var allPagesDataChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      metrics: 'ga:users',
+      metrics: 'ga:users,ga:sessions',
       dimensions: 'ga:pagePath',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
