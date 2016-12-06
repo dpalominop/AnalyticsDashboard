@@ -40,6 +40,10 @@ projects:
     slug: channels-keywords
     tech: [embed_api]
     excerpt: ''
+  - title: Referidos
+    slug: referrals
+    tech: [embed_api]
+    excerpt: ''
   - title: Comparaciones en el tiempo
     slug: comparisons-over-time
     tech: [embed_api, real_time_reporting_api]
