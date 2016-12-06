@@ -314,6 +314,27 @@ gapi.analytics.ready(function() {
 
       var row =  chart.getSelection()[0].row;
       var channel = dataTable.getValue(row, 0);
+      if(channel === "Organic Search") {
+          keywordChart.set({query: {
+              'dimensions': 'ga:keyword',
+                }
+          });
+      }else if(channel === "Referral"){
+        keywordChart.set({query: {
+              'dimensions': 'ga:source',
+                }
+          });
+      }else if(channel === "Social"){
+        keywordChart.set({query: {
+              'dimensions': 'ga:socialNetwork',
+                }
+          });
+      } if(channel === "Direct"){
+        keywordChart.set({query: {
+              'dimensions': 'ga:landingPagePath',
+                }
+          });
+      }
       var options = {
         query: {
           filters: 'ga:country==' + country + ';ga:landingPagePath==' + landingPagePath + ';ga:channelGrouping==' + channel
