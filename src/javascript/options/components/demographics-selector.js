@@ -161,7 +161,8 @@ gapi.analytics.ready(function() {
      * first will be the start date and the second will be the end date.
      */
     template:
-      '<div class="DateRangeSelector">' +
+      '<div class="row">' +
+      '<div class="col-md-6 DateRangeSelector">' +
       '  <div class="DateRangeSelector-item">' +
       '    <label>Start Date</label> ' +
       '    <input type="date">' +
@@ -170,17 +171,19 @@ gapi.analytics.ready(function() {
       '    <label>End Date</label> ' +
       '    <input type="date">' +
       '  </div>' +
-      '  <div class="DateRangeSelector-item">' +
+      '</div>' +
+      '<div class="col-md-6 ViewSelector2">' +
+      '  <div class="col-md-6 ViewSelector2-item">' +
       '    <label>Género</label> ' +
-      '    <select name="select-gender">' +
+      '    <select class="FormField">' +
       '      <option value="all" selected>Todos</option>' +
       '      <option value="male">Hombre</option>' +
       '      <option value="female">Mujer</option>' +
       '    </select>'+
       '  </div>' +
-      '  <div class="DateRangeSelector-item">' +
+      '  <div class="col-md-6 ViewSelector2-item"">' +
       '    <label>Edad</label> ' +
-      '    <select name="select-age">' +
+      '    <select class="FormField">' +
       '      <option value="all" selected>Todos</option>' +
       '      <option value="0-18">0-18</option>' +
       '      <option value="18-24">18-24</option>' +
@@ -191,6 +194,7 @@ gapi.analytics.ready(function() {
       '      <option value="65+">65+</option>' +
       '    </select>'+
       '  </div>' +
+      '</div>' +
       '</div>',
   });
 });
