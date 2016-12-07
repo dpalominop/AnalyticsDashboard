@@ -101,18 +101,18 @@ gapi.analytics.ready(function() {
    * Create a table chart showing Top Landing Page over time for the country the
    * user selected in the country chart.
    */
-  var landingPathChart = new gapi.analytics.googleCharts.DataChart({
+  var referralChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      'metrics': 'ga:sessions,ga:users',
+      'metrics': 'ga:sessions',
       'dimensions': 'ga:landingPagePath',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
-      'sort': '-ga:users',
+      'sort': '-ga:sessions',
       'max-results': '10'
     },
     chart: {
       type: 'TABLE',
-      container: 'landingpath-chart-container',
+      container: 'referral-chart-container',
       options: {
         width: '100%'
       }
@@ -123,7 +123,7 @@ gapi.analytics.ready(function() {
    * Create a table chart showing Top Landing Page over time for the country the
    * user selected in the main chart.
    */
-  var tempLandingPathChart = new gapi.analytics.googleCharts.DataChart({
+  var tempBounceRateChart = new gapi.analytics.googleCharts.DataChart({
     query: {
       'metrics': 'ga:bounceRate',
       'dimensions': 'ga:date',
@@ -133,7 +133,7 @@ gapi.analytics.ready(function() {
     },
     chart: {
       type: 'LINE',
-      container: 'temp-landingpath-chart-container',
+      container: 'temp-bouncerate-chart-container',
       options: {
         width: '100%'
       }
@@ -152,7 +152,7 @@ gapi.analytics.ready(function() {
    * removed later to prevent leaking memory when the chart instance is
    * replaced.
    */
-  var landingPathChartRowClickListener;
+  var referralChartRowClickListener;
 
   var country;
   /**
@@ -174,19 +174,19 @@ gapi.analytics.ready(function() {
 
     // Clean up any event listeners registered on the landing chart before
     // rendering a new one.
-    if (landingPathChartRowClickListener) {
-      google.visualization.events.removeListener(landingPathChartRowClickListener);
+    if (referralChartRowClickListener) {
+      google.visualization.events.removeListener(referralChartRowClickListener);
     }
 
     countryChart.set(options).execute();
-    landingPathChart.set(options);
-    tempLandingPathChart.set(options);
+    referralChart.set(options);
+    tempBounceRateChart.set(options);
 
     // Only render the breakdown chart if a Country filter has been set.
-    if (landingPathChart.get().query.filters) landingPathChart.execute();
+    if (referralChart.get().query.filters) referralChart.execute();
 
     // Only render the breakdown chart if a LandingPath filter has been set.
-    if (tempLandingPathChart.get().query.filters && landingPathChart.get().query.filters) tempLandingPathChart.execute();
+    if (tempBounceRateChart.get().query.filters && referralChart.get().query.filters) tempBounceRateChart.execute();
   });
 
   /**
@@ -208,19 +208,19 @@ gapi.analytics.ready(function() {
 
     // Clean up any event listeners registered on the landing chart before
     // rendering a new one.
-    if (landingPathChartRowClickListener) {
-      google.visualization.events.removeListener(landingPathChartRowClickListener);
+    if (referralChartRowClickListener) {
+      google.visualization.events.removeListener(referralChartRowClickListener);
     }
 
     countryChart.set(options).execute();
-    landingPathChart.set(options);
-    tempLandingPathChart.set(options);
+    referralChart.set(options);
+    tempBounceRateChart.set(options);
 
     // Only render the breakdown chart if a Country filter has been set.
-    if (landingPathChart.get().query.filters) landingPathChart.execute();
+    if (referralChart.get().query.filters) referralChart.execute();
 
     // Only render the breakdown chart if a LandingPath filter has been set.
-    if (tempLandingPathChart.get().query.filters && landingPathChart.get().query.filters) tempLandingPathChart.execute();
+    if (tempBounceRateChart.get().query.filters && referralChart.get().query.filters) tempBounceRateChart.execute();
 
     // Update the "period" dates text.
     var datefield = document.getElementById('period');
@@ -257,8 +257,8 @@ gapi.analytics.ready(function() {
         }
       };
 
-      landingPathChart.set(options).execute();
-      tempLandingPathChart.set(options).execute();
+      referralChart.set(options).execute();
+      tempBounceRateChart.set(options).execute();
     });
   });
 
@@ -267,32 +267,32 @@ gapi.analytics.ready(function() {
    * that when the user clicks on a row, the line chart is updated with
    * the data from the country in the clicked row.
    */
-  landingPathChart.on('success', function(response) {
+  referralChart.on('success', function(response) {
     var chart = response.chart;
     var dataTable = response.dataTable;
 
     // Store a reference to this listener so it can be cleaned up later.
-    landingPathChartRowClickListener = google.visualization.events
+    referralChartRowClickListener = google.visualization.events
         .addListener(chart, 'select', function(event) {
 
       // When you unselect a row, the "select" event still fires
       // but the selection is empty. Ignore that case.
       if (!chart.getSelection().length) return;
       var row =  chart.getSelection()[0].row;
-      var landingPagePath = dataTable.getValue(row, 0);
+      var referralPath = dataTable.getValue(row, 0);
       var options = {
         query: {
-          filters: 'ga:country==' + country + ';' + 'ga:landingPagePath==' + landingPagePath
+          filters: 'ga:country==' + country + ';' + 'ga:landingPagePath==' + referralPath
         },
         chart: {
           options: {
-            title: country + ': ' + landingPagePath
+            title: country + ': ' + referralPath
           }
         }
       };
       //console.log(options);
 
-      tempLandingPathChart.set(options).execute();
+      tempBounceRateChart.set(options).execute();
     });
   });
 
