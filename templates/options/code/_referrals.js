@@ -197,7 +197,13 @@ gapi.analytics.ready(function() {
    * instance as well as change the dashboard subtitle to reflect the range.
    */
   dateRangeSelector.on('change', function(data) {
-    var options = {query: data};
+    data['filters']=null;
+    var options = {query: data,
+                  chart: {
+                    options: {
+                      title: null
+                    }
+                  }};
 
     // Start tracking active users for this view.
     activeUsers.set(data).execute();
@@ -215,14 +221,14 @@ gapi.analytics.ready(function() {
     }
 
     countryChart.set(options).execute();
-    referralChart.set(options);
-    tempBounceRateChart.set(options);
+    referralChart.set(options).execute();
+    tempBounceRateChart.set(options).execute();
 
     // Only render the breakdown chart if a Country filter has been set.
-    if (referralChart.get().query.filters) referralChart.execute();
+    //if (referralChart.get().query.filters) referralChart.execute();
 
     // Only render the breakdown chart if a LandingPath filter has been set.
-    if (tempBounceRateChart.get().query.filters && referralChart.get().query.filters) tempBounceRateChart.execute();
+    //if (tempBounceRateChart.get().query.filters && referralChart.get().query.filters) tempBounceRateChart.execute();
 
     // Update the "period" dates text.
     var datefield = document.getElementById('period');
