@@ -171,6 +171,7 @@ gapi.analytics.ready(function() {
     countryChart.set(options).execute();
     landingPathChart.set(options).execute();
     channelChart.set(options).execute();
+    keywordChart.set({query: {'dimensions': 'ga:keyword'}});
     keywordChart.set(options).execute();
 
     // Only render the breakdown chart if a Country filter has been set.
@@ -188,13 +189,14 @@ gapi.analytics.ready(function() {
     //console.log(data);
     country = null;
     landingPagePath = null;
-    data['filters']='ga:channelGrouping==Referral';
     var options = {query: data,
-                  chart: {
-                    options: {
-                      title: null
+                    chart: {
+                      options: {
+                        title: null
+                      }
                     }
-                  }};
+                  };
+    console.log(options);
 
     // Clean up any event listeners registered on the main chart before
     // rendering a new one.
@@ -212,9 +214,10 @@ gapi.analytics.ready(function() {
 
     // Render all the of charts for this view.
     countryChart.set(options).execute();
-    landingPathChart.set(options).execute();;
-    channelChart.set(options).execute();;
-    keywordChart.set(options).execute();;
+    landingPathChart.set(options).execute();
+    channelChart.set(options).execute();
+    keywordChart.set({query: {'dimensions': 'ga:keyword'}});
+    keywordChart.set(options).execute();
 
     // Only render the breakdown chart if a Country filter has been set.
     //if (landingPathChart.get().query.filters) landingPathChart.execute();
@@ -259,6 +262,7 @@ gapi.analytics.ready(function() {
 
       landingPathChart.set(options).execute();
       channelChart.set(options).execute();
+      keywordChart.set({query: {'dimensions': 'ga:keyword'}});
       keywordChart.set(options).execute();
 
       var title = document.getElementById('landing-subtitle');
@@ -310,6 +314,7 @@ gapi.analytics.ready(function() {
       }
 
       channelChart.set(options).execute();
+      keywordChart.set({query: {'dimensions': 'ga:keyword'}});
       keywordChart.set(options).execute();
     });
   });
