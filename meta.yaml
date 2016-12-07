@@ -44,6 +44,10 @@ projects:
     slug: referrals
     tech: [embed_api]
     excerpt: ''
+  - title: Páginas de Destino
+    slug: landing-pages
+    tech: [embed_api]
+    excerpt: ''
   - title: Comparaciones en el tiempo
     slug: comparisons-over-time
     tech: [embed_api, real_time_reporting_api]
