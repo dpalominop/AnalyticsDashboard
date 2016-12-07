@@ -60,6 +60,23 @@ projects:
     slug: custom-components
     tech: [embed_api]
     excerpt: 'The built-in components that ship with the Embed API are very nice, but sometimes you need to do more. This example shows how you can extend the Embed API to use your own custom components.'
+
+- title: Adquisición
+  type: demo
+  slug: acquisition
+  pages:
+  - title: Canales y Palabras Claves
+    slug: channels-keywords
+    tech: [embed_api]
+    excerpt: ''
+  - title: Referidos
+    slug: referrals
+    tech: [embed_api]
+    excerpt: ''
+  - title: Páginas de Destino
+    slug: landing-pages
+    tech: [embed_api]
+
   #- title: Autorización en el Servidor
   #  slug: server-side-authorization
   #  tech: [embed_api, api_client_library_python]
