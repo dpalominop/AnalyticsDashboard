@@ -131,8 +131,8 @@ gapi.analytics.ready(function() {
   var countryChartClickListener;
   var landingPathChartRowClickListener;
   var channelChartRowClickListener;
-  var country;
-  var landingPagePath;
+  var country = null;
+  var landingPagePath = null;
   /**
    * Update the activeUsers component, the Chartjs charts, and the dashboard
    * title whenever the user changes the view.
@@ -141,9 +141,16 @@ gapi.analytics.ready(function() {
     var title = document.getElementById('view-name');
     title.innerHTML = data.property.name + ' (' + data.view.name + ')';
 
+    country = null;
+    landingPagePath = null;
     var options = {query: {ids: data.ids,
                           filters: null,
-                          }
+                          },
+                    chart: {
+                      options: {
+                        title: null
+                      }
+                    }
                 };
 
     // Clean up any event listeners registered on the main chart before
@@ -162,14 +169,14 @@ gapi.analytics.ready(function() {
 
     // Render all the of charts for this view.
     countryChart.set(options).execute();
-    landingPathChart.set(options);
-    channelChart.set(options);
-    keywordChart.set(options);
+    landingPathChart.set(options).execute();
+    channelChart.set(options).execute();
+    keywordChart.set(options).execute();
 
     // Only render the breakdown chart if a Country filter has been set.
-    if (landingPathChart.get().query.filters) landingPathChart.execute();
-    if (channelChart.get().query.filters && landingPathChart.get().query.filters) channelChart.execute();
-    if (keywordChart.get().query.filters && channelChart.get().query.filters && landingPathChart.get().query.filters) keywordChart.execute();
+    //if (landingPathChart.get().query.filters) landingPathChart.execute();
+    //if (channelChart.get().query.filters && landingPathChart.get().query.filters) channelChart.execute();
+    //if (keywordChart.get().query.filters && channelChart.get().query.filters && landingPathChart.get().query.filters) keywordChart.execute();
 
   });
 
@@ -179,8 +186,15 @@ gapi.analytics.ready(function() {
   demographicSelector.on('change', function(data) {
     //console.log("demographicSelector");
     //console.log(data);
-
-    var options = {query: data};
+    country = null;
+    landingPagePath = null;
+    data['filters']='ga:channelGrouping==Referral';
+    var options = {query: data,
+                  chart: {
+                    options: {
+                      title: null
+                    }
+                  }};
 
     // Clean up any event listeners registered on the main chart before
     // rendering a new one.
@@ -198,14 +212,14 @@ gapi.analytics.ready(function() {
 
     // Render all the of charts for this view.
     countryChart.set(options).execute();
-    landingPathChart.set(options);
-    channelChart.set(options);
-    keywordChart.set(options);
+    landingPathChart.set(options).execute();;
+    channelChart.set(options).execute();;
+    keywordChart.set(options).execute();;
 
     // Only render the breakdown chart if a Country filter has been set.
-    if (landingPathChart.get().query.filters) landingPathChart.execute();
-    if (channelChart.get().query.filters && landingPathChart.get().query.filters) channelChart.execute();
-    if (keywordChart.get().query.filters && channelChart.get().query.filters && landingPathChart.get().query.filters) keywordChart.execute();
+    //if (landingPathChart.get().query.filters) landingPathChart.execute();
+    //if (channelChart.get().query.filters && landingPathChart.get().query.filters) channelChart.execute();
+    //if (keywordChart.get().query.filters && channelChart.get().query.filters && landingPathChart.get().query.filters) keywordChart.execute();
 
     // Update the "period" dates text.
     var datefield = document.getElementById('period');
@@ -231,6 +245,7 @@ gapi.analytics.ready(function() {
 
       var row =  chart.getSelection()[0].row;
       country =  dataTable.getValue(row, 0);
+      landingPagePath = null;
       var options = {
         query: {
           filters: 'ga:country==' + country
@@ -248,10 +263,6 @@ gapi.analytics.ready(function() {
 
       var title = document.getElementById('landing-subtitle');
       title.innerHTML = country;
-      var title2 = document.getElementById('channel-subtitle');
-      title2.innerHTML = country;
-      var title3 = document.getElementById('keyword-subtitle');
-      title3.innerHTML = country;
     });
   });
 
@@ -274,24 +285,32 @@ gapi.analytics.ready(function() {
 
       var row =  chart.getSelection()[0].row;
       landingPagePath = dataTable.getValue(row, 0);
-      var options = {
-        query: {
-          filters: 'ga:country==' + country + ';' + 'ga:landingPagePath==' + landingPagePath
-        },
-        chart: {
-          options: {
-            title: country + ': ' + landingPagePath
+      if (country){
+        var options = {
+          query: {
+            filters: 'ga:country==' + country + ';' + 'ga:landingPagePath==' + landingPagePath
+          },
+          chart: {
+            options: {
+              title: country + ': ' + landingPagePath
+            }
           }
-        }
-      };
+        };
+      }else{
+        var options = {
+          query: {
+            filters: 'ga:landingPagePath==' + landingPagePath
+          },
+          chart: {
+            options: {
+              title: landingPagePath
+            }
+          }
+        };
+      }
 
       channelChart.set(options).execute();
       keywordChart.set(options).execute();
-
-      var title = document.getElementById('channel-subtitle');
-      title.innerHTML = country + ': ' + landingPagePath;
-      var title2 = document.getElementById('keyword-subtitle');
-      title2.innerHTML = country + ': ' + landingPagePath;
     });
   });
 
@@ -335,21 +354,54 @@ gapi.analytics.ready(function() {
                 }
           });
       }
-      var options = {
-        query: {
-          filters: 'ga:country==' + country + ';ga:landingPagePath==' + landingPagePath + ';ga:channelGrouping==' + channel
-        },
-        chart: {
-          options: {
-            title: country + ': ' + landingPagePath + ': ' + channel
+
+      if (country && landingPagePath){
+        var options = {
+          query: {
+            filters: 'ga:country==' + country + ';ga:landingPagePath==' + landingPagePath + ';ga:channelGrouping==' + channel
+          },
+          chart: {
+            options: {
+              title: country + ': ' + landingPagePath + ': ' + channel
+            }
           }
-        }
-      };
+        };
+      }else if(country){
+        var options = {
+          query: {
+            filters: 'ga:country==' + country + ';ga:channelGrouping==' + channel
+          },
+          chart: {
+            options: {
+              title: country + ': ' + channel
+            }
+          }
+        };
+      }else if(landingPagePath){
+        var options = {
+          query: {
+            filters: 'ga:landingPagePath==' + landingPagePath + ';ga:channelGrouping==' + channel
+          },
+          chart: {
+            options: {
+              title: landingPagePath + ': ' + channel
+            }
+          }
+        };
+      }else{
+        var options = {
+          query: {
+            filters: 'ga:channelGrouping==' + channel
+          },
+          chart: {
+            options: {
+              title: channel
+            }
+          }
+        };
+      }
 
       keywordChart.set(options).execute();
-
-      var title = document.getElementById('keyword-subtitle');
-      title.innerHTML = country + ': ' + landingPagePath + ': ' + channel;
     });
   });
 
