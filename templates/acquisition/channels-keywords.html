@@ -1,0 +1,79 @@
+{% extends 'options/demo.html' %}
+
+{% block content %}
+
+<section>
+</section>
+
+<div class="Dashboard">
+  <header class="Dashboard-header">
+    <ul class="FlexGrid">
+      <li class="FlexGrid-item">
+        <div class="Titles">
+          <h1 class="Titles-main" id="view-name">Selecciona una Vista</h1>
+          <div class="Titles-sub">Periodo de comparación:
+            <b id="period">31 days ago - Yesterday</b>
+          </div>
+        </div>
+      </li>
+      <li class="FlexGrid-item FlexGrid-item--fixed">
+        <div id="active-users-container"></div>
+      </li>
+    </ul>
+    <div id="view-selector-container"></div>
+    <div id="demographics-selector-container" style="padding-top:20px;"></div>
+  </header>
+
+  <ul class="row FlexGrid FlexGrid--halves">
+    <li class="col-md-12 FlexGrid-item">
+      <div class="Chart">
+        <header class="Titles">
+          <h1 class="Titles-main">Sesiones por País</h1>
+          <p class="Titles-sub">Top 21</p>
+        </header>
+        <figure class="Chartjs-figure" id="country-container"></figure>
+      </div>
+    </li>
+  </ul>
+  <div class="row" style="padding-top:30px;">
+    <ul class="col-md-6 FlexGrid">
+      <li class="col-md-12 FlexGrid-item">
+        <header class="Titles">
+          <h1 class="Titles-main">Top Landing Page</h1>
+          <p class="Titles-sub" id="landing-subtitle"></p>
+        </header>
+        <div id="landingpath-chart-container" style="min-height:300px"></div>
+      </li>
+    </ul>
+    <ul class="col-md-6 FlexGrid">
+      <li class="FlexGrid-item">
+        <header class="Titles">
+          <h1 class="Titles-main">Canales</h1>
+          <p class="Titles-sub" id="channel-subtitle"></p>
+        </header>
+        <figure class="Chartjs-figure" id="channel-chart-container" style="min-height:300px"></figure>
+      </li>
+      <li class="FlexGrid-item">
+        <header class="Titles">
+          <h1 class="Titles-main">Orígenes</h1>
+          <p class="Titles-sub" id="keyword-subtitle"></p>
+        </header>
+        <figure class="Chartjs-figure" id="keyword-chart-container" style="min-height:300px"></figure>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<section>
+</section>
+
+{% endblock %}
+
+{% block foot_scripts %}
+{% include 'options/dependencies/_comparisons-over-time.html' %}
+{{ super() }}
+<script>
+{% include 'acquisition/code/_channels-keywords.js' %}
+</script>
+{% endblock %}
