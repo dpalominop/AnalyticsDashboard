@@ -36,18 +36,18 @@ projects:
     slug: demographics
     tech: [embed_api]
     excerpt: ''
-  - title: Canales y Palabras Claves
-    slug: channels-keywords
-    tech: [embed_api]
-    excerpt: ''
-  - title: Referidos
-    slug: referrals
-    tech: [embed_api]
-    excerpt: ''
-  - title: Páginas de Destino
-    slug: landing-pages
-    tech: [embed_api]
-    excerpt: ''
+  #- title: Canales y Palabras Claves
+  #  slug: channels-keywords
+  #  tech: [embed_api]
+  #  excerpt: ''
+  #- title: Referidos
+  #  slug: referrals
+  #  tech: [embed_api]
+  #  excerpt: ''
+  #- title: Páginas de Destino
+  #  slug: landing-pages
+  #  tech: [embed_api]
+  #  excerpt: ''
   - title: Comparaciones en el tiempo
     slug: comparisons-over-time
     tech: [embed_api, real_time_reporting_api]
@@ -65,7 +65,7 @@ projects:
   type: demo
   slug: acquisition
   pages:
-  - title: Canales y Palabras Claves
+  - title: Canales y Orígenes
     slug: channels-keywords
     tech: [embed_api]
     excerpt: ''
