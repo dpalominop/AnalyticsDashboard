@@ -156,7 +156,7 @@ gapi.analytics.ready(function() {
    */
   var referralChartRowClickListener;
 
-  var country;
+  var country = null;
   /**
    * Update both charts whenever the selected view changes.
    */
