@@ -186,7 +186,7 @@ gapi.analytics.ready(function() {
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
       'sort': '-ga:users',
-      'max-results': '10'
+      'max-results': '20'
     },
     chart: {
       container: 'top-landing-chart-container',
@@ -207,7 +207,7 @@ gapi.analytics.ready(function() {
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
       'sort': '-ga:users',
-      'max-results': '10'
+      'max-results': '20'
     },
     chart: {
       container: 'all-pages-chart-container',
