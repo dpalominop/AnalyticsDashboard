@@ -166,6 +166,7 @@ gapi.analytics.ready(function() {
     // Start tracking active users for this view.
     activeUsers.set(data).execute();
 
+    country = null;
     var options = {query: {ids: data.ids,
                             filters: null,
                           },
@@ -205,6 +206,7 @@ gapi.analytics.ready(function() {
    * instance as well as change the dashboard subtitle to reflect the range.
    */
   dateRangeSelector.on('change', function(data) {
+    country = null;
     data['filters']=null;
     var options = {query: data,
                   chart: {
@@ -296,16 +298,30 @@ gapi.analytics.ready(function() {
       if (!chart.getSelection().length) return;
       var row =  chart.getSelection()[0].row;
       var referralPath = dataTable.getValue(row, 0);
-      var options = {
-        query: {
-          filters: 'ga:channelGrouping==Referral;ga:country==' + country + ';' + 'ga:source==' + referralPath
-        },
-        chart: {
-          options: {
-            title: country + ': ' + referralPath
+      if (country){
+        var options = {
+          query: {
+            filters: 'ga:channelGrouping==Referral;ga:country==' + country + ';' + 'ga:source==' + referralPath
+          },
+          chart: {
+            options: {
+              title: country + ': ' + referralPath
+            }
           }
-        }
-      };
+        };
+      }else{
+        var options = {
+          query: {
+            filters: 'ga:channelGrouping==Referral;' + 'ga:source==' + referralPath
+          },
+          chart: {
+            options: {
+              title: referralPath
+            }
+          }
+        };
+      }
+      
       //console.log(options);
 
       tempBounceRateChart.set(options).execute();
