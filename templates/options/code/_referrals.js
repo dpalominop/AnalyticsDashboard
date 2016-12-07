@@ -166,7 +166,15 @@ gapi.analytics.ready(function() {
     // Start tracking active users for this view.
     activeUsers.set(data).execute();
 
-    var options = {query: {ids: data.ids}};
+    var options = {query: {ids: data.ids,
+                            filters: null,
+                          },
+                    chart: {
+                      options: {
+                        title: null
+                      }
+                    }
+                  };
 
     // Clean up any event listeners registered on the main chart before
     // rendering a new one.
@@ -181,14 +189,14 @@ gapi.analytics.ready(function() {
     }
 
     countryChart.set(options).execute();
-    referralChart.set(options);
-    tempBounceRateChart.set(options);
+    referralChart.set(options).execute();
+    tempBounceRateChart.set(options).execute();
 
     // Only render the breakdown chart if a Country filter has been set.
-    if (referralChart.get().query.filters) referralChart.execute();
+    //if (referralChart.get().query.filters) referralChart.execute();
 
     // Only render the breakdown chart if a LandingPath filter has been set.
-    if (tempBounceRateChart.get().query.filters && referralChart.get().query.filters) tempBounceRateChart.execute();
+    //if (tempBounceRateChart.get().query.filters && referralChart.get().query.filters) tempBounceRateChart.execute();
   });
 
   /**
