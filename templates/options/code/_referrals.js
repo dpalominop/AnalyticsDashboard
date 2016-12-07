@@ -168,7 +168,7 @@ gapi.analytics.ready(function() {
 
     country = null;
     var options = {query: {ids: data.ids,
-                            filters: null,
+                            filters: 'ga:channelGrouping==Referral',
                           },
                     chart: {
                       options: {
@@ -207,7 +207,7 @@ gapi.analytics.ready(function() {
    */
   dateRangeSelector.on('change', function(data) {
     country = null;
-    data['filters']=null;
+    data['filters']='ga:channelGrouping==Referral';
     var options = {query: data,
                   chart: {
                     options: {
@@ -231,6 +231,7 @@ gapi.analytics.ready(function() {
     }
 
     countryChart.set(options).execute();
+
     referralChart.set(options).execute();
     tempBounceRateChart.set(options).execute();
 
