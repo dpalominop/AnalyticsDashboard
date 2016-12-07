@@ -104,10 +104,11 @@ gapi.analytics.ready(function() {
   var referralChart = new gapi.analytics.googleCharts.DataChart({
     query: {
       'metrics': 'ga:sessions',
-      'dimensions': 'ga:landingPagePath',
+      'dimensions': 'ga:source',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
       'sort': '-ga:sessions',
+      'filters': 'ga:channelGrouping==Referral',
       'max-results': '10'
     },
     chart: {
@@ -129,6 +130,7 @@ gapi.analytics.ready(function() {
       'dimensions': 'ga:date',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
+      'filters': 'ga:channelGrouping==Referral',
       'sort': 'ga:date'
     },
     chart: {
@@ -248,7 +250,7 @@ gapi.analytics.ready(function() {
       country =  dataTable.getValue(row, 0);
       var options = {
         query: {
-          filters: 'ga:country==' + country
+          filters: 'ga:channelGrouping==Referral;ga:country==' + country
         },
         chart: {
           options: {
@@ -282,7 +284,7 @@ gapi.analytics.ready(function() {
       var referralPath = dataTable.getValue(row, 0);
       var options = {
         query: {
-          filters: 'ga:country==' + country + ';' + 'ga:landingPagePath==' + referralPath
+          filters: 'ga:channelGrouping==Referral;ga:country==' + country + ';' + 'ga:source==' + referralPath
         },
         chart: {
           options: {
