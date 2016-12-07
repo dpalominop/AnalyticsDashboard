@@ -163,6 +163,7 @@ gapi.analytics.ready(function() {
   viewSelector.on('viewChange', function(data) {
     var title = document.getElementById('view-name');
     title.innerHTML = data.property.name + ' (' + data.view.name + ')';
+
     // Start tracking active users for this view.
     activeUsers.set(data).execute();
 
@@ -231,7 +232,6 @@ gapi.analytics.ready(function() {
     }
 
     countryChart.set(options).execute();
-
     referralChart.set(options).execute();
     tempBounceRateChart.set(options).execute();
 

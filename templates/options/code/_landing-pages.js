@@ -103,11 +103,11 @@ gapi.analytics.ready(function() {
    */
   var landingPathChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      'metrics': 'ga:sessions,ga:users',
+      'metrics': 'ga:sessions',
       'dimensions': 'ga:landingPagePath',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
-      'sort': '-ga:users',
+      'sort': '-ga:sessions',
       'max-results': '10'
     },
     chart: {
@@ -154,17 +154,27 @@ gapi.analytics.ready(function() {
    */
   var landingPathChartRowClickListener;
 
-  var country;
+  var country = null;
   /**
    * Update both charts whenever the selected view changes.
    */
   viewSelector.on('viewChange', function(data) {
     var title = document.getElementById('view-name');
     title.innerHTML = data.property.name + ' (' + data.view.name + ')';
+
     // Start tracking active users for this view.
     activeUsers.set(data).execute();
 
-    var options = {query: {ids: data.ids}};
+    country = null;
+    var options = {query: {ids: data.ids,
+                            filters: 'ga:channelGrouping==Direct',
+                          },
+                    chart: {
+                      options: {
+                        title: null
+                      }
+                    }
+                  };
 
     // Clean up any event listeners registered on the main chart before
     // rendering a new one.
@@ -179,14 +189,14 @@ gapi.analytics.ready(function() {
     }
 
     countryChart.set(options).execute();
-    landingPathChart.set(options);
-    tempLandingPathChart.set(options);
+    landingPathChart.set(options).execute();
+    tempLandingPathChart.set(options).execute();
 
     // Only render the breakdown chart if a Country filter has been set.
-    if (landingPathChart.get().query.filters) landingPathChart.execute();
+    //if (landingPathChart.get().query.filters) landingPathChart.execute();
 
     // Only render the breakdown chart if a LandingPath filter has been set.
-    if (tempLandingPathChart.get().query.filters && landingPathChart.get().query.filters) tempLandingPathChart.execute();
+    //if (tempLandingPathChart.get().query.filters && landingPathChart.get().query.filters) tempLandingPathChart.execute();
   });
 
   /**
@@ -195,7 +205,14 @@ gapi.analytics.ready(function() {
    * instance as well as change the dashboard subtitle to reflect the range.
    */
   dateRangeSelector.on('change', function(data) {
-    var options = {query: data};
+    country = null;
+    data['filters']='ga:channelGrouping==Referral';
+    var options = {query: data,
+                  chart: {
+                    options: {
+                      title: null
+                    }
+                  }};
 
     // Start tracking active users for this view.
     activeUsers.set(data).execute();
@@ -213,14 +230,14 @@ gapi.analytics.ready(function() {
     }
 
     countryChart.set(options).execute();
-    landingPathChart.set(options);
-    tempLandingPathChart.set(options);
+    landingPathChart.set(options).execute();
+    tempLandingPathChart.set(options).execute();
 
     // Only render the breakdown chart if a Country filter has been set.
-    if (landingPathChart.get().query.filters) landingPathChart.execute();
+    //if (landingPathChart.get().query.filters) landingPathChart.execute();
 
     // Only render the breakdown chart if a LandingPath filter has been set.
-    if (tempLandingPathChart.get().query.filters && landingPathChart.get().query.filters) tempLandingPathChart.execute();
+    //if (tempLandingPathChart.get().query.filters && landingPathChart.get().query.filters) tempLandingPathChart.execute();
 
     // Update the "period" dates text.
     var datefield = document.getElementById('period');
@@ -248,7 +265,7 @@ gapi.analytics.ready(function() {
       country =  dataTable.getValue(row, 0);
       var options = {
         query: {
-          filters: 'ga:country==' + country
+          filters: 'ga:channelGrouping==Direct;ga:country==' + country
         },
         chart: {
           options: {
@@ -280,16 +297,30 @@ gapi.analytics.ready(function() {
       if (!chart.getSelection().length) return;
       var row =  chart.getSelection()[0].row;
       var landingPagePath = dataTable.getValue(row, 0);
-      var options = {
-        query: {
-          filters: 'ga:country==' + country + ';' + 'ga:landingPagePath==' + landingPagePath
-        },
-        chart: {
-          options: {
-            title: country + ': ' + landingPagePath
+      if (country){
+        var options = {
+          query: {
+            filters: 'ga:channelGrouping==Direct;ga:country==' + country + ';' + 'ga:landingPagePath==' + landingPagePath
+          },
+          chart: {
+            options: {
+              title: country + ': ' + landingPagePath
+            }
           }
-        }
-      };
+        };
+      }else{
+        var options = {
+          query: {
+            filters: 'ga:channelGrouping==Direct;' + 'ga:landingPagePath==' + landingPagePath
+          },
+          chart: {
+            options: {
+              title: landingPagePath
+            }
+          }
+        };
+      }
+
       //console.log(options);
 
       tempLandingPathChart.set(options).execute();
