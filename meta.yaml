@@ -48,18 +48,19 @@ projects:
   #  slug: landing-pages
   #  tech: [embed_api]
   #  excerpt: ''
-  - title: Comparaciones en el tiempo
-    slug: comparisons-over-time
-    tech: [embed_api, real_time_reporting_api]
-    excerpt: '.'
-  - title: Múltiples Vistas
-    slug: multiple-views
-    tech: [embed_api]
-    excerpt: 'Displaying two different views side-by-side is not currently possible through the Google Analytics website. This demo shows how easy it is to do this using the Embed API.'
-  - title: Componentes Personalizados
-    slug: custom-components
-    tech: [embed_api]
-    excerpt: 'The built-in components that ship with the Embed API are very nice, but sometimes you need to do more. This example shows how you can extend the Embed API to use your own custom components.'
+  
+  ##- title: Comparaciones en el tiempo
+  ##  slug: comparisons-over-time
+  ##  tech: [embed_api, real_time_reporting_api]
+  ##  excerpt: '.'
+  ##- title: Múltiples Vistas
+  ##  slug: multiple-views
+  ##  tech: [embed_api]
+  ##  excerpt: 'Displaying two different views side-by-side is not currently possible through the Google Analytics website. This demo shows how easy it is to do this using the Embed API.'
+  ##- title: Componentes Personalizados
+  ##  slug: custom-components
+  ##  tech: [embed_api]
+  ##  excerpt: 'The built-in components that ship with the Embed API are very nice, but sometimes you need to do more. This example shows how you can extend the Embed API to use your own custom components.'
 
 - title: Adquisición
   type: demo
@@ -94,11 +95,11 @@ projects:
 #  external:
 #    action: View Demo
 #    url: https://enhancedecommerce.appspot.com
-- title: Campañas
-  type: tool
-  slug: campaign-url-builder
-  status: new
-  tech: [url_shortener_api]
+##- title: Campañas
+##  type: tool
+##  slug: campaign-url-builder
+##  status: new
+##  tech: [url_shortener_api]
 #- title: Dimensions & Metrics Explorer
 #  type: tool
 #  slug: dimensions-metrics-explorer
