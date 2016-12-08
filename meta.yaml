@@ -69,12 +69,18 @@ projects:
     slug: channels-keywords
     tech: [embed_api]
     excerpt: ''
+  - title: Palabras Clave
+    slug: keywords
+    tech: [embed_api]
+  - title: Páginas de Destino
+    slug: landing-pages
+    tech: [embed_api]
   - title: Referidos
     slug: referrals
     tech: [embed_api]
     excerpt: ''
-  - title: Páginas de Destino
-    slug: landing-pages
+  - title: Redes Sociales
+    slug: social-networks
     tech: [embed_api]
 
   #- title: Autorización en el Servidor
