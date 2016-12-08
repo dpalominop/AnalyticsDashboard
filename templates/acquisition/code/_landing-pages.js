@@ -235,10 +235,6 @@ gapi.analytics.ready(function() {
 
     countryChart_1.set(options).execute();
     landingPathChart_1.set(options).execute();
-
-    // Update the "period" dates text.
-    var datefield = document.getElementById('period');
-    datefield.innerHTML = data['start-date'] + '&mdash;' + data['end-date'];
   });
 
   dateRangeSelector_2.on('change', function(data) {
@@ -261,10 +257,6 @@ gapi.analytics.ready(function() {
 
     countryChart_2.set(options).execute();
     landingPathChart_2.set(options).execute();
-
-    // Update the "period" dates text.
-    var datefield = document.getElementById('period');
-    datefield.innerHTML = data['start-date'] + '&mdash;' + data['end-date'];
   });
 
   /**
