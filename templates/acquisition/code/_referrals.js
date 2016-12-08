@@ -201,12 +201,16 @@ gapi.analytics.ready(function() {
     if (countryChartRowClickListener_1) {
       google.visualization.events.removeListener(countryChartRowClickListener_1);
     }
+    var subtitle_1 = document.getElementById('subtitle-1');
+    subtitle_1.innerHTML = '';
     countryChart_1.set(options).execute();
     referralChart_1.set(options).execute();
 
     if (countryChartRowClickListener_2) {
       google.visualization.events.removeListener(countryChartRowClickListener_2);
     }
+    var subtitle_2 = document.getElementById('subtitle-2');
+    subtitle_2.innerHTML = '';
     countryChart_2.set(options).execute();
     referralChart_2.set(options).execute();
  });
@@ -234,6 +238,8 @@ gapi.analytics.ready(function() {
       google.visualization.events.removeListener(countryChartRowClickListener_1);
     }
 
+    var subtitle_1 = document.getElementById('subtitle-1');
+    subtitle_1.innerHTML = '';
     countryChart_1.set(options).execute();
     referralChart_1.set(options).execute();
   });
@@ -255,7 +261,8 @@ gapi.analytics.ready(function() {
     if (countryChartRowClickListener_2) {
       google.visualization.events.removeListener(countryChartRowClickListener_2);
     }
-
+    var subtitle_2 = document.getElementById('subtitle-2');
+    subtitle_2.innerHTML = '';
     countryChart_2.set(options).execute();
     referralChart_2.set(options).execute();
   });
@@ -290,6 +297,8 @@ gapi.analytics.ready(function() {
         }
       };
 
+      var subtitle_1 = document.getElementById('subtitle-1');
+      subtitle_1.innerHTML = country;
       referralChart_1.set(options).execute();
     });
   });
@@ -319,6 +328,8 @@ gapi.analytics.ready(function() {
         }
       };
 
+      var subtitle_2 = document.getElementById('subtitle-2');
+      subtitle_2.innerHTML = country;
       referralChart_2.set(options).execute();
     });
   });
