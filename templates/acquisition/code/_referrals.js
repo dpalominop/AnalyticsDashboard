@@ -103,7 +103,7 @@ gapi.analytics.ready(function() {
    */
   var referralChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      'metrics': 'ga:sessions',
+      'metrics': 'ga:sessions,ga:bounceRate',
       'dimensions': 'ga:source',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
@@ -121,42 +121,12 @@ gapi.analytics.ready(function() {
   });
 
   /**
-   * Create a table chart showing Top Landing Page over time for the country the
-   * user selected in the main chart.
-   */
-  var tempBounceRateChart = new gapi.analytics.googleCharts.DataChart({
-    query: {
-      'metrics': 'ga:bounceRate',
-      'dimensions': 'ga:date',
-      'start-date': '31daysAgo',
-      'end-date': 'yesterday',
-      'filters': 'ga:channelGrouping==Referral',
-      'sort': 'ga:date'
-    },
-    chart: {
-      type: 'LINE',
-      container: 'temp-bouncerate-chart-container',
-      options: {
-        width: '100%'
-      }
-    }
-  });
-
-  /**
    * Store a refernce to the row click listener variable so it can be
    * removed later to prevent leaking memory when the chart instance is
    * replaced.
    */
   var countryChartRowClickListener;
-
-  /**
-   * Store a refernce to the row click listener variable so it can be
-   * removed later to prevent leaking memory when the chart instance is
-   * replaced.
-   */
-  var referralChartRowClickListener;
-
-  var country = null;
+  
   /**
    * Update both charts whenever the selected view changes.
    */
@@ -167,7 +137,6 @@ gapi.analytics.ready(function() {
     // Start tracking active users for this view.
     activeUsers.set(data).execute();
 
-    country = null;
     var options = {query: {ids: data.ids,
                             filters: 'ga:channelGrouping==Referral',
                           },
@@ -184,22 +153,9 @@ gapi.analytics.ready(function() {
       google.visualization.events.removeListener(countryChartRowClickListener);
     }
 
-    // Clean up any event listeners registered on the landing chart before
-    // rendering a new one.
-    if (referralChartRowClickListener) {
-      google.visualization.events.removeListener(referralChartRowClickListener);
-    }
-
     countryChart.set(options).execute();
     referralChart.set(options).execute();
-    tempBounceRateChart.set(options).execute();
-
-    // Only render the breakdown chart if a Country filter has been set.
-    //if (referralChart.get().query.filters) referralChart.execute();
-
-    // Only render the breakdown chart if a LandingPath filter has been set.
-    //if (tempBounceRateChart.get().query.filters && referralChart.get().query.filters) tempBounceRateChart.execute();
-  });
+ });
 
   /**
    * Register a handler to run whenever the user changes the date range from
@@ -207,7 +163,6 @@ gapi.analytics.ready(function() {
    * instance as well as change the dashboard subtitle to reflect the range.
    */
   dateRangeSelector.on('change', function(data) {
-    country = null;
     data['filters']='ga:channelGrouping==Referral';
     var options = {query: data,
                   chart: {
@@ -225,21 +180,8 @@ gapi.analytics.ready(function() {
       google.visualization.events.removeListener(countryChartRowClickListener);
     }
 
-    // Clean up any event listeners registered on the landing chart before
-    // rendering a new one.
-    if (referralChartRowClickListener) {
-      google.visualization.events.removeListener(referralChartRowClickListener);
-    }
-
     countryChart.set(options).execute();
     referralChart.set(options).execute();
-    tempBounceRateChart.set(options).execute();
-
-    // Only render the breakdown chart if a Country filter has been set.
-    //if (referralChart.get().query.filters) referralChart.execute();
-
-    // Only render the breakdown chart if a LandingPath filter has been set.
-    //if (tempBounceRateChart.get().query.filters && referralChart.get().query.filters) tempBounceRateChart.execute();
 
     // Update the "period" dates text.
     var datefield = document.getElementById('period');
@@ -264,7 +206,7 @@ gapi.analytics.ready(function() {
       if (!chart.getSelection().length) return;
 
       var row =  chart.getSelection()[0].row;
-      country =  dataTable.getValue(row, 0);
+      var country =  dataTable.getValue(row, 0);
       var options = {
         query: {
           filters: 'ga:channelGrouping==Referral;ga:country==' + country
@@ -277,55 +219,6 @@ gapi.analytics.ready(function() {
       };
 
       referralChart.set(options).execute();
-      tempBounceRateChart.set(options).execute();
-    });
-  });
-
-  /**
-   * Each time the landing chart is rendered, add an event listener to it so
-   * that when the user clicks on a row, the line chart is updated with
-   * the data from the country in the clicked row.
-   */
-  referralChart.on('success', function(response) {
-    var chart = response.chart;
-    var dataTable = response.dataTable;
-
-    // Store a reference to this listener so it can be cleaned up later.
-    referralChartRowClickListener = google.visualization.events
-        .addListener(chart, 'select', function(event) {
-
-      // When you unselect a row, the "select" event still fires
-      // but the selection is empty. Ignore that case.
-      if (!chart.getSelection().length) return;
-      var row =  chart.getSelection()[0].row;
-      var referralPath = dataTable.getValue(row, 0);
-      if (country){
-        var options = {
-          query: {
-            filters: 'ga:channelGrouping==Referral;ga:country==' + country + ';' + 'ga:source==' + referralPath
-          },
-          chart: {
-            options: {
-              title: country + ': ' + referralPath
-            }
-          }
-        };
-      }else{
-        var options = {
-          query: {
-            filters: 'ga:channelGrouping==Referral;' + 'ga:source==' + referralPath
-          },
-          chart: {
-            options: {
-              title: referralPath
-            }
-          }
-        };
-      }
-      
-      //console.log(options);
-
-      tempBounceRateChart.set(options).execute();
     });
   });
 
