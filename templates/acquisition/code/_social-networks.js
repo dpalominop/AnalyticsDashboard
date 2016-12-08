@@ -133,7 +133,7 @@ gapi.analytics.ready(function() {
   var networkChart_1 = new gapi.analytics.googleCharts.DataChart({
     query: {
       'metrics': 'ga:sessions,ga:bounceRate',
-      'dimensions': 'ga:source',
+      'dimensions': 'ga:socialNetwork',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
       'sort': '-ga:sessions',
@@ -152,7 +152,7 @@ gapi.analytics.ready(function() {
   var networkChart_2 = new gapi.analytics.googleCharts.DataChart({
     query: {
       'metrics': 'ga:sessions,ga:bounceRate',
-      'dimensions': 'ga:source',
+      'dimensions': 'ga:socialNetwork',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
       'sort': '-ga:sessions',
