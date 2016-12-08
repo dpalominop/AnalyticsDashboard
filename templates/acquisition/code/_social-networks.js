@@ -130,38 +130,38 @@ gapi.analytics.ready(function() {
    * Create a table chart showing Top Landing Page over time for the country the
    * user selected in the country chart.
    */
-  var referralChart_1 = new gapi.analytics.googleCharts.DataChart({
+  var networkChart_1 = new gapi.analytics.googleCharts.DataChart({
     query: {
       'metrics': 'ga:sessions,ga:bounceRate',
       'dimensions': 'ga:source',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
       'sort': '-ga:sessions',
-      'filters': 'ga:channelGrouping==Referral',
+      'filters': 'ga:channelGrouping==Social',
       'max-results': '10'
     },
     chart: {
       type: 'TABLE',
-      container: 'referral-container-1',
+      container: 'network-container-1',
       options: {
         width: '100%'
       }
     }
   });
 
-  var referralChart_2 = new gapi.analytics.googleCharts.DataChart({
+  var networkChart_2 = new gapi.analytics.googleCharts.DataChart({
     query: {
       'metrics': 'ga:sessions,ga:bounceRate',
       'dimensions': 'ga:source',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
       'sort': '-ga:sessions',
-      'filters': 'ga:channelGrouping==Referral',
+      'filters': 'ga:channelGrouping==Social',
       'max-results': '10'
     },
     chart: {
       type: 'TABLE',
-      container: 'referral-container-2',
+      container: 'network-container-2',
       options: {
         width: '100%'
       }
@@ -187,7 +187,7 @@ gapi.analytics.ready(function() {
     activeUsers.set(data).execute();
 
     var options = {query: {ids: data.ids,
-                            filters: 'ga:channelGrouping==Referral',
+                            filters: 'ga:channelGrouping==Social',
                           },
                     chart: {
                       options: {
@@ -204,7 +204,7 @@ gapi.analytics.ready(function() {
     var subtitle_1 = document.getElementById('subtitle-1');
     subtitle_1.innerHTML = '';
     countryChart_1.set(options).execute();
-    referralChart_1.set(options).execute();
+    networkChart_1.set(options).execute();
 
     if (countryChartRowClickListener_2) {
       google.visualization.events.removeListener(countryChartRowClickListener_2);
@@ -212,7 +212,7 @@ gapi.analytics.ready(function() {
     var subtitle_2 = document.getElementById('subtitle-2');
     subtitle_2.innerHTML = '';
     countryChart_2.set(options).execute();
-    referralChart_2.set(options).execute();
+    networkChart_2.set(options).execute();
  });
 
   /**
@@ -221,7 +221,7 @@ gapi.analytics.ready(function() {
    * instance as well as change the dashboard subtitle to reflect the range.
    */
   dateRangeSelector_1.on('change', function(data) {
-    data['filters']='ga:channelGrouping==Referral';
+    data['filters']='ga:channelGrouping==Social';
     var options = {query: data,
                   chart: {
                     options: {
@@ -241,11 +241,11 @@ gapi.analytics.ready(function() {
     var subtitle_1 = document.getElementById('subtitle-1');
     subtitle_1.innerHTML = '';
     countryChart_1.set(options).execute();
-    referralChart_1.set(options).execute();
+    networkChart_1.set(options).execute();
   });
 
   dateRangeSelector_2.on('change', function(data) {
-    data['filters']='ga:channelGrouping==Referral';
+    data['filters']='ga:channelGrouping==Social';
     var options = {query: data,
                   chart: {
                     options: {
@@ -264,7 +264,7 @@ gapi.analytics.ready(function() {
     var subtitle_2 = document.getElementById('subtitle-2');
     subtitle_2.innerHTML = '';
     countryChart_2.set(options).execute();
-    referralChart_2.set(options).execute();
+    networkChart_2.set(options).execute();
   });
 
   /**
@@ -288,7 +288,7 @@ gapi.analytics.ready(function() {
       var country =  dataTable.getValue(row, 0);
       var options = {
         query: {
-          filters: 'ga:channelGrouping==Referral;ga:country==' + country
+          filters: 'ga:channelGrouping==Social;ga:country==' + country
         },
         chart: {
           options: {
@@ -299,7 +299,7 @@ gapi.analytics.ready(function() {
 
       var subtitle_1 = document.getElementById('subtitle-1');
       subtitle_1.innerHTML = country;
-      referralChart_1.set(options).execute();
+      networkChart_1.set(options).execute();
     });
   });
 
@@ -319,7 +319,7 @@ gapi.analytics.ready(function() {
       var country =  dataTable.getValue(row, 0);
       var options = {
         query: {
-          filters: 'ga:channelGrouping==Referral;ga:country==' + country
+          filters: 'ga:channelGrouping==Social;ga:country==' + country
         },
         chart: {
           options: {
@@ -330,7 +330,7 @@ gapi.analytics.ready(function() {
 
       var subtitle_2 = document.getElementById('subtitle-2');
       subtitle_2.innerHTML = country;
-      referralChart_2.set(options).execute();
+      networkChart_2.set(options).execute();
     });
   });
 
