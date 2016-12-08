@@ -89,7 +89,25 @@ gapi.analytics.ready(function() {
     },
     chart: {
       type: 'GEO',
-      container: 'country-chart-container',
+      container: 'country-container-1',
+      options: {
+        width: '100%'
+      }
+    }
+  });
+
+  var countryChart_2 = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      'metrics': 'ga:sessions',
+      'dimensions': 'ga:country',
+      'start-date': '31daysAgo',
+      'end-date': 'yesterday',
+      'sort': '-ga:sessions',
+      'max-results': '21'
+    },
+    chart: {
+      type: 'GEO',
+      container: 'country-container-2',
       options: {
         width: '100%'
       }
@@ -112,19 +130,37 @@ gapi.analytics.ready(function() {
     },
     chart: {
       type: 'TABLE',
-      container: 'landingpath-chart-container',
+      container: 'landingpath-container-1',
       options: {
         width: '100%'
       }
     }
   });
 
+  var landingPathChart_2 = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      'metrics': 'ga:sessions,ga:users,ga:bounceRate',
+      'dimensions': 'ga:landingPagePath',
+      'start-date': '31daysAgo',
+      'end-date': 'yesterday',
+      'sort': '-ga:users',
+      'max-results': '10'
+    },
+    chart: {
+      type: 'TABLE',
+      container: 'landingpath-container-2',
+      options: {
+        width: '100%'
+      }
+    }
+  });
   /**
    * Store a refernce to the row click listener variable so it can be
    * removed later to prevent leaking memory when the chart instance is
    * replaced.
    */
   var countryChartRowClickListener_1;
+  var countryChartRowClickListener_2;
 
   /**
    * Update both charts whenever the selected view changes.
@@ -150,12 +186,15 @@ gapi.analytics.ready(function() {
     if (countryChartRowClickListener_1) {
       google.visualization.events.removeListener(countryChartRowClickListener_1);
     }
-
     countryChart_1.set(options).execute();
     landingPathChart_1.set(options).execute();
 
-    // Only render the breakdown chart if a Country filter has been set.
-    //if (landingPathChart.get().query.filters) landingPathChart.execute();
+    if (countryChartRowClickListener_2) {
+      google.visualization.events.removeListener(countryChartRowClickListener_2);
+    }
+    countryChart_2.set(options).execute();
+    landingPathChart_2.set(options).execute();
+
   });
 
   /**
