@@ -73,13 +73,13 @@ gapi.analytics.ready(function() {
    * and then render it to the page.
    */
   var dateRangeSelector_1 = new gapi.analytics.ext.DateRangeSelector({
-    container: 'date-range-selector-container-1'
+    container: 'dateRangeSelector-container-1'
   })
   .set(dateRange_1)
   .execute();
 
   var dateRangeSelector_2 = new gapi.analytics.ext.DateRangeSelector({
-    container: 'date-range-selector-container-2'
+    container: 'dateRangeSelector-container-2'
   })
   .set(dateRange_2)
   .execute();
