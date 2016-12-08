@@ -126,7 +126,6 @@ gapi.analytics.ready(function() {
    */
   var countryChartRowClickListener;
 
-  var country;
   /**
    * Update both charts whenever the selected view changes.
    */
@@ -136,7 +135,15 @@ gapi.analytics.ready(function() {
     // Start tracking active users for this view.
     activeUsers.set(data).execute();
 
-    var options = {query: {ids: data.ids}};
+    var options = {query: {ids: data.ids,
+                            filters: null,
+                          },
+                    chart: {
+                      options: {
+                        title: null
+                      }
+                    }
+                  };
 
     // Clean up any event listeners registered on the main chart before
     // rendering a new one.
@@ -145,10 +152,10 @@ gapi.analytics.ready(function() {
     }
 
     countryChart.set(options).execute();
-    landingPathChart.set(options);
+    landingPathChart.set(options).execute();
 
     // Only render the breakdown chart if a Country filter has been set.
-    if (landingPathChart.get().query.filters) landingPathChart.execute();
+    //if (landingPathChart.get().query.filters) landingPathChart.execute();
   });
 
   /**
@@ -157,10 +164,16 @@ gapi.analytics.ready(function() {
    * instance as well as change the dashboard subtitle to reflect the range.
    */
   dateRangeSelector.on('change', function(data) {
-    var options = {query: data};
-
     // Start tracking active users for this view.
     activeUsers.set(data).execute();
+
+    data['filters']=null;
+    var options = {query: data,
+                  chart: {
+                    options: {
+                      title: null
+                    }
+                  }};
 
     // Clean up any event listeners registered on the main chart before
     // rendering a new one.
@@ -169,10 +182,10 @@ gapi.analytics.ready(function() {
     }
 
     countryChart.set(options).execute();
-    landingPathChart.set(options);
+    landingPathChart.set(options).execute();
 
     // Only render the breakdown chart if a Country filter has been set.
-    if (landingPathChart.get().query.filters) landingPathChart.execute();
+    //if (landingPathChart.get().query.filters) landingPathChart.execute();
 
     // Update the "period" dates text.
     var datefield = document.getElementById('period');
@@ -197,7 +210,7 @@ gapi.analytics.ready(function() {
       if (!chart.getSelection().length) return;
 
       var row =  chart.getSelection()[0].row;
-      country =  dataTable.getValue(row, 0);
+      var country =  dataTable.getValue(row, 0);
       var options = {
         query: {
           filters: 'ga:country==' + country
