@@ -13,7 +13,12 @@ gapi.analytics.ready(function() {
   /**
    * Query params representing the first chart's date range.
    */
-  var dateRange = {
+  var dateRange_1 = {
+    'start-date': '31daysAgo',
+    'end-date': '1daysAgo'
+  };
+
+  var dateRange_2 = {
     'start-date': '31daysAgo',
     'end-date': '1daysAgo'
   };
@@ -70,7 +75,7 @@ gapi.analytics.ready(function() {
   var dateRangeSelector = new gapi.analytics.ext.DateRangeSelector({
     container: 'date-range-selector-container'
   })
-  .set(dateRange)
+  .set(dateRange_1)
   .execute();
 
   /**
