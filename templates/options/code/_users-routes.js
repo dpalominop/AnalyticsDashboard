@@ -103,7 +103,7 @@ gapi.analytics.ready(function() {
    */
   var landingPathChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      'metrics': 'ga:sessions,ga:users',
+      'metrics': 'ga:sessions,ga:users,ga:bounceRate',
       'dimensions': 'ga:landingPagePath',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
@@ -120,61 +120,11 @@ gapi.analytics.ready(function() {
   });
 
   /**
-   * Create a table chart showing Top Landing Page over time for the country the
-   * user selected in the main chart.
-   */
-  var tempLandingPathChart = new gapi.analytics.googleCharts.DataChart({
-    query: {
-      'metrics': 'ga:sessions, ga:bounces',
-      'dimensions': 'ga:date',
-      'start-date': '31daysAgo',
-      'end-date': 'yesterday',
-      'sort': 'ga:date'
-    },
-    chart: {
-      type: 'LINE',
-      container: 'temp-landingpath-chart-container',
-      options: {
-        width: '100%'
-      }
-    }
-  });
-
-    /**
-   * Create a table chart showing Inicial Pade next to Landing Page for the country the
-   * user selected in the main chart.
-   */
-  var inicialPageChart = new gapi.analytics.googleCharts.DataChart({
-    query: {
-      'metrics': 'ga:sessions',
-      'dimensions': 'ga:pagePath',
-      'start-date': '31daysAgo',
-      'end-date': 'yesterday',
-      'sort': '-ga:sessions',
-      'max-results': '5'
-    },
-    chart: {
-      type: 'TABLE',
-      container: 'inicialpage-chart-container',
-      options: {
-        width: '100%'
-      }
-    }
-  });
-
-  /**
    * Store a refernce to the row click listener variable so it can be
    * removed later to prevent leaking memory when the chart instance is
    * replaced.
    */
   var countryChartRowClickListener;
-
-  /**
-   * Store a refernce to the row click listener variable so it can be
-   * removed later to prevent leaking memory when the chart instance is
-   * replaced.
-   */
-  var landingPathChartRowClickListener;
 
   var country;
   /**
@@ -194,23 +144,11 @@ gapi.analytics.ready(function() {
       google.visualization.events.removeListener(countryChartRowClickListener);
     }
 
-    // Clean up any event listeners registered on the landing chart before
-    // rendering a new one.
-    if (landingPathChartRowClickListener) {
-      google.visualization.events.removeListener(landingPathChartRowClickListener);
-    }
-
     countryChart.set(options).execute();
     landingPathChart.set(options);
-    tempLandingPathChart.set(options);
-    inicialPageChart.set(options);
 
     // Only render the breakdown chart if a Country filter has been set.
     if (landingPathChart.get().query.filters) landingPathChart.execute();
-
-    // Only render the breakdown chart if a LandingPath filter has been set.
-    if (tempLandingPathChart.get().query.filters && landingPathChart.get().query.filters) tempLandingPathChart.execute();
-    if (inicialPageChart.get().query.filters && landingPathChart.get().query.filters) inicialPageChart.execute();
   });
 
   /**
@@ -230,23 +168,11 @@ gapi.analytics.ready(function() {
       google.visualization.events.removeListener(countryChartRowClickListener);
     }
 
-    // Clean up any event listeners registered on the landing chart before
-    // rendering a new one.
-    if (landingPathChartRowClickListener) {
-      google.visualization.events.removeListener(landingPathChartRowClickListener);
-    }
-
     countryChart.set(options).execute();
     landingPathChart.set(options);
-    tempLandingPathChart.set(options);
-    inicialPageChart.set(options);
 
     // Only render the breakdown chart if a Country filter has been set.
     if (landingPathChart.get().query.filters) landingPathChart.execute();
-
-    // Only render the breakdown chart if a LandingPath filter has been set.
-    if (tempLandingPathChart.get().query.filters && landingPathChart.get().query.filters) tempLandingPathChart.execute();
-    if (inicialPageChart.get().query.filters && landingPathChart.get().query.filters) inicialPageChart.execute();
 
     // Update the "period" dates text.
     var datefield = document.getElementById('period');
@@ -284,43 +210,6 @@ gapi.analytics.ready(function() {
       };
 
       landingPathChart.set(options).execute();
-      tempLandingPathChart.set(options).execute();
-      inicialPageChart.set(options).execute();
-    });
-  });
-
-  /**
-   * Each time the landing chart is rendered, add an event listener to it so
-   * that when the user clicks on a row, the line chart is updated with
-   * the data from the country in the clicked row.
-   */
-  landingPathChart.on('success', function(response) {
-    var chart = response.chart;
-    var dataTable = response.dataTable;
-
-    // Store a reference to this listener so it can be cleaned up later.
-    landingPathChartRowClickListener = google.visualization.events
-        .addListener(chart, 'select', function(event) {
-
-      // When you unselect a row, the "select" event still fires
-      // but the selection is empty. Ignore that case.
-      if (!chart.getSelection().length) return;
-      var row =  chart.getSelection()[0].row;
-      var landingPagePath = dataTable.getValue(row, 0);
-      var options = {
-        query: {
-          filters: 'ga:country==' + country + ';' + 'ga:landingPagePath==' + landingPagePath
-        },
-        chart: {
-          options: {
-            title: country + ': ' + landingPagePath
-          }
-        }
-      };
-      //console.log(options);
-
-      tempLandingPathChart.set(options).execute();
-      inicialPageChart.set(options).execute();
     });
   });
 
