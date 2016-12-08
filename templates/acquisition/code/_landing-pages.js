@@ -221,7 +221,7 @@ gapi.analytics.ready(function() {
    * instance as well as change the dashboard subtitle to reflect the range.
    */
   dateRangeSelector_1.on('change', function(data) {
-    data['filters']='ga:channelGrouping==Referral';
+    data['filters']='ga:channelGrouping==Direct';
     var options = {query: data,
                   chart: {
                     options: {
@@ -246,7 +246,7 @@ gapi.analytics.ready(function() {
   });
 
   dateRangeSelector_2.on('change', function(data) {
-    data['filters']='ga:channelGrouping==Referral';
+    data['filters']='ga:channelGrouping==Direct';
     var options = {query: data,
                   chart: {
                     options: {
