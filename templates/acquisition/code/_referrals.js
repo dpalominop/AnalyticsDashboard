@@ -73,13 +73,13 @@ gapi.analytics.ready(function() {
    * and then render it to the page.
    */
   var dateRangeSelector_1 = new gapi.analytics.ext.DateRangeSelector({
-    container: 'date-range-selector-container-1'
+    container: 'dateRangeSelector-container-1'
   })
   .set(dateRange_1)
   .execute();
 
   var dateRangeSelector_2 = new gapi.analytics.ext.DateRangeSelector({
-    container: 'date-range-selector-container-2'
+    container: 'dateRangeSelector-container-2'
   })
   .set(dateRange_2)
   .execute();
@@ -100,7 +100,7 @@ gapi.analytics.ready(function() {
     },
     chart: {
       type: 'GEO',
-      container: 'country-chart-container-1',
+      container: 'country-container-1',
       options: {
         width: '100%'
       }
@@ -118,7 +118,7 @@ gapi.analytics.ready(function() {
     },
     chart: {
       type: 'GEO',
-      container: 'country-chart-container-2',
+      container: 'country-container-2',
       options: {
         width: '100%'
       }
@@ -142,7 +142,7 @@ gapi.analytics.ready(function() {
     },
     chart: {
       type: 'TABLE',
-      container: 'referral-chart-container-1',
+      container: 'referral-container-1',
       options: {
         width: '100%'
       }
@@ -161,7 +161,7 @@ gapi.analytics.ready(function() {
     },
     chart: {
       type: 'TABLE',
-      container: 'referral-chart-container-2',
+      container: 'referral-container-2',
       options: {
         width: '100%'
       }
