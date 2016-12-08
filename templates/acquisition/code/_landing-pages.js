@@ -72,10 +72,16 @@ gapi.analytics.ready(function() {
    * element with the id "date-range-selector-container", set its date range
    * and then render it to the page.
    */
-  var dateRangeSelector = new gapi.analytics.ext.DateRangeSelector({
-    container: 'date-range-selector-container'
+  var dateRangeSelector_1 = new gapi.analytics.ext.DateRangeSelector({
+    container: 'date-range-selector-container-1'
   })
   .set(dateRange_1)
+  .execute();
+
+  var dateRangeSelector_2 = new gapi.analytics.ext.DateRangeSelector({
+    container: 'date-range-selector-container-2'
+  })
+  .set(dateRange_2)
   .execute();
 
   /**
@@ -83,7 +89,7 @@ gapi.analytics.ready(function() {
    * Clicking on a row in the table will update a second timeline chart with
    * data from the selected browser.
    */
-  var countryChart = new gapi.analytics.googleCharts.DataChart({
+  var countryChart_1 = new gapi.analytics.googleCharts.DataChart({
     query: {
       'metrics': 'ga:sessions',
       'dimensions': 'ga:country',
@@ -94,7 +100,25 @@ gapi.analytics.ready(function() {
     },
     chart: {
       type: 'GEO',
-      container: 'country-container',
+      container: 'country-container-1',
+      options: {
+        width: '100%'
+      }
+    }
+  });
+
+  var countryChart_2 = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      'metrics': 'ga:sessions',
+      'dimensions': 'ga:country',
+      'start-date': '31daysAgo',
+      'end-date': 'yesterday',
+      'sort': '-ga:sessions',
+      'max-results': '21'
+    },
+    chart: {
+      type: 'GEO',
+      container: 'country-container-2',
       options: {
         width: '100%'
       }
@@ -106,7 +130,7 @@ gapi.analytics.ready(function() {
    * Create a table chart showing Top Landing Page over time for the country the
    * user selected in the country chart.
    */
-  var landingPathChart = new gapi.analytics.googleCharts.DataChart({
+  var landingPathChart_1 = new gapi.analytics.googleCharts.DataChart({
     query: {
       'metrics': 'ga:sessions, ga:bounceRate',
       'dimensions': 'ga:landingPagePath',
@@ -117,7 +141,25 @@ gapi.analytics.ready(function() {
     },
     chart: {
       type: 'TABLE',
-      container: 'landingpath-container',
+      container: 'landingpath-container-1',
+      options: {
+        width: '100%'
+      }
+    }
+  });
+
+  var landingPathChart_2 = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      'metrics': 'ga:sessions, ga:bounceRate',
+      'dimensions': 'ga:landingPagePath',
+      'start-date': '31daysAgo',
+      'end-date': 'yesterday',
+      'sort': '-ga:sessions',
+      'max-results': '10'
+    },
+    chart: {
+      type: 'TABLE',
+      container: 'landingpath-container-2',
       options: {
         width: '100%'
       }
@@ -129,7 +171,8 @@ gapi.analytics.ready(function() {
    * removed later to prevent leaking memory when the chart instance is
    * replaced.
    */
-  var countryChartRowClickListener;
+  var countryChartRowClickListener_1;
+  var countryChartRowClickListener_2;
 
   /**
    * Update both charts whenever the selected view changes.
@@ -153,12 +196,17 @@ gapi.analytics.ready(function() {
 
     // Clean up any event listeners registered on the main chart before
     // rendering a new one.
-    if (countryChartRowClickListener) {
-      google.visualization.events.removeListener(countryChartRowClickListener);
+    if (countryChartRowClickListener_1) {
+      google.visualization.events.removeListener(countryChartRowClickListener_1);
     }
+    countryChart_1.set(options).execute();
+    landingPathChart_1.set(options).execute();
 
-    countryChart.set(options).execute();
-    landingPathChart.set(options).execute();
+    if (countryChartRowClickListener_2) {
+      google.visualization.events.removeListener(countryChartRowClickListener_2);
+    }
+    countryChart_2.set(options).execute();
+    landingPathChart_2.set(options).execute();
 
   });
 
@@ -167,7 +215,7 @@ gapi.analytics.ready(function() {
    * the first datepicker. The handler will update the first dataChart
    * instance as well as change the dashboard subtitle to reflect the range.
    */
-  dateRangeSelector.on('change', function(data) {
+  dateRangeSelector_1.on('change', function(data) {
     data['filters']='ga:channelGrouping==Referral';
     var options = {query: data,
                   chart: {
@@ -181,12 +229,38 @@ gapi.analytics.ready(function() {
 
     // Clean up any event listeners registered on the main chart before
     // rendering a new one.
-    if (countryChartRowClickListener) {
-      google.visualization.events.removeListener(countryChartRowClickListener);
+    if (countryChartRowClickListener_1) {
+      google.visualization.events.removeListener(countryChartRowClickListener_1);
     }
 
-    countryChart.set(options).execute();
-    landingPathChart.set(options).execute();
+    countryChart_1.set(options).execute();
+    landingPathChart_1.set(options).execute();
+
+    // Update the "period" dates text.
+    var datefield = document.getElementById('period');
+    datefield.innerHTML = data['start-date'] + '&mdash;' + data['end-date'];
+  });
+
+  dateRangeSelector_2.on('change', function(data) {
+    data['filters']='ga:channelGrouping==Referral';
+    var options = {query: data,
+                  chart: {
+                    options: {
+                      title: null
+                    }
+                  }};
+
+    // Start tracking active users for this view.
+    activeUsers.set(data).execute();
+
+    // Clean up any event listeners registered on the main chart before
+    // rendering a new one.
+    if (countryChartRowClickListener_2) {
+      google.visualization.events.removeListener(countryChartRowClickListener_2);
+    }
+
+    countryChart_2.set(options).execute();
+    landingPathChart_2.set(options).execute();
 
     // Update the "period" dates text.
     var datefield = document.getElementById('period');
@@ -198,12 +272,12 @@ gapi.analytics.ready(function() {
    * that when the user clicks on a row, the line chart is updated with
    * the data from the browser in the clicked row.
    */
-  countryChart.on('success', function(response) {
+  countryChart_1.on('success', function(response) {
     var chart = response.chart;
     var dataTable = response.dataTable;
 
     // Store a reference to this listener so it can be cleaned up later.
-    countryChartRowClickListener = google.visualization.events
+    countryChartRowClickListener_1 = google.visualization.events
         .addListener(chart, 'select', function(event) {
 
       // When you unselect a row, the "select" event still fires
@@ -223,7 +297,36 @@ gapi.analytics.ready(function() {
         }
       };
 
-      landingPathChart.set(options).execute();
+      landingPathChart_1.set(options).execute();
+    });
+  });
+
+  countryChart_2.on('success', function(response) {
+    var chart = response.chart;
+    var dataTable = response.dataTable;
+
+    // Store a reference to this listener so it can be cleaned up later.
+    countryChartRowClickListener_2 = google.visualization.events
+        .addListener(chart, 'select', function(event) {
+
+      // When you unselect a row, the "select" event still fires
+      // but the selection is empty. Ignore that case.
+      if (!chart.getSelection().length) return;
+
+      var row =  chart.getSelection()[0].row;
+      var country =  dataTable.getValue(row, 0);
+      var options = {
+        query: {
+          filters: 'ga:channelGrouping==Direct;ga:country==' + country
+        },
+        chart: {
+          options: {
+            title: country
+          }
+        }
+      };
+
+      landingPathChart_2.set(options).execute();
     });
   });
 
