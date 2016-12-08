@@ -188,12 +188,18 @@ gapi.analytics.ready(function() {
     }
     countryChart_1.set(options).execute();
     landingPathChart_1.set(options).execute();
+    
+    var subtitle_1 = document.getElementById('subtitle-1');
+    subtitle_1.innerHTML = '';
 
     if (countryChartRowClickListener_2) {
       google.visualization.events.removeListener(countryChartRowClickListener_2);
     }
     countryChart_2.set(options).execute();
     landingPathChart_2.set(options).execute();
+
+    var subtitle_2 = document.getElementById('subtitle-2');
+    subtitle_2.innerHTML = '';
 
   });
 
@@ -222,11 +228,17 @@ gapi.analytics.ready(function() {
     countryChart_1.set(options).execute();
     landingPathChart_1.set(options).execute();
 
+    var subtitle_1 = document.getElementById('subtitle-1');
+    subtitle_1.innerHTML = '';
+
     if (countryChartRowClickListener_2) {
       google.visualization.events.removeListener(countryChartRowClickListener_2);
     }
     countryChart_2.set(options).execute();
     landingPathChart_2.set(options).execute();
+
+    var subtitle_2 = document.getElementById('subtitle-2');
+    subtitle_2.innerHTML = '';
 
     // Update the "period" dates text.
     var datefield = document.getElementById('period');
@@ -264,6 +276,9 @@ gapi.analytics.ready(function() {
       };
 
       landingPathChart_1.set(options).execute();
+
+      var subtitle = document.getElementById('subtitle-1');
+      subtitle.innerHTML = country;
     });
   });
 
@@ -293,6 +308,9 @@ gapi.analytics.ready(function() {
       };
 
       landingPathChart_2.set(options).execute();
+
+      var subtitle = document.getElementById('subtitle-2');
+      subtitle.innerHTML = country;
     });
   });
 
