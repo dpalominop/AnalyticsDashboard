@@ -137,6 +137,7 @@ gapi.analytics.ready(function() {
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
       'sort': '-ga:sessions',
+      'filters': 'ga:channelGrouping==Direct',
       'max-results': '10'
     },
     chart: {
@@ -155,6 +156,7 @@ gapi.analytics.ready(function() {
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
       'sort': '-ga:sessions',
+      'filters': 'ga:channelGrouping==Direct',
       'max-results': '10'
     },
     chart: {
