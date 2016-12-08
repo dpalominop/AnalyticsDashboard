@@ -219,12 +219,14 @@ gapi.analytics.ready(function() {
     if (countryChartRowClickListener_1) {
       google.visualization.events.removeListener(countryChartRowClickListener_1);
     }
-
     countryChart_1.set(options).execute();
     landingPathChart_1.set(options).execute();
 
-    // Only render the breakdown chart if a Country filter has been set.
-    //if (landingPathChart.get().query.filters) landingPathChart.execute();
+    if (countryChartRowClickListener_2) {
+      google.visualization.events.removeListener(countryChartRowClickListener_2);
+    }
+    countryChart_2.set(options).execute();
+    landingPathChart_2.set(options).execute();
 
     // Update the "period" dates text.
     var datefield = document.getElementById('period');
@@ -262,6 +264,35 @@ gapi.analytics.ready(function() {
       };
 
       landingPathChart_1.set(options).execute();
+    });
+  });
+
+  countryChart_2.on('success', function(response) {
+    var chart = response.chart;
+    var dataTable = response.dataTable;
+
+    // Store a reference to this listener so it can be cleaned up later.
+    countryChartRowClickListener_2 = google.visualization.events
+        .addListener(chart, 'select', function(event) {
+
+      // When you unselect a row, the "select" event still fires
+      // but the selection is empty. Ignore that case.
+      if (!chart.getSelection().length) return;
+
+      var row =  chart.getSelection()[0].row;
+      var country =  dataTable.getValue(row, 0);
+      var options = {
+        query: {
+          filters: 'ga:country==' + country
+        },
+        chart: {
+          options: {
+            title: country
+          }
+        }
+      };
+
+      landingPathChart_2.set(options).execute();
     });
   });
 
