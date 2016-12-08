@@ -94,7 +94,7 @@ gapi.analytics.ready(function() {
     },
     chart: {
       type: 'GEO',
-      container: 'country-chart-container',
+      container: 'country-container',
       options: {
         width: '100%'
       }
@@ -117,7 +117,7 @@ gapi.analytics.ready(function() {
     },
     chart: {
       type: 'TABLE',
-      container: 'landingpath-chart-container',
+      container: 'landingpath-container',
       options: {
         width: '100%'
       }
