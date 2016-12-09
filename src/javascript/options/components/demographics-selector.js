@@ -48,22 +48,26 @@ gapi.analytics.ready(function() {
   }
 
   /**
-   * 
+   * @param {number} start
+   * @param {number} end
+   * @param {number} gender
+   * @param {number} age
+   * @return {Void}
    */
-  function setQuery(start, end, gender, age){
-    if(gender === 'all' & age==='all'){
+  function setQuery(start, end, gender, age) {
+    if(gender === 'all' & age==='all') {
       return {
         'start-date': start,
         'end-date': end,
-        filters: null,
+        'filters': null,
       };
-    }else if(gender === 'all'){
+    }else if(gender === 'all') {
       return {
         'start-date': start,
         'end-date': end,
         'filters': 'ga:userAgeBracket=='+age,
       };
-    }else if(age === 'all'){
+    }else if(age === 'all') {
       return {
         'start-date': start,
         'end-date': end,
@@ -86,8 +90,6 @@ gapi.analytics.ready(function() {
      */
     execute: function() {
       let options = this.get();
-      //console.log('options')
-      //console.log(options)
 
       options['start-date'] = options['start-date'] || '7daysAgo';
       options['end-date'] = options['end-date'] || 'yesterday';
