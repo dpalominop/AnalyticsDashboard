@@ -184,20 +184,30 @@ gapi.analytics.ready(function() {
       if (!chart.getSelection().length) return;
 
       var row =  chart.getSelection()[0].row;
-      var country =  dataTable.getValue(row, 0);
-      var options = {
+      var page =  dataTable.getValue(row, 0);
+      var options_1 = {
         query: {
-          filters: 'ga:country==' + country
+          filters: 'ga:pagePath==' + page
         },
         chart: {
           options: {
-            title: country
+            title: page
           }
         }
       };
-      
-      previousChart.set(options).execute();
-      nextChart.set(options).execute();
+      previousChart.set(options_1).execute();
+
+      var options_2 = {
+        query: {
+          filters: 'ga:previousPagePath==' + page
+        },
+        chart: {
+          options: {
+            title: page
+          }
+        }
+      };
+      nextChart.set(options_2).execute();
     });
   });
 
