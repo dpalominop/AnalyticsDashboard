@@ -1,0 +1,83 @@
+{% extends 'options/demo.html' %}
+
+{% block content %}
+
+<section>
+</section>
+
+<div class="Dashboard Dashboard--full">
+  <header class="Dashboard-header">
+    <ul class="FlexGrid">
+      <li class="FlexGrid-item">
+        <div class="Titles">
+          <h1 class="Titles-main" id="view-name">Selecciona una Vista</h1>
+          <div class="Titles-sub">Periodo de comparación:
+            <b id="period">31 days ago - Yesterday</b>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div id="view-selector-container"></div>
+    <div id="date-range-selector-container" style="padding-top:20px;"></div>
+  </header>
+
+  <ul class="FlexGrid">
+    <li class="FlexGrid-item">
+      <header class="Titles">
+        <h1 class="Titles-main"style="padding-bottom:10px;">Usuarios por País: <b id="period2">31 day ago - Yesterday</b></h1>
+      </header>
+      <div id="main-chart-container" style="min-height:300px"></div>
+    </li>
+  </ul>
+  <ul class="FlexGrid" style="padding-top:30px">
+    <li class="FlexGrid-item">
+      <header class="Titles">
+        <h1 class="Titles-main">Dispositivos</h1>
+      </header>
+      <div id="devices-chart-container" style="min-height:300px"></div>
+    </li>
+    <li class="FlexGrid-item">
+      <header class="Titles">
+        <h1 class="Titles-main">Género</h1>
+      </header>
+      <div id="gender-chart-container" style="min-height:300px"></div>
+    </li>
+  </ul>
+  <div class="row">
+    <ul class="col-md-6 FlexGrid" style="padding-top:30px">
+      <li class="FlexGrid-item">
+        <header class="Titles">
+          <h1 class="Titles-main">Edad</h1>
+        </header>
+        <div id="age-chart-container" style="min-height:300px"></div>
+      </li>
+      <li class="FlexGrid-item">
+        <header class="Titles">
+          <h1 class="Titles-main">Intereses</h1>
+        </header>
+        <div id="interest-chart-container" style="min-height:300px"></div>
+      </li>
+    </ul>
+    <ul class="col-md-6 FlexGrid" style="padding-top:30px;">
+      <li class="FlexGrid-item">
+        <header class="Titles">
+          <h1 class="Titles-main" style="padding-bottom:10px">Público Objetivo<b id="country"></b></h1>
+        </header>
+        <div id="demographics-chart-container" style="min-height:300px"></div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<section>
+</section>
+
+{% endblock %}
+
+{% block foot_scripts %}
+{% include'options/dependencies/_custom-components.html' %}
+{{ super() }}
+<script>
+{% include 'options/code/_navigation-summary.js' %}
+</script>
+{% endblock %}
