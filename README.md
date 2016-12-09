@@ -25,26 +25,26 @@ Analytics Dashboard corre sobre [Google App Engine](https://cloud.google.com/app
 Una vez instalados todas las dependencias, sigue estos pasos para construir y correr la plataforma localmente:
 
 ```sh
-# Clone the repository.
-git clone https://github.com/googleanalytics/ga-dev-tools.git
-cd ga-dev-tools
+# Clona el repositorio.
+git clone https://github.com/dpalominop/AnalyticsDashboard.git
+cd AnalyticsDashboard
 
-# Install the build dependencies.
+# Instala las dependencias.
 pip install -r requirements.txt -t python_modules
 npm install
 
-# Install the 'gcloud app Python Extensions' component
+# Instala el componente 'gcloud app Python Extensions'
 gcloud components install app-engine-python
 
-# Build the site and run the local App Engine server.
+# Construye el sitio y ejecuta el servidor local 'App Engine'.
 npm start
 ```
 
-If you're wanting to load any of the pages that require server-side authorization, you'll also need to create a service account, add the private JSON key to your project's root directory, and name it `service-account-key.json`. You can follow the instructions described in the [Server-side Authorization demo](https://ga-dev-tools.appspot.com/embed-api/server-side-authorization/) for more details.
+<!--- If you're wanting to load any of the pages that require server-side authorization, you'll also need to create a service account, add the private JSON key to your project's root directory, and name it `service-account-key.json`. You can follow the instructions described in the [Server-side Authorization demo](https://ga-dev-tools.appspot.com/embed-api/server-side-authorization/) for more details.
 
 Now you should be able to load [http://localhost:8080/](http://localhost:8080/) in your browser and see the site. (Note, the client ID associated with this project has the origin `localhost:8080` whitelisted. If you load the site on another port, authentication may not work properly.)
 
-If you're running App Engine on Windows or Mac, you can use the App Engine Launcher GUI to run the site as an alternative to running the above command.
+If you're running App Engine on Windows or Mac, you can use the App Engine Launcher GUI to run the site as an alternative to running the above command.-->
 
 ## Deploying the site
 
