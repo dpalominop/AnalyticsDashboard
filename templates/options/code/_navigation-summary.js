@@ -48,7 +48,7 @@ gapi.analytics.ready(function() {
   var pageChart = new gapi.analytics.googleCharts.DataChart({
     query: {
       'metrics': 'ga:pageviews',
-      'dimensions': 'ga:country',
+      'dimensions': 'ga:pagePath',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
       'sort': '-ga:pageviews',
@@ -69,12 +69,13 @@ gapi.analytics.ready(function() {
    */
   var previousChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      metrics: 'ga:users',
-      dimensions: 'ga:deviceCategory',
+      'metrics': 'ga:pageviews',
+      'dimensions': 'ga:previousPagePath',
       'start-date': '30daysAgo',
       'end-date': 'yesterday',
       'max-results': 6,
-      sort: '-ga:users'
+      'sort': '-ga:pageviews',
+      'max-results': '20'
     },
     chart: {
       container: 'previous-container',
@@ -92,12 +93,13 @@ gapi.analytics.ready(function() {
    */
   var nextChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      metrics: 'ga:users',
-      dimensions: 'ga:userGender',
+      'metrics': 'ga:pageviews',
+      'dimensions': 'ga:pagePath',
       'start-date': '30daysAgo',
       'end-date': 'yesterday',
       'max-results': 6,
-      sort: '-ga:users'
+      'sort': '-ga:pageviews',
+      'max-results': '20'
     },
     chart: {
       container: 'next-container',
