@@ -203,21 +203,6 @@ gapi.analytics.ready(function() {
     genderChart.set(options).execute();
     ageChart.set(options).execute();
     interestChart.set(options).execute();
-
-    // Only render the breakdown chart if a browser filter has been set.
-    if (demographicsChart.get().query.filters) demographicsChart.execute();
-
-    // Only render the breakdown chart if a browser filter has been set.
-    if (devicesChart.get().query.filters) devicesChart.execute();
-
-    // Only render the breakdown chart if a browser filter has been set.
-    if (genderChart.get().query.filters) genderChart.execute();
-
-    // Only render the breakdown chart if a browser filter has been set.
-    if (ageChart.get().query.filters) ageChart.execute();
-
-    // Only render the breakdown chart if a browser filter has been set.
-    if (interestChart.get().query.filters) ageChart.execute();
     
     var title = document.getElementById('view-name');
     title.innerHTML = data.property.name + ' (' + data.view.name + ')';
@@ -244,21 +229,6 @@ gapi.analytics.ready(function() {
     genderChart.set(options).execute();
     ageChart.set(options).execute();
     interestChart.set(options).execute();
-
-    // Only render the breakdown chart if a browser filter has been set.
-    if (demographicsChart.get().query.filters) demographicsChart.execute();
-
-    // Only render the breakdown chart if a browser filter has been set.
-    if (devicesChart.get().query.filters) devicesChart.execute();
-
-    // Only render the breakdown chart if a browser filter has been set.
-    if (genderChart.get().query.filters) genderChart.execute();
-
-    // Only render the breakdown chart if a browser filter has been set.
-    if (ageChart.get().query.filters) ageChart.execute();
-
-    // Only render the breakdown chart if a browser filter has been set.
-    if (interestChart.get().query.filters) ageChart.execute();
 
     // Update the "period" dates text.
     var datefield = document.getElementById('period');
