@@ -52,10 +52,10 @@ gapi.analytics.ready(function() {
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
       'sort': '-ga:users',
-      'max-results': '30'
+      'max-results': '20'
     },
     chart: {
-      type: 'GEO',
+      type: 'TABLE',
       container: 'main-chart-container',
       options: {
         width: '100%'
@@ -78,7 +78,7 @@ gapi.analytics.ready(function() {
     },
     chart: {
       container: 'devices-chart-container',
-      type: 'PIE',
+      type: 'TABLE',
       options: {
         width: '100%',
         pieHole: 4/9
@@ -101,7 +101,7 @@ gapi.analytics.ready(function() {
     },
     chart: {
       container: 'gender-chart-container',
-      type: 'PIE',
+      type: 'TABLE',
       options: {
         width: '100%',
         pieHole: 4/9
