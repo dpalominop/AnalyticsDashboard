@@ -58,7 +58,8 @@ gapi.analytics.ready(function() {
       type: 'TABLE',
       container: 'page-container',
       options: {
-        width: '100%'
+        width: '100%',
+        'height':'300px'
       }
     }
   });
@@ -123,6 +124,9 @@ gapi.analytics.ready(function() {
    * Update both charts whenever the selected view changes.
    */
   viewSelector.on('viewChange', function(data) {
+    var ul = document.getElementById('prev-next-ul');
+    ul.style.display = 'none';
+
     var options = {query: {
                       ids: data.ids,
                       filters: null  
@@ -136,8 +140,8 @@ gapi.analytics.ready(function() {
     }
 
     pageChart.set(options).execute();
-    previousChart.set(options).execute();
-    nextChart.set(options).execute();
+    previousChart.set(options);
+    nextChart.set(options);
     
     var title = document.getElementById('view-name');
     title.innerHTML = data.property.name + ' (' + data.view.name + ')';
@@ -149,6 +153,9 @@ gapi.analytics.ready(function() {
    * instance as well as change the dashboard subtitle to reflect the range.
    */
   dateRangeSelector.on('change', function(data) {
+    var ul = document.getElementById('prev-next-ul');
+    ul.style.display = 'none';
+
     data['filters'] = null;
     var options = {query: data};
 
@@ -159,15 +166,12 @@ gapi.analytics.ready(function() {
     }
 
     pageChart.set(options).execute();
-    
-    previousChart.set(options).execute();
-    nextChart.set(options).execute();
+    previousChart.set(options);
+    nextChart.set(options);
 
     // Update the "period" dates text.
     var datefield = document.getElementById('period');
     datefield.innerHTML = data['start-date'] + '&mdash;' + data['end-date'];
-    var datefield2 = document.getElementById('period2');
-    datefield2.innerHTML = data['start-date'] + '&mdash;' + data['end-date'];
   });
 
 
@@ -188,6 +192,9 @@ gapi.analytics.ready(function() {
       // but the selection is empty. Ignore that case.
       if (!chart.getSelection().length) return;
 
+      var ul = document.getElementById('prev-next-ul');
+      ul.style.display = null;
+
       var row =  chart.getSelection()[0].row;
       var page =  dataTable.getValue(row, 0);
       var options_1 = {
@@ -200,6 +207,8 @@ gapi.analytics.ready(function() {
           }
         }
       };
+      var datefield_1 = document.getElementById('previous');
+      datefield_1.innerHTML = page;
       previousChart.set(options_1).execute();
 
       var options_2 = {
@@ -212,6 +221,8 @@ gapi.analytics.ready(function() {
           }
         }
       };
+      var datefield_2 = document.getElementById('next');
+      datefield_2.innerHTML = page;
       nextChart.set(options_2).execute();
     });
   });
