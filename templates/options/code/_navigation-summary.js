@@ -115,7 +115,7 @@ gapi.analytics.ready(function() {
    * removed later to prevent leaking memory when the chart instance is
    * replaced.
    */
-  var mainChartRowClickListener;
+  var pageRowClickListener;
 
   /**
    * Update both charts whenever the selected view changes.
@@ -125,8 +125,8 @@ gapi.analytics.ready(function() {
 
     // Clean up any event listeners registered on the main chart before
     // rendering a new one.
-    if (mainChartRowClickListener) {
-      google.visualization.events.removeListener(mainChartRowClickListener);
+    if (pageRowClickListener) {
+      google.visualization.events.removeListener(pageRowClickListener);
     }
 
     pageChart.set(options).execute();
@@ -147,8 +147,8 @@ gapi.analytics.ready(function() {
 
     // Clean up any event listeners registered on the main chart before
     // rendering a new one.
-    if (mainChartRowClickListener) {
-      google.visualization.events.removeListener(mainChartRowClickListener);
+    if (pageRowClickListener) {
+      google.visualization.events.removeListener(pageRowClickListener);
     }
 
     pageChart.set(options).execute();
@@ -174,7 +174,7 @@ gapi.analytics.ready(function() {
     var dataTable = response.dataTable;
 
     // Store a reference to this listener so it can be cleaned up later.
-    mainChartRowClickListener = google.visualization.events
+    pageRowClickListener = google.visualization.events
         .addListener(chart, 'select', function(event) {
 
       // When you unselect a row, the "select" event still fires
