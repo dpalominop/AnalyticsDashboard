@@ -267,7 +267,7 @@ gapi.analytics.ready(function() {
     template:
       '<div class="ViewSelector2">' +
       '  <div class="ViewSelector2-item">' +
-      '    <label>Account</label>' +
+      '    <label>Account - Check if this is OK</label>' +
       '    <select class="FormField"></select>' +
       '  </div>' +
       '  <div class="ViewSelector2-item">' +
