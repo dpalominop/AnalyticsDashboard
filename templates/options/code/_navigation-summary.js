@@ -123,7 +123,11 @@ gapi.analytics.ready(function() {
    * Update both charts whenever the selected view changes.
    */
   viewSelector.on('viewChange', function(data) {
-    var options = {query: {ids: data.ids}};
+    var options = {query: {
+                      ids: data.ids,
+                      filters: null  
+                    }
+                  };
 
     // Clean up any event listeners registered on the main chart before
     // rendering a new one.
@@ -145,6 +149,7 @@ gapi.analytics.ready(function() {
    * instance as well as change the dashboard subtitle to reflect the range.
    */
   dateRangeSelector.on('change', function(data) {
+    data['filters'] = null;
     var options = {query: data};
 
     // Clean up any event listeners registered on the main chart before
