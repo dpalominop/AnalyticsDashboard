@@ -45,18 +45,18 @@ gapi.analytics.ready(function() {
    * Clicking on a row in the table will update a second timeline chart with
    * data from the selected browser.
    */
-  var mainChart = new gapi.analytics.googleCharts.DataChart({
+  var pageChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      'metrics': 'ga:users',
+      'metrics': 'ga:pageviews',
       'dimensions': 'ga:country',
       'start-date': '31daysAgo',
       'end-date': 'yesterday',
-      'sort': '-ga:users',
+      'sort': '-ga:pageviews',
       'max-results': '20'
     },
     chart: {
       type: 'TABLE',
-      container: 'main-chart-container',
+      container: 'page-container',
       options: {
         width: '100%'
       }
@@ -67,7 +67,7 @@ gapi.analytics.ready(function() {
    * Create a table chart showing users by device for the country the
    * user selected in the main chart.
    */
-  var devicesChart = new gapi.analytics.googleCharts.DataChart({
+  var previousChart = new gapi.analytics.googleCharts.DataChart({
     query: {
       metrics: 'ga:users',
       dimensions: 'ga:deviceCategory',
@@ -77,7 +77,7 @@ gapi.analytics.ready(function() {
       sort: '-ga:users'
     },
     chart: {
-      container: 'devices-chart-container',
+      container: 'previous-container',
       type: 'TABLE',
       options: {
         width: '100%',
@@ -90,7 +90,7 @@ gapi.analytics.ready(function() {
    * Create a table chart showing users by device for the country the
    * user selected in the main chart.
    */
-  var genderChart = new gapi.analytics.googleCharts.DataChart({
+  var nextChart = new gapi.analytics.googleCharts.DataChart({
     query: {
       metrics: 'ga:users',
       dimensions: 'ga:userGender',
@@ -100,7 +100,7 @@ gapi.analytics.ready(function() {
       sort: '-ga:users'
     },
     chart: {
-      container: 'gender-chart-container',
+      container: 'next-container',
       type: 'TABLE',
       options: {
         width: '100%',
@@ -129,10 +129,9 @@ gapi.analytics.ready(function() {
       google.visualization.events.removeListener(mainChartRowClickListener);
     }
 
-    mainChart.set(options).execute();
-    
-    devicesChart.set(options).execute();
-    genderChart.set(options).execute();
+    pageChart.set(options).execute();
+    previousChart.set(options).execute();
+    nextChart.set(options).execute();
     
     var title = document.getElementById('view-name');
     title.innerHTML = data.property.name + ' (' + data.view.name + ')';
@@ -152,10 +151,10 @@ gapi.analytics.ready(function() {
       google.visualization.events.removeListener(mainChartRowClickListener);
     }
 
-    mainChart.set(options).execute();
+    pageChart.set(options).execute();
     
-    devicesChart.set(options).execute();
-    genderChart.set(options).execute();
+    previousChart.set(options).execute();
+    nextChart.set(options).execute();
 
     // Update the "period" dates text.
     var datefield = document.getElementById('period');
@@ -170,7 +169,7 @@ gapi.analytics.ready(function() {
    * that when the user clicks on a row, the line chart is updated with
    * the data from the browser in the clicked row.
    */
-  mainChart.on('success', function(response) {
+  pageChart.on('success', function(response) {
     var chart = response.chart;
     var dataTable = response.dataTable;
 
@@ -195,8 +194,8 @@ gapi.analytics.ready(function() {
         }
       };
       
-      devicesChart.set(options).execute();
-      genderChart.set(options).execute();
+      previousChart.set(options).execute();
+      nextChart.set(options).execute();
     });
   });
 
